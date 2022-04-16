@@ -1,10 +1,11 @@
 import React from 'react'
 import {createRoot} from 'react-dom/client'
-import App from './components/App'
-import AppIndex from './components/AppIndex'
 import {BrowserRouter as Router} from 'react-router-dom'
 import {Routes, Route} from 'react-router'
 import './styles/index.css'
+import App from './components/App'
+import AppIndex from './components/AppIndex'
+import NoSuchPage from './components/NoSuchPage'
 
 
 createRoot(document.getElementById('root')).render(
@@ -13,6 +14,7 @@ createRoot(document.getElementById('root')).render(
             <Routes>
                 <Route path="/" element={<App />}>
                     <Route index element={<AppIndex />} />
+                    <Route path="*" element={<NoSuchPage />} />
                 </Route>
             </Routes>
         </Router>

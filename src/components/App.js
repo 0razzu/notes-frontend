@@ -1,21 +1,34 @@
 import {Outlet} from 'react-router'
-import {Link} from 'react-router-dom'
 import '../styles/App.css'
+import {IntlProvider} from 'react-intl'
+import LOCALES from '../i18n/locales'
+import {useState} from 'react'
+import MESSAGES from '../i18n/messages'
+import Head from './Head'
+import Header from './Header'
+import Footer from './Footer'
 
 
 const App = () => {
+    const defaultLocale = LOCALES.ENGLISH
+    const [currentLocale, setCurrentLocale] = useState(localStorage.getItem('locale') ?? defaultLocale)
+
+
     return (
         <>
-            <nav className={'navbar has-shadow'}>
-                <div className={'navbar-start'}>
-                    <div className={'navbar-brand'}>
-                        <h1 className={'title'}><Link to={'/'} className={'navbar-item'}>Notes</Link></h1>
-                    </div>
-                </div>
-            </nav>
-            <main className={'content'}>
-                <Outlet />
-            </main>
+            <IntlProvider locale={currentLocale}
+                          defaultLocale={defaultLocale}
+                          messages={{...MESSAGES[defaultLocale], ...MESSAGES[currentLocale]}}>
+                <Head />
+
+                <Header />
+
+                <main>
+                    <Outlet />
+                </main>
+
+                <Footer localeState={{currentLocale, setCurrentLocale}} />
+            </IntlProvider>
         </>
     )
 }
