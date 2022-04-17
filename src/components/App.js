@@ -1,5 +1,5 @@
 import {Outlet} from 'react-router'
-import '../styles/App.css'
+import '../styles/App.sass'
 import {IntlProvider} from 'react-intl'
 import LOCALES from '../i18n/locales'
 import {useState} from 'react'

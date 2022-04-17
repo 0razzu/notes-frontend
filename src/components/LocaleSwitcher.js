@@ -1,7 +1,7 @@
 import {FormattedMessage} from 'react-intl'
 import LANGUAGES from '../i18n/languages'
 
-import '../styles/LocaleSwitcher.css'
+import '../styles/LocaleSwitcher.sass'
 
 
 const LocaleSwitcher = ({localeState: {currentLocale, setCurrentLocale}}) => {
