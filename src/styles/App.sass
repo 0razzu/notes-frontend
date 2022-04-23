@@ -1,13 +1,27 @@
-@import './colors'
+@import "bulma"
+
+
+#root
+  background: $grey-lightest
+  height: 100vh
 
 
 main
   background: $white
-  flex-grow: 1
+  min-height: 65vh
+  @media screen and (min-width: 769px)
+    //box-shadow: -.25rem 0 .5rem 0 $white-ter, .25rem 0 .5rem 0 $white-ter
+    margin: 2rem
   padding: 2rem
 
 
-footer
-  background: $white
-  margin: 0
-  padding: 2rem
+  h2
+    @extend .title, .is-3
+
+
+  .field.is-grouped.is-grouped-multiline
+    margin-right: -$help-size
+
+
+  .field.is-grouped.is-grouped-multiline .control
+    margin-right: $help-size

@@ -3,8 +3,12 @@ import LocaleSwitcher from './LocaleSwitcher'
 
 const Footer = ({localeState}) => {
     return (
-        <footer>
-            <LocaleSwitcher localeState={localeState} />
+        <footer className={'footer'}>
+            <div className={'columns'}>
+                <div className={'column'}>
+                    <LocaleSwitcher localeState={localeState} />
+                </div>
+            </div>
         </footer>
     )
 }

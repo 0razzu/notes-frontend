@@ -14,13 +14,20 @@ const LocaleSwitcher = ({localeState: {currentLocale, setCurrentLocale}}) => {
     return (
         <div className={'LocaleSwitcher'}>
             <label htmlFor="language-select"><FormattedMessage id="language" /></label>
-            <select id="language-select" value={currentLocale} onChange={handleLocaleChange}>
-                {
-                    Object.entries(LANGUAGES).map(
-                        ([locale, language]) => (<option key={locale} value={locale}>{language}</option>),
-                    )
-                }
-            </select>
+            <div className={'control has-icons-left'}>
+                <div className={'select is-small'}>
+                    <select id="language-select" value={currentLocale} onChange={handleLocaleChange}>
+                        {
+                            Object.entries(LANGUAGES).map(
+                                ([locale, language]) => (<option key={locale} value={locale}>{language}</option>),
+                            )
+                        }
+                    </select>
+                </div>
+                <span className={'icon is-small is-left'}>
+                    <i className={'fas fa-globe'} />
+                </span>
+            </div>
         </div>
     )
 }
