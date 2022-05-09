@@ -2,6 +2,8 @@ import {FormattedMessage} from 'react-intl'
 import {useState} from 'react'
 import '../styles/Register.sass'
 import fetchFromAPI from '../utils/fetchFromAPI'
+import store from '../store/store'
+import {setCurrentUser} from '../store/slices/currentUserSlice'
 
 
 const Register = () => {
@@ -27,9 +29,9 @@ const Register = () => {
             login,
             password,
         })
-        console.dir(body)
 
-        console.dir(fetchFromAPI('POST', '/accounts', body))
+        fetchFromAPI('POST', '/accounts', body)
+            .then(response => store.dispatch(setCurrentUser(response)))
     }
 
 

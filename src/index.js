@@ -1,7 +1,7 @@
 import React from 'react'
 import {createRoot} from 'react-dom/client'
 import {BrowserRouter as Router} from 'react-router-dom'
-import {Routes, Route} from 'react-router'
+import {Route, Routes} from 'react-router'
 import App from './components/App'
 import AppIndex from './components/AppIndex'
 import Register from './components/Register'

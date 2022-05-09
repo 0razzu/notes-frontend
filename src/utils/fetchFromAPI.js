@@ -2,6 +2,7 @@ const fetchFromAPI = (method, path, body) => {
     let params = {
         method,
         'Accept': 'application/json',
+        credentials: 'include'
     }
 
     if (body)
