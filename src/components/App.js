@@ -7,6 +7,8 @@ import MESSAGES from '../i18n/messages'
 import Head from './Head'
 import Header from './Header'
 import Footer from './Footer'
+import {Provider} from 'react-redux'
+import store from '../store/store'
 
 
 const App = () => {
@@ -16,19 +18,21 @@ const App = () => {
 
     return (
         <>
-            <IntlProvider locale={currentLocale}
-                          defaultLocale={defaultLocale}
-                          messages={{...MESSAGES[defaultLocale], ...MESSAGES[currentLocale]}}>
-                <Head />
+            <Provider store={store}>
+                <IntlProvider locale={currentLocale}
+                              defaultLocale={defaultLocale}
+                              messages={{...MESSAGES[defaultLocale], ...MESSAGES[currentLocale]}}>
+                    <Head />
 
-                <Header />
+                    <Header />
 
-                <main>
-                    <Outlet />
-                </main>
+                    <main>
+                        <Outlet />
+                    </main>
 
-                <Footer localeState={{currentLocale, setCurrentLocale}} />
-            </IntlProvider>
+                    <Footer localeState={{currentLocale, setCurrentLocale}} />
+                </IntlProvider>
+            </Provider>
         </>
     )
 }

@@ -1,9 +1,9 @@
 import {Link} from 'react-router-dom'
 import {FormattedMessage} from 'react-intl'
-import store from '../store/store'
+import {connect} from 'react-redux'
 
 
-const Header = () => {
+const Header = ({login}) => {
     return (
         <nav className={'navbar has-shadow'}>
             <div className={'navbar-start'}>
@@ -15,13 +15,18 @@ const Header = () => {
             </div>
 
             <div className={'navbar-end'}>
-                <h2>
-                    {store.getState().currentUser.login}
-                </h2>
+                <div className={'navbar-item'}>
+                    <h2>{login}</h2>
+                </div>
             </div>
         </nav>
     )
 }
 
 
-export default Header
+const mapStateToProps = state => ({
+    login: state.currentUser.login,
+})
+
+
+export default connect(mapStateToProps)(Header)
