@@ -2,10 +2,10 @@ import {createSlice} from '@reduxjs/toolkit'
 
 
 const initialState = {
-    firstName: localStorage.getItem('currentUser/firstName'),
-    patronymic: localStorage.getItem('currentUser/patronymic'),
-    lastName: localStorage.getItem('currentUser/lastName'),
-    login: localStorage.getItem('currentUser/login')
+    firstName: undefined,
+    patronymic: undefined,
+    lastName: undefined,
+    login: undefined
 }
 
 
@@ -22,7 +22,7 @@ const currentUserSlice = createSlice({
             state.login = payload.login
         },
 
-        clear: state => initialState
+        clear: state => initialState,
     }
 })
 

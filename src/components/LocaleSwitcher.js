@@ -2,13 +2,15 @@ import {FormattedMessage} from 'react-intl'
 import LANGUAGES from '../i18n/languages'
 
 import '../styles/LocaleSwitcher.sass'
+import {bindActionCreators} from '@reduxjs/toolkit'
+import {connect} from 'react-redux'
+import {setLocale} from '../store/slices/locale/actionCreators'
 
 
-const LocaleSwitcher = ({localeState: {currentLocale, setCurrentLocale}}) => {
+const LocaleSwitcher = ({locale: currentLocale, setLocale}) => {
     const handleLocaleChange = event => {
         const newLocale = event.target.value
-        setCurrentLocale(newLocale)
-        localStorage.setItem('locale', newLocale)
+        setLocale(newLocale)
     }
 
     return (
@@ -33,4 +35,14 @@ const LocaleSwitcher = ({localeState: {currentLocale, setCurrentLocale}}) => {
 }
 
 
-export default LocaleSwitcher
+const mapStateToProps = state => ({
+    locale: state.localeCode,
+})
+
+
+const mapDispatchToProps = dispatch => ({
+    setLocale: bindActionCreators(setLocale, dispatch)
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(LocaleSwitcher)

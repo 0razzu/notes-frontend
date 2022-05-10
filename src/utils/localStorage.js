@@ -1,19 +1,24 @@
-const loadStore = () => {
-    try {
-        const serializedStore = localStorage.getItem('store')
+const STORE_PREFIX = `s-`
 
-        return serializedStore === null?
-            undefined :
-            JSON.parse(serializedStore)
+
+const loadStore = () => {
+    const serializedStore = {}
+
+    try {
+        for (const key in localStorage)
+            if (key.startsWith(STORE_PREFIX))
+                serializedStore[key.replace(STORE_PREFIX, '')] = JSON.parse(localStorage[key])
     } catch (e) {
-        return undefined
     }
+
+    return serializedStore
 }
 
 
 const saveStore = (store) => {
     try {
-        localStorage.setItem('store', JSON.stringify(store))
+        for (const storeKey in store)
+            localStorage.setItem(`${STORE_PREFIX}${storeKey}`, JSON.stringify(store[storeKey]))
     } catch (e) {
     }
 }

@@ -6,18 +6,22 @@ import App from './components/App'
 import AppIndex from './components/AppIndex'
 import Register from './components/Register'
 import NoSuchPage from './components/NoSuchPage'
+import store from './store/store'
+import {Provider} from 'react-redux'
 
 
 createRoot(document.getElementById('root')).render(
     <React.StrictMode>
-        <Router>
-            <Routes>
-                <Route path="/" element={<App />}>
-                    <Route index element={<AppIndex />} />
-                    <Route path="register" element={<Register />} />
-                    <Route path="*" element={<NoSuchPage />} />
-                </Route>
-            </Routes>
-        </Router>
+        <Provider store={store}>
+            <Router>
+                <Routes>
+                    <Route path="/" element={<App />}>
+                        <Route index element={<AppIndex />} />
+                        <Route path="register" element={<Register />} />
+                        <Route path="*" element={<NoSuchPage />} />
+                    </Route>
+                </Routes>
+            </Router>
+        </Provider>
     </React.StrictMode>
 )

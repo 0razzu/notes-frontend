@@ -1,12 +1,12 @@
 import LocaleSwitcher from './LocaleSwitcher'
 
 
-const Footer = ({localeState}) => {
+const Footer = () => {
     return (
         <footer className={'footer'}>
             <div className={'columns'}>
                 <div className={'column'}>
-                    <LocaleSwitcher localeState={localeState} />
+                    <LocaleSwitcher />
                 </div>
             </div>
         </footer>

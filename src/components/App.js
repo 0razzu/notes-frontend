@@ -1,40 +1,36 @@
 import {Outlet} from 'react-router'
 import '../styles/App.sass'
 import {IntlProvider} from 'react-intl'
-import LOCALES from '../i18n/locales'
-import {useState} from 'react'
-import MESSAGES from '../i18n/messages'
 import Head from './Head'
 import Header from './Header'
 import Footer from './Footer'
-import {Provider} from 'react-redux'
-import store from '../store/store'
+import {connect} from 'react-redux'
 
 
-const App = () => {
-    const defaultLocale = LOCALES.ENGLISH
-    const [currentLocale, setCurrentLocale] = useState(localStorage.getItem('locale') ?? defaultLocale)
-
-
+const App = ({locale}) => {
     return (
         <>
-            <Provider store={store}>
-                <IntlProvider locale={currentLocale}
-                              defaultLocale={defaultLocale}
-                              messages={{...MESSAGES[defaultLocale], ...MESSAGES[currentLocale]}}>
-                    <Head />
+            <IntlProvider locale={locale.code}
+                          defaultLocale={locale.defaultLocale}
+                          messages={locale.messages}>
+                <Head />
 
-                    <Header />
+                <Header />
 
-                    <main>
-                        <Outlet />
-                    </main>
+                <main>
+                    <Outlet />
+                </main>
 
-                    <Footer localeState={{currentLocale, setCurrentLocale}} />
-                </IntlProvider>
-            </Provider>
+                <Footer />
+            </IntlProvider>
         </>
     )
 }
 
-export default App
+
+const mapStateToProps = state => ({
+    locale: {code: state.localeCode, ...state.localeData}
+})
+
+
+export default connect(mapStateToProps)(App)

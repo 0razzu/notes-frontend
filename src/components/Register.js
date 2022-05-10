@@ -2,11 +2,12 @@ import {FormattedMessage} from 'react-intl'
 import {useState} from 'react'
 import '../styles/Register.sass'
 import fetchFromAPI from '../utils/fetchFromAPI'
-import store from '../store/store'
 import {setCurrentUser} from '../store/slices/currentUserSlice'
+import {bindActionCreators} from '@reduxjs/toolkit'
+import {connect} from 'react-redux'
 
 
-const Register = () => {
+const Register = ({setCurrentUser}) => {
     const [firstName, setFirstName] = useState()
     const [patronymic, setPatronymic] = useState()
     const [lastName, setLastName] = useState()
@@ -31,7 +32,7 @@ const Register = () => {
         })
 
         fetchFromAPI('POST', '/accounts', body)
-            .then(response => store.dispatch(setCurrentUser(response)))
+            .then(response => setCurrentUser(response))
     }
 
 
@@ -103,4 +104,9 @@ const Register = () => {
 }
 
 
-export default Register
+const mapDispatchToProps = dispatch => ({
+    setCurrentUser: bindActionCreators(setCurrentUser, dispatch)
+})
+
+
+export default connect(null, mapDispatchToProps)(Register)
