@@ -6,7 +6,6 @@ import {SET_LOCALE} from './actionTypes'
 const localeCodeSlice = createSlice({
     name: 'localeCode',
     initialState: DEFAULT_LOCALE,
-    reducers: {},
     extraReducers: {
         [SET_LOCALE]: (state, action) => action.payload,
     }

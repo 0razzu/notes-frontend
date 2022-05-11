@@ -13,7 +13,6 @@ const initialState = {
 const localeDataSlice = createSlice({
     name: 'localeData',
     initialState,
-    reducers: {},
     extraReducers: {
         [SET_LOCALE]: (state, action) => {
             state.messages = {...MESSAGES[DEFAULT_LOCALE], ...MESSAGES[action.payload]}
