@@ -23,6 +23,8 @@ const fetchFromAPI = (method, path, body) => {
 const throwIfErrors = response => {
     if (response.errors)
         throw response
+
+    return response
 }
 
 

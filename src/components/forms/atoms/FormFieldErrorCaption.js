@@ -1,10 +1,14 @@
 import {FormattedMessage} from 'react-intl'
 
 
-const FormFieldErrorCaption = ({messageId}) => {
+const FormFieldErrorCaption = ({messageIds = []}) => {
     return (
         <>
-            {messageId && (<p className={'help is-danger'}><FormattedMessage id={messageId} /></p>)}
+            {messageIds.map(messageId =>
+                <p key={messageId} className={'help is-danger'}>
+                    <FormattedMessage id={messageId} />
+                </p>
+            )}
         </>
     )
 }

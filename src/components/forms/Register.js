@@ -15,6 +15,7 @@ const Register = ({setCurrentUser}) => {
     const [lastName, setLastName] = useState()
     const [login, setLogin] = useState()
     const [password, setPassword] = useState()
+    const [errors, setErrors] = useState({})
 
 
     const handleSubmitChange = event => {
@@ -30,7 +31,19 @@ const Register = ({setCurrentUser}) => {
 
         fetchFromAPI(POST, '/accounts', body)
             .then(response => setCurrentUser(response))
-            .catch(response => alert(response))
+            .then(setErrors({}))
+            .catch(e => {
+                const errorList = e.errors
+                const errorObj = {}
+
+                for (const {field, errorCode: code} of errorList)
+                    if (errorObj[field])
+                        errorObj[field].append(code)
+                    else
+                        errorObj[field] = [code]
+
+                setErrors(errorObj)
+            })
     }
 
 
@@ -43,16 +56,19 @@ const Register = ({setCurrentUser}) => {
                         <LabelledInput id="first_name"
                                        type="text"
                                        stateMutator={setFirstName}
-                                       required />
+                                       required
+                                       errorIds={errors.firstName} />
 
                         <LabelledInput id="patronymic"
                                        type="text"
-                                       stateMutator={setPatronymic} />
+                                       stateMutator={setPatronymic}
+                                       errorIds={errors.patronymic} />
 
                         <LabelledInput id="last_name"
                                        type="text"
                                        stateMutator={setLastName}
-                                       required />
+                                       required
+                                       errorIds={errors.lastName} />
                     </div>
 
                     <div className={'field'}>
@@ -60,7 +76,8 @@ const Register = ({setCurrentUser}) => {
                                                type="text"
                                                stateMutator={setLogin}
                                                required
-                                               iconId="fa-user" />
+                                               iconId="fa-user"
+                                               errorIds={errors.login} />
                     </div>
 
                     <div className={'field'}>
@@ -68,7 +85,8 @@ const Register = ({setCurrentUser}) => {
                                                type="password"
                                                stateMutator={setPassword}
                                                required
-                                               iconId="fa-lock" />
+                                               iconId="fa-lock"
+                                               errorIds={errors.password} />
                     </div>
 
                     <div className={'field has-addons has-addons-centered'}>
