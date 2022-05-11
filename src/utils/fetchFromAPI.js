@@ -16,7 +16,18 @@ const fetchFromAPI = (method, path, body) => {
 
     return fetch(process.env.REACT_APP_API + path, params)
         .then(response => response.json())
+        .then(response => throwIfErrors(response))
+}
+
+
+const throwIfErrors = response => {
+    if (response.errors)
+        throw response
 }
 
 
 export default fetchFromAPI
+export const POST = 'POST'
+export const PUT = 'PUT'
+export const GET = 'GET'
+export const DELETE = 'DELETE'
