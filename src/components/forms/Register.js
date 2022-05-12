@@ -1,12 +1,13 @@
 import {FormattedMessage} from 'react-intl'
 import {useState} from 'react'
 import '../../styles/Register.sass'
-import fetchFromAPI, {POST} from '../../utils/fetchFromAPI'
+import {postToAPI} from '../../utils/fetchFromAPI'
 import {setCurrentUser} from '../../store/slices/currentUserSlice'
 import {bindActionCreators} from '@reduxjs/toolkit'
 import {connect} from 'react-redux'
 import LabelledInput from './atoms/LabelledInput'
 import LabelledInputWithIcon from './atoms/LabelledInputWithIcon'
+import distributeErrors from '../../utils/distributeErrors'
 
 
 const Register = ({setCurrentUser}) => {
@@ -29,21 +30,10 @@ const Register = ({setCurrentUser}) => {
             password,
         })
 
-        fetchFromAPI(POST, '/accounts', body)
+        postToAPI('/accounts', body)
             .then(response => setCurrentUser(response))
-            .then(setErrors({}))
-            .catch(e => {
-                const errorList = e.errors
-                const errorObj = {}
-
-                for (const {field, errorCode: code} of errorList)
-                    if (errorObj[field])
-                        errorObj[field].append(code)
-                    else
-                        errorObj[field] = [code]
-
-                setErrors(errorObj)
-            })
+            .then(() => setErrors({}))
+            .catch(e => distributeErrors(e, setErrors))
     }
 
 

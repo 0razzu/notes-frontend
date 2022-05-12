@@ -1,9 +1,10 @@
 import {configureStore} from '@reduxjs/toolkit'
 import {currentUserReducer} from './slices/currentUserSlice'
-import {loadStore, saveStore} from '../utils/localStorage'
+import {loadStore, saveStore} from './localStorage'
 import {localeCodeReducer} from './slices/locale/localeCodeSlice'
 import {localeDataReducer} from './slices/locale/localeDataSlice'
 import {setLocale} from './slices/locale/actionCreators'
+import {errorsReducer} from './slices/errorsSlice'
 
 
 const store = configureStore({
@@ -11,6 +12,7 @@ const store = configureStore({
         currentUser: currentUserReducer,
         localeCode: localeCodeReducer,
         localeData: localeDataReducer,
+        errors: errorsReducer,
     },
     preloadedState: loadStore()
 })

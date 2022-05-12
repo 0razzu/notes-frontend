@@ -28,8 +28,10 @@ const throwIfErrors = response => {
 }
 
 
-export default fetchFromAPI
-export const POST = 'POST'
-export const PUT = 'PUT'
-export const GET = 'GET'
-export const DELETE = 'DELETE'
+const fetcherCreator = method => (path, body) => fetchFromAPI(method, path, body)
+
+
+export const postToAPI = fetcherCreator('POST')
+export const putToAPI = fetcherCreator('PUT')
+export const getFromAPI = fetcherCreator('GET')
+export const deleteFromAPI = fetcherCreator('DELETE')
