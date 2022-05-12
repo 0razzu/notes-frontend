@@ -5,6 +5,7 @@ import Head from './Head'
 import Header from './Header'
 import Footer from './Footer'
 import {connect} from 'react-redux'
+import ErrorHandler from './Errors'
 
 
 const App = ({locale}) => {
@@ -19,6 +20,7 @@ const App = ({locale}) => {
 
                 <main>
                     <Outlet />
+                    <ErrorHandler />
                 </main>
 
                 <Footer />
