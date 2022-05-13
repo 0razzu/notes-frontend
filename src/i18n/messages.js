@@ -7,13 +7,18 @@ const MESSAGES = {
         app_description: 'Publish your notes!',
         no_such_page: 'No such page!',
         language: 'Language',
+
+        register: 'Register',
+        log_in: 'Log in',
+
         registration: 'Registration',
         first_name: 'First name',
         patronymic: 'Patronymic name',
         last_name: 'Last name',
         login: 'Login',
         password: 'Password',
-        register: 'Register',
+
+        authentication: 'Log in',
 
         uh_oh: 'Uh-oh!',
         COMMENT_NOT_FOUND: 'Cannot find a comment with this id',
@@ -53,13 +58,18 @@ const MESSAGES = {
         app_description: 'Публикуйте свои заметки!',
         no_such_page: 'Нет такой страницы!',
         language: 'Язык',
+
+        register: 'Зарегистрироваться',
+        log_in: 'Войти',
+
         registration: 'Регистрация',
         first_name: 'Имя',
         patronymic: 'Отчество',
         last_name: 'Фамилия',
         login: 'Логин',
         password: 'Пароль',
-        register: 'Зарегистрироваться',
+
+        authentication: 'Вход',
 
         uh_oh: 'Ой!',
         COMMENT_NOT_FOUND: 'Нет такого комментария',

@@ -1,4 +1,4 @@
-import LocaleSwitcher from './LocaleSwitcher'
+import LocaleSwitcher from './forms/LocaleSwitcher'
 
 
 const Footer = () => {
