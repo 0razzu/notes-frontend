@@ -6,6 +6,7 @@
     "@reduxjs/toolkit": "^1.8.1",
     "bulma": "^0.9.3",
     "classnames": "^2.3.1",
+    "nanoid": "^3.3.4",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-helmet-async": "^1.3.0",
@@ -14,8 +15,7 @@
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
-    "sass": "^1.50.0",
-    "shortid": "^2.2.16"
+    "sass": "^1.50.0"
   },
   "scripts": {
     "start": "react-scripts start",

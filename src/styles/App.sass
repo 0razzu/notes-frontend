@@ -1,6 +1,16 @@
 @import "bulma"
 
 
+@mixin desktop
+  @media screen and (min-width: 770px)
+    @content
+
+
+@mixin mobile
+  @media screen and (max-width: 769px)
+    @content
+
+
 #root
   background: $grey-lightest
 
@@ -8,7 +18,7 @@
 main
   background: $white
   min-height: 65vh
-  @media screen and (min-width: 769px)
+  @include desktop
     margin: 2rem
   padding: 2rem
 
@@ -19,9 +29,16 @@ main
 
   .Errors
     position: fixed
-    top: 10rem
+    top: 2rem
     right: 1rem
+    z-index: 100
     min-width: 20rem
+    @include mobile
+      width: calc(100% - 2rem)
+
+
+    .message
+      box-shadow: $panel-shadow
 
 
   .field.is-grouped.is-grouped-multiline

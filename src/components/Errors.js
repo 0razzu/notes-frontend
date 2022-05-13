@@ -2,7 +2,7 @@ import {bindActionCreators} from '@reduxjs/toolkit'
 import {clearErrors} from '../store/slices/errorsSlice'
 import {connect} from 'react-redux'
 import {FormattedMessage} from 'react-intl'
-import {generate as generateId} from 'shortid'
+import {nanoid} from 'nanoid'
 
 
 const Errors = ({errors, clearErrors}) => {
@@ -10,11 +10,15 @@ const Errors = ({errors, clearErrors}) => {
         <div className={'Errors'}>
             <article className={'message is-danger'}>
                 <div className={'message-header'}>
-                    <FormattedMessage id="error" />
+                    <FormattedMessage id="uh_oh" />
                     <button className={'delete'} onClick={() => clearErrors()} />
                 </div>
                 <div className={'message-body'}>{
-                    errors.map(error => <p key={generateId()}>{error.code}</p>)
+                    errors.map(error =>
+                        <p key={nanoid()}>
+                            <FormattedMessage id={error.code} />
+                        </p>
+                    )
                 }</div>
             </article>
         </div>
