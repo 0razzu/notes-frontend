@@ -3,10 +3,10 @@ import {createRoot} from 'react-dom/client'
 import {BrowserRouter as Router} from 'react-router-dom'
 import {Route, Routes} from 'react-router'
 import App from './components/App'
-import AppIndex from './components/AppIndex'
-import Register from './components/forms/Register'
-import LogIn from './components/forms/LogIn'
-import NoSuchPage from './components/NoSuchPage'
+import AppIndex from './components/pages/AppIndex'
+import RegisterPage from './components/pages/RegisterPage'
+import LogInPage from './components/pages/LogInPage'
+import NoSuchPage from './components/pages/NoSuchPage'
 import store from './store/store'
 import {Provider} from 'react-redux'
 
@@ -18,8 +18,8 @@ createRoot(document.getElementById('root')).render(
                 <Routes>
                     <Route path="/" element={<App />}>
                         <Route index element={<AppIndex />} />
-                        <Route path="register" element={<Register />} />
-                        <Route path="login" element={<LogIn />} />
+                        <Route path="register" element={<RegisterPage />} />
+                        <Route path="login" element={<LogInPage />} />
                         <Route path="*" element={<NoSuchPage />} />
                     </Route>
                 </Routes>

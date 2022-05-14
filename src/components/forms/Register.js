@@ -38,55 +38,52 @@ const Register = ({setCurrentUser}) => {
 
 
     return (
-        <>
-            <h2><FormattedMessage id="registration" /></h2>
-            <form className={'card form'} onSubmit={handleSubmitChange}>
-                <div className={'card-content'}>
-                    <div className={'field is-grouped is-grouped-multiline'}>
-                        <LabelledInput id="first_name"
-                                       type="text"
-                                       stateMutator={setFirstName}
-                                       required
-                                       errorIds={errors.firstName} />
+        <form className={'card form'} onSubmit={handleSubmitChange}>
+            <div className={'card-content'}>
+                <div className={'field is-grouped is-grouped-multiline'}>
+                    <LabelledInput id="first_name"
+                                   type="text"
+                                   stateMutator={setFirstName}
+                                   required
+                                   errorIds={errors.firstName} />
 
-                        <LabelledInput id="patronymic"
-                                       type="text"
-                                       stateMutator={setPatronymic}
-                                       errorIds={errors.patronymic} />
+                    <LabelledInput id="patronymic"
+                                   type="text"
+                                   stateMutator={setPatronymic}
+                                   errorIds={errors.patronymic} />
 
-                        <LabelledInput id="last_name"
-                                       type="text"
-                                       stateMutator={setLastName}
-                                       required
-                                       errorIds={errors.lastName} />
-                    </div>
+                    <LabelledInput id="last_name"
+                                   type="text"
+                                   stateMutator={setLastName}
+                                   required
+                                   errorIds={errors.lastName} />
+                </div>
 
-                    <div className={'field'}>
-                        <LabelledInputWithIcon id="login"
-                                               type="text"
-                                               stateMutator={setLogin}
-                                               required
-                                               iconId="fa-user"
-                                               errorIds={errors.login} />
-                    </div>
+                <div className={'field'}>
+                    <LabelledInputWithIcon id="login"
+                                           type="text"
+                                           stateMutator={setLogin}
+                                           required
+                                           iconId="fa-user"
+                                           errorIds={errors.login} />
+                </div>
 
-                    <div className={'field'}>
-                        <LabelledInputWithIcon id="password"
-                                               type="password"
-                                               stateMutator={setPassword}
-                                               required
-                                               iconId="fa-lock"
-                                               errorIds={errors.password} />
-                    </div>
+                <div className={'field'}>
+                    <LabelledInputWithIcon id="password"
+                                           type="password"
+                                           stateMutator={setPassword}
+                                           required
+                                           iconId="fa-lock"
+                                           errorIds={errors.password} />
+                </div>
 
-                    <div className={'field has-addons has-addons-centered'}>
-                        <div className={'control'}>
-                            <button className={'button is-primary'}><FormattedMessage id="register" /></button>
-                        </div>
+                <div className={'field has-addons has-addons-centered'}>
+                    <div className={'control'}>
+                        <button className={'button is-primary'}><FormattedMessage id="register" /></button>
                     </div>
                 </div>
-            </form>
-        </>
+            </div>
+        </form>
     )
 }
 

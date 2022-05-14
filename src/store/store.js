@@ -5,10 +5,12 @@ import {localeCodeReducer} from './slices/locale/localeCodeSlice'
 import {localeDataReducer} from './slices/locale/localeDataSlice'
 import {setLocale} from './slices/locale/actionCreators'
 import {errorsReducer} from './slices/errorsSlice'
+import {pageIdReducer} from './slices/pageIdSlice'
 
 
 const store = configureStore({
     reducer: {
+        pageId: pageIdReducer,
         currentUser: currentUserReducer,
         localeCode: localeCodeReducer,
         localeData: localeDataReducer,

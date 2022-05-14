@@ -30,36 +30,33 @@ const LogIn = ({setCurrentUser}) => {
 
 
     return (
-        <>
-            <h2><FormattedMessage id="authentication" /></h2>
-            <form className={'card form'} onSubmit={handleSubmitChange}>
-                <div className={'card-content'}>
-                    <div className={'field'}>
-                        <LabelledInputWithIcon id="login"
-                                               type="text"
-                                               stateMutator={setLogin}
-                                               required
-                                               iconId="fa-user"
-                                               errorIds={errors.login} />
-                    </div>
+        <form className={'card form'} onSubmit={handleSubmitChange}>
+            <div className={'card-content'}>
+                <div className={'field'}>
+                    <LabelledInputWithIcon id="login"
+                                           type="text"
+                                           stateMutator={setLogin}
+                                           required
+                                           iconId="fa-user"
+                                           errorIds={errors.login} />
+                </div>
 
-                    <div className={'field'}>
-                        <LabelledInputWithIcon id="password"
-                                               type="password"
-                                               stateMutator={setPassword}
-                                               required
-                                               iconId="fa-lock"
-                                               errorIds={errors.password} />
-                    </div>
+                <div className={'field'}>
+                    <LabelledInputWithIcon id="password"
+                                           type="password"
+                                           stateMutator={setPassword}
+                                           required
+                                           iconId="fa-lock"
+                                           errorIds={errors.password} />
+                </div>
 
-                    <div className={'field has-addons has-addons-centered'}>
-                        <div className={'control'}>
-                            <button className={'button is-primary'}><FormattedMessage id="log_in" /></button>
-                        </div>
+                <div className={'field has-addons has-addons-centered'}>
+                    <div className={'control'}>
+                        <button className={'button is-primary'}><FormattedMessage id="log_in" /></button>
                     </div>
                 </div>
-            </form>
-        </>
+            </div>
+        </form>
     )
 }
 
