@@ -1,6 +1,6 @@
 import {bindActionCreators} from '@reduxjs/toolkit'
 import {connect} from 'react-redux'
-import {clearCurrentUser} from '../../../store/slices/currentUserSlice'
+import {clearUser} from '../../../store/slices/userSlice'
 import {deleteFromAPI} from '../../../utils/fetchFromAPI'
 import distributeErrors from '../../../utils/distributeErrors'
 
@@ -25,7 +25,7 @@ const LogOutButton = ({clearUser}) => {
 
 
 const mapDispatchToProps = dispatch => ({
-    clearUser: bindActionCreators(clearCurrentUser, dispatch)
+    clearUser: bindActionCreators(clearUser, dispatch)
 })
 
 

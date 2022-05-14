@@ -9,8 +9,8 @@ const initialState = {
 }
 
 
-const currentUserSlice = createSlice({
-    name: 'currentUser',
+const userSlice = createSlice({
+    name: 'user',
     initialState,
     reducers: {
         set: (state, action) => {
@@ -27,5 +27,5 @@ const currentUserSlice = createSlice({
 })
 
 
-export const {set: setCurrentUser, clear: clearCurrentUser} = currentUserSlice.actions
-export const currentUserReducer = currentUserSlice.reducer
+export const {set: setUser, clear: clearUser} = userSlice.actions
+export const userReducer = userSlice.reducer

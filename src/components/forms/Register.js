@@ -2,7 +2,7 @@ import {FormattedMessage} from 'react-intl'
 import {useState} from 'react'
 import '../../styles/Register.sass'
 import {postToAPI} from '../../utils/fetchFromAPI'
-import {setCurrentUser} from '../../store/slices/currentUserSlice'
+import {setUser} from '../../store/slices/userSlice'
 import {bindActionCreators} from '@reduxjs/toolkit'
 import {connect} from 'react-redux'
 import LabelledInput from './atoms/LabelledInput'
@@ -10,7 +10,7 @@ import LabelledInputWithIcon from './atoms/LabelledInputWithIcon'
 import distributeErrors from '../../utils/distributeErrors'
 
 
-const Register = ({setCurrentUser}) => {
+const Register = ({setUser}) => {
     const [firstName, setFirstName] = useState()
     const [patronymic, setPatronymic] = useState()
     const [lastName, setLastName] = useState()
@@ -31,7 +31,7 @@ const Register = ({setCurrentUser}) => {
         })
 
         postToAPI('/accounts', body)
-            .then(response => setCurrentUser(response))
+            .then(response => setUser(response))
             .then(() => setErrors({}))
             .catch(e => distributeErrors(e, setErrors))
     }
@@ -89,7 +89,7 @@ const Register = ({setCurrentUser}) => {
 
 
 const mapDispatchToProps = dispatch => ({
-    setCurrentUser: bindActionCreators(setCurrentUser, dispatch)
+    setUser: bindActionCreators(setUser, dispatch)
 })
 
 

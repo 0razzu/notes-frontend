@@ -1,6 +1,6 @@
 import store from '../store/store'
 import {addErrors} from '../store/slices/errorsSlice'
-import {clearCurrentUser} from '../store/slices/currentUserSlice'
+import {clearUser} from '../store/slices/userSlice'
 
 
 const distributeErrors = (e, setErrors) => {
@@ -15,7 +15,7 @@ const distributeErrors = (e, setErrors) => {
             switch (field) {
                 case 'JAVASESSIONID':
                     if (code in ['NO_COOKIE', 'SESSION_NOT_FOUND'])
-                    store.dispatch(clearCurrentUser())
+                    store.dispatch(clearUser())
                 // eslint-disable-next-line no-fallthrough
                 case 'unknown':
                 case 'request':

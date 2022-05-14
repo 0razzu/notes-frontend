@@ -45,7 +45,7 @@ const Header = ({user}) => {
 
 
 const mapStateToProps = state => ({
-    user: state.currentUser,
+    user: state.user,
 })
 
 

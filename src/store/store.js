@@ -1,5 +1,5 @@
 import {configureStore} from '@reduxjs/toolkit'
-import {currentUserReducer} from './slices/currentUserSlice'
+import {userReducer} from './slices/userSlice'
 import {loadStore, saveStore} from './localStorage'
 import {localeCodeReducer} from './slices/locale/localeCodeSlice'
 import {localeDataReducer} from './slices/locale/localeDataSlice'
@@ -11,7 +11,7 @@ import {pageIdReducer} from './slices/pageIdSlice'
 const store = configureStore({
     reducer: {
         pageId: pageIdReducer,
-        currentUser: currentUserReducer,
+        user: userReducer,
         localeCode: localeCodeReducer,
         localeData: localeDataReducer,
         errors: errorsReducer,
@@ -27,7 +27,7 @@ store.subscribe(() => {
     const state = store.getState()
 
     saveStore({
-        currentUser: state.currentUser,
+        user: state.user,
         localeCode: state.localeCode,
     })
 })

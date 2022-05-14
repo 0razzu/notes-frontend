@@ -4,11 +4,11 @@ import distributeErrors from '../../utils/distributeErrors'
 import {FormattedMessage} from 'react-intl'
 import LabelledInputWithIcon from './atoms/LabelledInputWithIcon'
 import {bindActionCreators} from '@reduxjs/toolkit'
-import {setCurrentUser} from '../../store/slices/currentUserSlice'
+import {setUser} from '../../store/slices/userSlice'
 import {connect} from 'react-redux'
 
 
-const LogIn = ({setCurrentUser}) => {
+const LogIn = ({setUser}) => {
     const [login, setLogin] = useState()
     const [password, setPassword] = useState()
     const [errors, setErrors] = useState({})
@@ -23,7 +23,7 @@ const LogIn = ({setCurrentUser}) => {
         })
 
         postToAPI('/sessions', body)
-            .then(() => setCurrentUser({login}))
+            .then(() => setUser({login}))
             .then(() => setErrors({}))
             .catch(e => distributeErrors(e, setErrors))
     }
@@ -62,7 +62,7 @@ const LogIn = ({setCurrentUser}) => {
 
 
 const mapDispatchToProps = dispatch => ({
-    setCurrentUser: bindActionCreators(setCurrentUser, dispatch)
+    setUser: bindActionCreators(setUser, dispatch)
 })
 
 
