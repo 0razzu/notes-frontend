@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import LogoutButton from './buttons/LogoutButton'
 import RegisterButton from './buttons/RegisterButton'
 import LogInButton from './buttons/LogInButton'
+import '../../styles/Header.sass'
 
 
 const Header = ({user}) => {
@@ -32,8 +33,6 @@ const Header = ({user}) => {
                         <>
                             <div className={'navbar-item'}>
                                 <RegisterButton />
-                            </div>
-                            <div className={'navbar-item'}>
                                 <LogInButton />
                             </div>
                         </>

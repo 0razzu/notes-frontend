@@ -1,6 +1,5 @@
 import {FormattedMessage} from 'react-intl'
 import {useState} from 'react'
-import '../../styles/Register.sass'
 import {postToAPI} from '../../utils/fetchFromAPI'
 import {setUser} from '../../store/slices/userSlice'
 import {bindActionCreators} from '@reduxjs/toolkit'

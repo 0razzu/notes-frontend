@@ -29,11 +29,15 @@ main
 
   .Errors
     position: fixed
-    top: 2rem
     right: 1rem
     z-index: 100
     min-width: 20rem
+
+    @include desktop
+      top: 2rem
+
     @include mobile
+      bottom: 2rem
       width: calc(100% - 2rem)
 
 
