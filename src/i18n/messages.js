@@ -20,6 +20,10 @@ const MESSAGES = {
 
         authentication: 'Log in',
 
+        my_account: 'My account',
+        edit: 'Edit',
+        delete_account: 'Delete account',
+
         uh_oh: 'Uh-oh!',
         COMMENT_NOT_FOUND: 'Cannot find a comment with this id',
         DATABASE_ERROR: 'An unknown database error has occurred',
@@ -70,6 +74,10 @@ const MESSAGES = {
         password: 'Пароль',
 
         authentication: 'Вход',
+
+        my_account: 'Мой аккаунт',
+        edit: 'Редактировать',
+        delete_account: 'Удалить аккаунт',
 
         uh_oh: 'Ой!',
         COMMENT_NOT_FOUND: 'Нет такого комментария',

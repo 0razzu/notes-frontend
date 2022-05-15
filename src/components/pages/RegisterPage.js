@@ -23,7 +23,7 @@ const RegisterPage = ({setPageId}) => {
 
 
 const mapDispatchToProps = dispatch => ({
-    setPageId: bindActionCreators(setPageId, dispatch)
+    setPageId: bindActionCreators(setPageId, dispatch),
 })
 
 
