@@ -9,7 +9,7 @@ const errorsSlice = createSlice({
     initialState,
     reducers: {
         add: (state, action) => {
-            state.push(...action.payload)
+            state.push(action.payload)
         },
 
         clear: state => initialState,
@@ -17,5 +17,5 @@ const errorsSlice = createSlice({
 })
 
 
-export const {add: addErrors, clear: clearErrors} = errorsSlice.actions
+export const {add: addError, clear: clearErrors} = errorsSlice.actions
 export const errorsReducer = errorsSlice.reducer

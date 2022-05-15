@@ -1,11 +1,11 @@
 import store from '../store/store'
-import {addErrors} from '../store/slices/errorsSlice'
+import {addError} from '../store/slices/errorsSlice'
 import {clearUser} from '../store/slices/userSlice'
 
 
 const distributeErrors = (e, setErrors) => {
     if (e.message)
-        store.dispatch(addErrors([{code: 'UNKNOWN_ERROR'}]))
+        dispatchAddError({code: 'UNKNOWN_ERROR'})
 
     else {
         const errorList = e.errors
@@ -20,7 +20,7 @@ const distributeErrors = (e, setErrors) => {
                 case 'unknown':
                 case 'request':
                 case 'url':
-                    store.dispatch(addErrors([{code}]))
+                    dispatchAddError({code})
                     break
                 default:
                     if (setErrors) {
@@ -29,11 +29,17 @@ const distributeErrors = (e, setErrors) => {
                         else
                             errorObj[field] = [code]
                     }
+
+                    else
+                        dispatchAddError({code})
             }
 
         setErrors?.(errorObj)
     }
 }
+
+
+const dispatchAddError = error => store.dispatch(addError(error))
 
 
 export default distributeErrors
