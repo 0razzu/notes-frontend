@@ -9,6 +9,7 @@ import LogInPage from './components/pages/LogInPage'
 import NoSuchPage from './components/pages/NoSuchPage'
 import store from './store/store'
 import {Provider} from 'react-redux'
+import ForNonAuth from './components/routes/ForNonAuth'
 
 
 createRoot(document.getElementById('root')).render(
@@ -18,8 +19,8 @@ createRoot(document.getElementById('root')).render(
                 <Routes>
                     <Route path="/" element={<App />}>
                         <Route index element={<AppIndex />} />
-                        <Route path="register" element={<RegisterPage />} />
-                        <Route path="login" element={<LogInPage />} />
+                        <Route path="register" element={<ForNonAuth><RegisterPage /></ForNonAuth>} />
+                        <Route path="login" element={<ForNonAuth><LogInPage /></ForNonAuth>} />
                         <Route path="*" element={<NoSuchPage />} />
                     </Route>
                 </Routes>
