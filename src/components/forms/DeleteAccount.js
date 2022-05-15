@@ -16,11 +16,7 @@ const DeleteAccount = ({clearUser}) => {
     const handleSubmitChange = event => {
         event.preventDefault()
 
-        const body = JSON.stringify({
-            password,
-        })
-
-        deleteFromAPI('/accounts', body)
+        deleteFromAPI('/accounts', {password})
             .then(() => clearUser())
             .then(() => setErrors({}))
             .catch(e => distributeErrors(e, setErrors))

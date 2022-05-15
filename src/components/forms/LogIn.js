@@ -17,10 +17,10 @@ const LogIn = ({setUser}) => {
     const handleSubmitChange = event => {
         event.preventDefault()
 
-        const body = JSON.stringify({
+        const body = {
             login,
             password,
-        })
+        }
 
         postToAPI('/sessions', body)
             .then(() => setUser({login}))

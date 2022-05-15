@@ -21,13 +21,13 @@ const Register = ({setUser}) => {
     const handleSubmitChange = event => {
         event.preventDefault()
 
-        const body = JSON.stringify({
+        const body = {
             firstName,
             patronymic: patronymic === ''? undefined : patronymic,
             lastName,
             login,
             password,
-        })
+        }
 
         postToAPI('/accounts', body)
             .then(response => setUser(response))

@@ -11,7 +11,7 @@ const fetchFromAPI = (method, path, body) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: body,
+            body: JSON.stringify(body),
         }
 
     return fetch(process.env.REACT_APP_API + path, params)
