@@ -1,0 +1,28 @@
+@mixin screen-min-width($width)
+  @media screen and (min-width: $width)
+    @content
+
+
+@mixin screen-max-width($width)
+  @media screen and (max-width: $width)
+    @content
+
+
+@mixin screen-770-plus
+  @include screen-min-width(770px)
+    @content
+
+
+@mixin screen-769-minus
+  @include screen-max-width(769px)
+    @content
+
+
+@mixin screen-1024-plus
+  @include screen-min-width(1024px)
+    @content
+
+
+@mixin screen-1023-minus
+  @include screen-max-width(1023px)
+    @content

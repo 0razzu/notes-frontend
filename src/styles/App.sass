@@ -1,14 +1,5 @@
 @import "bulma"
-
-
-@mixin desktop
-  @media screen and (min-width: 770px)
-    @content
-
-
-@mixin mobile
-  @media screen and (max-width: 769px)
-    @content
+@import "screens"
 
 
 #root
@@ -18,7 +9,7 @@
 main
   background: $white
   min-height: 65vh
-  @include desktop
+  @include screen-770-plus
     margin: 2rem
   padding: 2rem
 
@@ -33,10 +24,10 @@ main
     z-index: 100
     min-width: 20rem
 
-    @include desktop
+    @include screen-770-plus
       top: 2rem
 
-    @include mobile
+    @include screen-769-minus
       bottom: 2rem
       width: calc(100% - 2rem)
 

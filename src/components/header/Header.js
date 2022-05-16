@@ -22,21 +22,19 @@ const Header = ({user}) => {
             </div>
 
             <div className={'navbar-end'}>
-                {
-                    loggedIn?
-                        <>
-                            <Link to={'/me'} className={'navbar-item'}>{user.login}</Link>
-                            <div className={'navbar-item'}>
+                <div className={'navbar-group'}>
+                    {
+                        loggedIn?
+                            <>
+                                <Link to={'/me'} className={'navbar-item'}>{user.login}</Link>
                                 <LogoutButton />
-                            </div>
-                        </> :
-                        <>
-                            <div className={'navbar-item'}>
+                            </> :
+                            <>
                                 <RegisterButton />
                                 <LogInButton />
-                            </div>
-                        </>
-                }
+                            </>
+                    }
+                </div>
             </div>
         </nav>
     )
