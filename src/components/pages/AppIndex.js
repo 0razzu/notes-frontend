@@ -1,14 +1,14 @@
 import {FormattedMessage} from 'react-intl'
 import {bindActionCreators} from '@reduxjs/toolkit'
-import {clearPageId} from '../../store/slices/pageIdSlice'
+import {clearPage} from '../../store/slices/pageSlice'
 import {useEffect} from 'react'
 import {connect} from 'react-redux'
 
 
-const AppIndex = ({clearPageId}) => {
+const AppIndex = ({clearPage}) => {
     useEffect(() => {
-        clearPageId()
-    }, [clearPageId])
+        clearPage()
+    }, [clearPage])
 
 
     return <>
@@ -18,7 +18,7 @@ const AppIndex = ({clearPageId}) => {
 
 
 const mapDispatchToProps = dispatch => ({
-    clearPageId: bindActionCreators(clearPageId, dispatch)
+    clearPage: bindActionCreators(clearPage, dispatch)
 })
 
 

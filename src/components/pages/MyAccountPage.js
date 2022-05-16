@@ -6,7 +6,7 @@ import {bindActionCreators} from '@reduxjs/toolkit'
 import {setUser} from '../../store/slices/userSlice'
 import distributeErrors from '../../utils/distributeErrors'
 import {Link} from 'react-router-dom'
-import {setPageId} from '../../store/slices/pageIdSlice'
+import {setPageId} from '../../store/slices/pageSlice'
 import classNames from 'classnames'
 import DeleteAccount from '../forms/DeleteAccount'
 

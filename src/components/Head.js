@@ -3,12 +3,13 @@ import {useIntl} from 'react-intl'
 import {connect} from 'react-redux'
 
 
-const Head = ({titleId}) => {
+const Head = ({page}) => {
     const intl = useIntl()
+    const pageName = page.name
     let title = intl.formatMessage({id: 'app_name'})
 
-    if (titleId)
-        title += `: ${intl.formatMessage({id: titleId})}`
+    if (pageName)
+        title += `: ${page.asIs? pageName : intl.formatMessage({id: pageName})}`
 
 
     return (
@@ -24,7 +25,7 @@ const Head = ({titleId}) => {
 
 
 const mapStateToProps = state => ({
-    titleId: state.pageId
+    page: state.page,
 })
 
 

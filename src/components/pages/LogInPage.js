@@ -1,5 +1,5 @@
 import {bindActionCreators} from '@reduxjs/toolkit'
-import {setPageId} from '../../store/slices/pageIdSlice'
+import {setPageId} from '../../store/slices/pageSlice'
 import {connect} from 'react-redux'
 import {useEffect} from 'react'
 import LogIn from '../forms/LogIn'
