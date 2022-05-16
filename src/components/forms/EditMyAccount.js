@@ -10,7 +10,7 @@ import LabelledInput from './atoms/LabelledInput'
 import {Navigate} from 'react-router'
 
 
-const EditUser = ({user, setUser}) => {
+const EditMyAccount = ({user, setUser}) => {
     const [firstName, setFirstName] = useState(user.firstName ?? '')
     const [patronymic, setPatronymic] = useState(user.patronymic ?? '')
     const [lastName, setLastName] = useState(user.lastName ?? '')
@@ -133,4 +133,4 @@ const mapDispatchToProps = dispatch => ({
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditUser)
+export default connect(mapStateToProps, mapDispatchToProps)(EditMyAccount)

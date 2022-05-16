@@ -11,7 +11,7 @@ import classNames from 'classnames'
 import DeleteAccount from '../forms/DeleteAccount'
 
 
-const UserPage = ({setPageId, user, setUser}) => {
+const MyAccountPage = ({setPageId, user, setUser}) => {
     const [deleteDialogIsActive, setDeleteDialogIsActive] = useState(false)
 
 
@@ -28,7 +28,7 @@ const UserPage = ({setPageId, user, setUser}) => {
 
 
     return (
-        <div className={'UserPage'}>
+        <div className={'MyAccountPage'}>
             <h2><FormattedMessage id="my_account" /></h2>
             <article>
                 <section className={'content'}>
@@ -101,4 +101,4 @@ const mapDispatchToProps = dispatch => ({
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserPage)
+export default connect(mapStateToProps, mapDispatchToProps)(MyAccountPage)

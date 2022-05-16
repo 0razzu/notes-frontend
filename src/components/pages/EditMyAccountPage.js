@@ -3,10 +3,10 @@ import {setPageId} from '../../store/slices/pageIdSlice'
 import {connect} from 'react-redux'
 import {useEffect} from 'react'
 import {FormattedMessage} from 'react-intl'
-import EditUser from '../forms/EditUser'
+import EditMyAccount from '../forms/EditMyAccount'
 
 
-const EditUserPage = ({setPageId}) => {
+const EditMyAccountPage = ({setPageId}) => {
     useEffect(() => {
         setPageId('edit_account')
     }, [setPageId])
@@ -15,7 +15,7 @@ const EditUserPage = ({setPageId}) => {
     return (
         <div className={'form-only-page'}>
             <h2><FormattedMessage id="edit_account" /></h2>
-            <EditUser />
+            <EditMyAccount />
         </div>
     )
 }
@@ -26,4 +26,4 @@ const mapDispatchToProps = dispatch => ({
 })
 
 
-export default connect(null, mapDispatchToProps)(EditUserPage)
+export default connect(null, mapDispatchToProps)(EditMyAccountPage)
