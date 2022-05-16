@@ -24,6 +24,11 @@ const MESSAGES = {
         edit: 'Edit',
         delete_account: 'Delete account',
 
+        edit_account: 'Edit account',
+        old_password: 'Current password',
+        new_password: 'New password',
+        save: 'Save',
+
         uh_oh: 'Uh-oh!',
         COMMENT_NOT_FOUND: 'Cannot find a comment with this id',
         DATABASE_ERROR: 'An unknown database error has occurred',
@@ -42,8 +47,8 @@ const MESSAGES = {
         SECTION_EXISTS: 'A section with this name already exists',
         SECTION_NOT_FOUND: 'Cannot find a section with this id',
         SESSION_NOT_FOUND: 'Log in first',
-        WRONG_OLD_PASSWORD: 'The provided password is wrong',
-        WRONG_PASSWORD: 'The provided password is wrong',
+        WRONG_OLD_PASSWORD: 'Wrong password',
+        WRONG_PASSWORD: 'Wrong password',
         INCLUDE_CONSTRAINT_VIOLATION: 'Incorrect note inclusion type',
         MAX_CONSTRAINT_VIOLATION: 'The value is too large',
         MIN_CONSTRAINT_VIOLATION: 'The value is too small',
@@ -78,6 +83,11 @@ const MESSAGES = {
         my_account: 'Мой аккаунт',
         edit: 'Редактировать',
         delete_account: 'Удалить аккаунт',
+
+        edit_account: 'Редактировать аккаунт',
+        old_password: 'Текущий пароль',
+        new_password: 'Новый пароль',
+        save: 'Сохранить',
 
         uh_oh: 'Ой!',
         COMMENT_NOT_FOUND: 'Нет такого комментария',

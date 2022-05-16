@@ -12,6 +12,7 @@ import UserPage from './components/pages/UserPage'
 import NoSuchPage from './components/pages/NoSuchPage'
 import store from './store/store'
 import {Provider} from 'react-redux'
+import EditUserPage from './components/pages/EditUserPage'
 
 
 createRoot(document.getElementById('root')).render(
@@ -24,6 +25,7 @@ createRoot(document.getElementById('root')).render(
                         <Route path="register" element={<ForNonAuth><RegisterPage /></ForNonAuth>} />
                         <Route path="login" element={<ForNonAuth><LogInPage /></ForNonAuth>} />
                         <Route path="me" element={<ForAuth><UserPage /></ForAuth>} />
+                        <Route path="me/edit" element={<ForAuth><EditUserPage /></ForAuth>} />
                         <Route path="*" element={<NoSuchPage />} />
                     </Route>
                 </Routes>

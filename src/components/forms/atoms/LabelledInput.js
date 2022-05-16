@@ -1,17 +1,18 @@
 import {FormattedMessage} from 'react-intl'
-import classNames from 'classnames'
 import FormFieldErrorCaption from './FormFieldErrorCaption'
-import {handleInputChange} from '../actions'
+import Input from './Input'
 
 
-const LabelledInput = ({id, type, stateMutator, required = false, errorIds}) => {
+const LabelledInput = ({id, type, stateMutator, errorIds, ...rest}) => {
     return (
         <div className={'control'}>
             <label className={'label'}><FormattedMessage id={id} /></label>
-            <input className={classNames('input', {'is-danger': errorIds})}
-                   type={type}
-                   onChange={event => handleInputChange(event, stateMutator)}
-                   required={required} />
+            <Input type={type}
+                   stateMutator={stateMutator}
+                   hasErrors={errorIds?.length}
+                   required={rest.required}
+                   readOnly={rest.readOnly}
+                   value={rest.value} />
             <FormFieldErrorCaption messageIds={errorIds} />
         </div>
     )
