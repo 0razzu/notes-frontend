@@ -21,7 +21,7 @@ const EditUser = ({user, setUser}) => {
 
 
     useEffect(() => {
-        if (!user.firstName)
+        if (!user.id)
             getFromAPI('/account')
                 .then(response => {
                     setUser(response)
@@ -30,7 +30,7 @@ const EditUser = ({user, setUser}) => {
                     setLastName(response.lastName)
                 })
                 .catch(e => distributeErrors(e))
-    }, [setUser, user.firstName])
+    }, [setUser, user.id])
 
 
     const handleSubmitChange = event => {

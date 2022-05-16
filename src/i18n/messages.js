@@ -21,6 +21,7 @@ const MESSAGES = {
         authentication: 'Log in',
 
         my_account: 'My account',
+        id: 'Identifier',
         edit: 'Edit',
         delete_account: 'Delete account',
 
@@ -81,6 +82,7 @@ const MESSAGES = {
         authentication: 'Вход',
 
         my_account: 'Мой аккаунт',
+        id: 'Идентификатор',
         edit: 'Редактировать',
         delete_account: 'Удалить аккаунт',
 

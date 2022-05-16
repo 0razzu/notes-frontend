@@ -33,6 +33,10 @@ const UserPage = ({setPageId, user, setUser}) => {
             <article>
                 <section className={'content'}>
                     <p>
+                        <span className={'label is-inline'}><FormattedMessage id="id" />: </span>
+                        {user.id}
+                    </p>
+                    <p>
                         <span className={'label is-inline'}><FormattedMessage id="first_name" />: </span>
                         {user.firstName}
                     </p>
