@@ -6,7 +6,8 @@ const initialState = {
     firstName: undefined,
     patronymic: undefined,
     lastName: undefined,
-    login: undefined
+    login: undefined,
+    super: undefined,
 }
 
 
@@ -14,16 +15,7 @@ const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        set: (state, action) => {
-            const payload = action.payload
-
-            state.id = payload.id
-            state.firstName = payload.firstName
-            state.patronymic = payload.patronymic
-            state.lastName = payload.lastName
-            state.login = payload.login
-        },
-
+        set: (state, action) => action.payload,
         clear: state => initialState,
     }
 })

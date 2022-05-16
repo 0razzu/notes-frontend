@@ -22,6 +22,7 @@ const MESSAGES = {
 
         my_account: 'My account',
         id: 'Identifier',
+        superuser: '✨ Superuser ✨',
         edit: 'Edit',
         delete_account: 'Delete account',
 
@@ -83,6 +84,7 @@ const MESSAGES = {
 
         my_account: 'Мой аккаунт',
         id: 'Идентификатор',
+        superuser: '✨ Суперпользователь ✨',
         edit: 'Редактировать',
         delete_account: 'Удалить аккаунт',
 

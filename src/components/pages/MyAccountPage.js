@@ -54,6 +54,11 @@ const MyAccountPage = ({setPageId, user, setUser}) => {
                         <span className={'label is-inline'}><FormattedMessage id="login" />: </span>
                         <span>{user.login}</span>
                     </p>
+                    {user.super &&
+                        <p>
+                            <FormattedMessage id="superuser" />
+                        </p>
+                    }
                 </section>
 
                 <section className={'content'}>

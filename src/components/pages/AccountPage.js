@@ -48,6 +48,11 @@ const AccountPage = ({setPageName}) => {
                         <span className={'label is-inline'}><FormattedMessage id="last_name" />: </span>
                         {requestedUser?.lastName}
                     </p>
+                    {requestedUser?.super &&
+                        <p>
+                            <FormattedMessage id="superuser" />
+                        </p>
+                    }
                 </section>
             </article>
         </div>
