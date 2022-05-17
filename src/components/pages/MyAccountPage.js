@@ -28,7 +28,7 @@ const MyAccountPage = ({setPageId, user, setUser}) => {
 
 
     return (
-        <div className={'MyAccountPage'}>
+        <>
             <h2><FormattedMessage id="my_account" /></h2>
             <article>
                 <section className={'content'}>
@@ -90,7 +90,7 @@ const MyAccountPage = ({setPageId, user, setUser}) => {
                         aria-label="close"
                         onClick={() => setDeleteDialogIsActive(false)} />
             </div>
-        </div>
+        </>
     )
 }
 

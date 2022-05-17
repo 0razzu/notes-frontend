@@ -32,6 +32,8 @@ const MESSAGES = {
         save: 'Save',
 
         make_super: 'Make superuser',
+        make_them_super: 'Make {login} a superuser?',
+        yes: 'Yes',
 
         uh_oh: 'Uh-oh!',
         COMMENT_NOT_FOUND: 'Cannot find a comment with this id',
@@ -96,6 +98,8 @@ const MESSAGES = {
         save: 'Сохранить',
 
         make_super: 'Сделать суперпользователем',
+        make_them_super: 'Сделать {login} суперпользователем?',
+        yes: 'Да',
 
         uh_oh: 'Ой!',
         COMMENT_NOT_FOUND: 'Нет такого комментария',
