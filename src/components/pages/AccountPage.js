@@ -28,10 +28,13 @@ const AccountPage = ({setPageName, user, setUser}) => {
 
 
     useEffect(() => {
-        getFromAPI('/accounts/' + login)
-            .then(response => setRequestedUser(response))
-            .catch(e => distributeErrors(e))
-    }, [login])
+        if (user.login !== login)
+            getFromAPI('/accounts/' + login)
+                .then(response => setRequestedUser(response))
+                .catch(e => distributeErrors(e))
+        else
+            setRequestedUser(user)
+    }, [user, login])
 
 
     const makeSuper = () => {
