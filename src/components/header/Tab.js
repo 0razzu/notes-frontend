@@ -18,7 +18,7 @@ const Tab = ({currentPageName, location, pageName, children}) => {
 
 
 const mapStateToProps = state => ({
-    currentPageName: state.pageName,
+    currentPageName: state.page.name,
 })
 
 

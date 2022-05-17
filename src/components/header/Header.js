@@ -20,11 +20,13 @@ const Header = ({user}) => {
                 </Link>
             </div>
 
-            <div className={'navbar-start'}>
-                <div className={'navbar-tabs'}>
-                    <Tab location={'/users'} pageName={'users'}><FormattedMessage id="users" /></Tab>
+            {loggedIn &&
+                <div className={'navbar-start'}>
+                    <div className={'navbar-tabs'}>
+                        <Tab location={'/users'} pageName={'users'}><FormattedMessage id="users" /></Tab>
+                    </div>
                 </div>
-            </div>
+            }
 
             <div className={'navbar-end'}>
                 <div className={'navbar-group'}>
