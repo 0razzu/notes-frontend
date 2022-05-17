@@ -1,6 +1,7 @@
 import {Link} from 'react-router-dom'
 import {FormattedMessage} from 'react-intl'
 import {connect} from 'react-redux'
+import Tab from './Tab'
 import LogoutButton from './buttons/LogoutButton'
 import RegisterButton from './buttons/RegisterButton'
 import LogInButton from './buttons/LogInButton'
@@ -12,12 +13,16 @@ const Header = ({user}) => {
 
 
     return (
-        <nav className={'navbar has-shadow'}>
+        <nav className={'navbar'}>
+            <div className={'navbar-brand'}>
+                <Link to={'/'} className={'title navbar-item is-uppercase has-background-white-ter'}>
+                    <FormattedMessage id="app_name" />
+                </Link>
+            </div>
+
             <div className={'navbar-start'}>
-                <div className={'navbar-brand'}>
-                    <h1 className={'title'}>
-                        <Link to={'/'} className={'navbar-item'}><FormattedMessage id="app_name" /></Link>
-                    </h1>
+                <div className={'navbar-tabs'}>
+                    <Tab location={'/users'} pageName={'users'}><FormattedMessage id="users" /></Tab>
                 </div>
             </div>
 
@@ -26,7 +31,7 @@ const Header = ({user}) => {
                     {
                         loggedIn?
                             <>
-                                <Link to={'/me'} className={'navbar-item'}>{user.login}</Link>
+                                <Tab location={'/me'} pageName={'my_account'}>{user.login}</Tab>
                                 <LogoutButton />
                             </> :
                             <>
