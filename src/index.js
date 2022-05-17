@@ -27,7 +27,7 @@ createRoot(document.getElementById('root')).render(
                         <Route path="login" element={<ForNonAuth><LogInPage /></ForNonAuth>} />
                         <Route path="me" element={<ForAuth><MyAccountPage /></ForAuth>} />
                         <Route path="me/edit" element={<ForAuth><EditMyAccountPage /></ForAuth>} />
-                        <Route path=":login" element={<ForAuth><AccountPage /></ForAuth>} />
+                        <Route path="users/:login" element={<ForAuth><AccountPage /></ForAuth>} />
                         <Route path="*" element={<NoSuchPage />} />
                     </Route>
                 </Routes>

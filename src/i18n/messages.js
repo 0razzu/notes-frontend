@@ -31,6 +31,8 @@ const MESSAGES = {
         new_password: 'New password',
         save: 'Save',
 
+        make_super: 'Make superuser',
+
         uh_oh: 'Uh-oh!',
         COMMENT_NOT_FOUND: 'Cannot find a comment with this id',
         DATABASE_ERROR: 'An unknown database error has occurred',
@@ -92,6 +94,8 @@ const MESSAGES = {
         old_password: 'Текущий пароль',
         new_password: 'Новый пароль',
         save: 'Сохранить',
+
+        make_super: 'Сделать суперпользователем',
 
         uh_oh: 'Ой!',
         COMMENT_NOT_FOUND: 'Нет такого комментария',
