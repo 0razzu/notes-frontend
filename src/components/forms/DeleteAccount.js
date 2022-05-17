@@ -13,7 +13,7 @@ const DeleteAccount = ({clearUser}) => {
     const [errors, setErrors] = useState({})
 
 
-    const handleSubmitChange = event => {
+    const handleSubmit = event => {
         event.preventDefault()
 
         deleteFromAPI('/accounts', {password})
@@ -24,7 +24,7 @@ const DeleteAccount = ({clearUser}) => {
 
 
     return (
-        <form className={'card form'} onSubmit={handleSubmitChange}>
+        <form className={'card form'} onSubmit={handleSubmit}>
             <div className={'card-content'}>
                 <div className={'field'}>
                     <LabelledInputWithIcon id="password"

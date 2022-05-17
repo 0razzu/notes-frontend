@@ -33,7 +33,7 @@ const EditMyAccount = ({user, setUser}) => {
     }, [setUser, user.id])
 
 
-    const handleSubmitChange = event => {
+    const handleSubmit = event => {
         event.preventDefault()
 
         const body = {
@@ -62,7 +62,7 @@ const EditMyAccount = ({user, setUser}) => {
     return (
         done?
             <Navigate to={'/me'} /> :
-            <form className={'card form'} onSubmit={handleSubmitChange}>
+            <form className={'card form'} onSubmit={handleSubmit}>
                 <div className={'card-content'}>
                     <div className={'field is-grouped is-grouped-multiline'}>
                         <LabelledInput id="first_name"
