@@ -82,11 +82,11 @@ const MyAccountPage = ({setPageId, user, setUser}) => {
             </article>
 
             <div className={classNames('modal', {'is-active': deleteDialogIsActive})}>
-                <div className="modal-background" />
-                <div className="modal-content">
+                <div className={'modal-background'} />
+                <div className={'modal-content'}>
                     <DeleteAccount />
                 </div>
-                <button className="modal-close is-large"
+                <button className={'modal-close is-large'}
                         aria-label="close"
                         onClick={() => setDeleteDialogIsActive(false)} />
             </div>

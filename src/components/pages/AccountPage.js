@@ -82,13 +82,13 @@ const AccountPage = ({setPageName, user, setUser}) => {
 
                     {!requestedUser.super && user.super &&
                         <div className={classNames('modal', {'is-active': makeSuperDialogIsActive})}>
-                            <div className="modal-background" />
-                            <div className="modal-content">
+                            <div className={'modal-background'} />
+                            <div className={'modal-content'}>
                                 <MakeSuper requestedUser={requestedUser}
                                            setRequestedUser={setRequestedUser}
                                            onSuccess={() => setMakeSuperDialogIsActive(false)} />
                             </div>
-                            <button className="modal-close is-large"
+                            <button className={'modal-close is-large'}
                                     aria-label="close"
                                     onClick={() => setMakeSuperDialogIsActive(false)} />
                         </div>

@@ -16,7 +16,7 @@ const MakeSuper = ({requestedUser, setRequestedUser}) => {
     return (
         <form className={'card form'} onSubmit={handleSubmit}>
             <div className={'card-content'}>
-                <h2 className={'title'}>
+                <h2 className={'title is-4'}>
                     <FormattedMessage id="make_them_super" values={{login: requestedUser.login}} />
                 </h2>
 
