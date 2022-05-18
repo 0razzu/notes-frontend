@@ -1,0 +1,16 @@
+@import "bulma"
+@import "screens"
+
+
+.HorizontalInputField
+  @extend .field, .is-horizontal
+  display: flex
+  margin: 0 !important
+
+  @include screen-769-minus
+    align-items: center
+
+
+  .field-label
+    margin-right: 1.5rem
+    padding-top: 0.375em

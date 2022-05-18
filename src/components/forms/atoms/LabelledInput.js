@@ -3,16 +3,13 @@ import FormFieldErrorCaption from './FormFieldErrorCaption'
 import Input from './Input'
 
 
-const LabelledInput = ({id, type, stateMutator, errorIds, ...rest}) => {
+const LabelledInput = ({id, stateMutator, errorIds, ...rest}) => {
     return (
         <div className={'control'}>
             <label className={'label'}><FormattedMessage id={id} /></label>
-            <Input type={type}
-                   stateMutator={stateMutator}
+            <Input stateMutator={stateMutator}
                    hasErrors={errorIds?.length}
-                   required={rest.required}
-                   readOnly={rest.readOnly}
-                   value={rest.value} />
+                   {...rest} />
             <FormFieldErrorCaption messageIds={errorIds} />
         </div>
     )

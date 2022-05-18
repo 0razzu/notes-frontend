@@ -30,16 +30,15 @@ const Header = ({user}) => {
 
             <div className={'navbar-end'}>
                 <div className={'navbar-group'}>
-                    {
-                        loggedIn?
-                            <>
-                                <Tab location={'/me'} pageName={'my_account'}>{user.login}</Tab>
-                                <LogoutButton />
-                            </> :
-                            <>
-                                <RegisterButton />
-                                <LogInButton />
-                            </>
+                    {loggedIn?
+                        <>
+                            <Tab location={'/me'} pageName={'my_account'}>{user.login}</Tab>
+                            <LogoutButton />
+                        </> :
+                        <>
+                            <RegisterButton />
+                            <LogInButton />
+                        </>
                     }
                 </div>
             </div>

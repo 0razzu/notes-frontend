@@ -8,9 +8,17 @@ const MESSAGES = {
     [LOCALES.ENGLISH]: {
         app_name: 'Notes',
         app_description: 'Publish your notes!',
-        users: 'Users',
         no_such_page: 'No such page!',
         language: 'Language',
+
+        users: 'Users',
+        on_page: `Elements on${nbsp}the${nbsp}page`,
+        show: 'Show',
+        online: 'Online',
+        offline: 'Offline',
+        deleted: 'Deleted',
+        registered_on: `Registered on${nbsp}{date}`,
+        rating: 'Rating',
 
         register: 'Register',
         log_in: `Log${nbsp}in`,
@@ -75,9 +83,17 @@ const MESSAGES = {
     [LOCALES.RUSSIAN]: {
         app_name: 'Заметки',
         app_description: 'Публикуйте свои заметки!',
-        users: 'Пользователи',
         no_such_page: 'Нет такой страницы!',
         language: 'Язык',
+
+        users: 'Пользователи',
+        on_page: `Элементов на${nbsp}странице`,
+        show: 'Показать',
+        online: 'Онлайн',
+        offline: 'Офлайн',
+        deleted: 'Покинул(-а) сервер',
+        registered_on: 'Зарегистрирован(-а) {date}',
+        rating: 'Рейтинг',
 
         register: 'Зарегистрироваться',
         log_in: 'Войти',
