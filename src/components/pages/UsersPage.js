@@ -8,14 +8,18 @@ import HorizontalInputField from '../forms/atoms/HorizontalInputField'
 import {getFromAPI, stringifyParams} from '../../utils/fetchFromAPI'
 import distributeErrors from '../../utils/distributeErrors'
 import ChangingFontAwesomeIcon from '../atoms/ChangingFontAwesomeIcon'
+import {setUser} from '../../store/slices/userSlice'
+import FormFieldErrorCaption from '../forms/atoms/FormFieldErrorCaption'
+import classNames from 'classnames'
 
 
-const UsersPage = ({setPageId}) => {
+const UsersPage = ({setPageId, user, setUser}) => {
     const intl = useIntl()
     const [from, setFrom] = useState(0)
     const [count, setCount] = useState(20)
     const sortingTypes = [undefined, 'asc', 'desc']
     const [sortByRatingIndex, setSortByRatingIndex] = useState(0)
+    const [type, setType] = useState()
     const [users, setUsers] = useState([])
     const [hasNext, setHasNext] = useState(false)
     const [errors, setErrors] = useState({})
@@ -31,11 +35,13 @@ const UsersPage = ({setPageId}) => {
             from,
             count,
             sortByRating: sortingTypes[sortByRatingIndex],
+            type,
         }))
             .then(result => {
                 setUsers(result)
                 setFrom(from)
             })
+            .then(() => setErrors({}))
             .catch(e => distributeErrors(e, setErrors))
     }
 
@@ -55,13 +61,24 @@ const UsersPage = ({setPageId}) => {
     const sortByRatingOnClick = () => setSortByRatingIndex((sortByRatingIndex + 1) % sortingTypes.length)
 
 
+    const typeOnChange = event => {
+        const value = event.target.value
+        setType(value === 'all'? undefined : value)
+    }
+
+
     const showOnClick = () => getUsers(from)
 
 
     useEffect(() => {
         getUsers(0)
+
+        if (!user.super)
+            getFromAPI('/account')
+                .then(response => setUser(response))
+                .catch(e => distributeErrors(e))
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [user.super])
 
 
     useEffect(() => {
@@ -73,6 +90,7 @@ const UsersPage = ({setPageId}) => {
                 from: from + count,
                 count: 1,
                 sortByRating: sortingTypes[sortByRatingIndex],
+                type,
             }))
                 .then(result => setHasNext(result.length === 1))
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -111,6 +129,25 @@ const UsersPage = ({setPageId}) => {
                         <span><FormattedMessage id="rating" /></span>
                     </button>
 
+                    <div className={'field is-horizontal'}>
+                        <div className={classNames('select', {'is-danger': errors.type?.length > 0})}>
+                            <select onChange={typeOnChange}>
+                                <option value={'all'}>{intl.formatMessage({id: 'all_users'})}</option>
+                                <option value={'highRating'}>{intl.formatMessage({id: 'high_rating_users'})}</option>
+                                <option value={'lowRating'}>{intl.formatMessage({id: 'low_rating_users'})}</option>
+                                <option value={'following'}>{intl.formatMessage({id: 'following'})}</option>
+                                <option value={'followers'}>{intl.formatMessage({id: 'followers'})}</option>
+                                <option value={'ignore'}>{intl.formatMessage({id: 'ignored'})}</option>
+                                <option value={'ignoredBy'}>{intl.formatMessage({id: 'ignored_by'})}</option>
+                                <option value={'deleted'}>{intl.formatMessage({id: 'deleted_users'})}</option>
+                                {user.super &&
+                                    <option value={'super'}>{intl.formatMessage({id: 'superusers'})}</option>
+                                }
+                            </select>
+                        </div>
+                        <FormFieldErrorCaption messageIds={errors.type} />
+                    </div>
+
                     <button className={'button is-primary'} onClick={showOnClick}>
                         <FormattedMessage id="show" />
                     </button>
@@ -144,9 +181,15 @@ const UsersPage = ({setPageId}) => {
 }
 
 
-const mapDispatchToProps = dispatch => ({
-    setPageId: bindActionCreators(setPageId, dispatch),
+const mapStateToProps = state => ({
+    user: state.user,
 })
 
 
-export default connect(null, mapDispatchToProps)(UsersPage)
+const mapDispatchToProps = dispatch => ({
+    setPageId: bindActionCreators(setPageId, dispatch),
+    setUser: bindActionCreators(setUser, dispatch),
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(UsersPage)
