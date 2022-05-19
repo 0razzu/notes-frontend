@@ -56,7 +56,9 @@ const MESSAGES = {
 
         make_super: 'Make superuser',
         subscribe: 'Subscribe',
+        unsubscribe: 'Unsubscribe',
         ignore: 'Ignore',
+        unignore: 'Remove from ignore list',
         make_them_super: `Make {login} a${nbsp}superuser?`,
         yes: 'Yes',
 
@@ -144,7 +146,9 @@ const MESSAGES = {
 
         make_super: 'Сделать суперпользователем',
         subscribe: 'Подписаться',
+        unsubscribe: 'Отписаться',
         ignore: 'Игнорировать',
+        unignore: `Убрать из${nbsp}игнор-листа`,
         make_them_super: 'Сделать {login} суперпользователем?',
         yes: 'Да',
 

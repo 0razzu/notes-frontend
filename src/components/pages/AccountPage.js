@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 import {FormattedMessage} from 'react-intl'
 import {useEffect, useState} from 'react'
-import {getFromAPI, postToAPI} from '../../utils/fetchFromAPI'
+import {deleteFromAPI, getFromAPI, postToAPI} from '../../utils/fetchFromAPI'
 import {bindActionCreators} from '@reduxjs/toolkit'
 import distributeErrors from '../../utils/distributeErrors'
 import {useParams} from 'react-router-dom'
@@ -46,9 +46,23 @@ const AccountPage = ({setPageName, user, setUser}) => {
     }
 
 
+    const unsubscribe = () => {
+        deleteFromAPI(`/followings/${login}`)
+            .then(() => setRequestedUser({...requestedUser, followed: false}))
+            .catch(e => distributeErrors(e))
+    }
+
+
     const ignore = () => {
         postToAPI('/ignore', {login})
             .then(() => setRequestedUser({...requestedUser, ignored: true, followed: false}))
+            .catch(e => distributeErrors(e))
+    }
+
+
+    const unignore = () => {
+        deleteFromAPI(`/ignore/${login}`)
+            .then(() => setRequestedUser({...requestedUser, ignored: false}))
             .catch(e => distributeErrors(e))
     }
 
@@ -103,14 +117,22 @@ const AccountPage = ({setPageName, user, setUser}) => {
                                     </button>
                                 }
 
-                                {!requestedUser.followed &&
+                                {requestedUser.followed?
+                                    <button className={'button is-link is-outlined'}
+                                            onClick={unsubscribe}>
+                                        <FormattedMessage id="unsubscribe" />
+                                    </button> :
                                     <button className={'button is-link'}
                                             onClick={subscribe}>
                                         <FormattedMessage id="subscribe" />
                                     </button>
                                 }
 
-                                {!requestedUser.ignored &&
+                                {requestedUser.ignored?
+                                    <button className={'button is-danger is-outlined'}
+                                            onClick={unignore}>
+                                        <FormattedMessage id="unignore" />
+                                    </button> :
                                     <button className={'button is-danger'}
                                             onClick={ignore}>
                                         <FormattedMessage id="ignore" />
