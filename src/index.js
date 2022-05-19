@@ -8,6 +8,7 @@ import App from './components/App'
 import AppIndex from './components/pages/AppIndex'
 import UsersPage from './components/pages/UsersPage'
 import AccountPage from './components/pages/AccountPage'
+import SectionsPage from './components/pages/SectionsPage'
 import RegisterPage from './components/pages/RegisterPage'
 import LogInPage from './components/pages/LogInPage'
 import MyAccountPage from './components/pages/MyAccountPage'
@@ -26,6 +27,7 @@ createRoot(document.getElementById('root')).render(
                         <Route index element={<AppIndex />} />
                         <Route path="users" element={<ForAuth><UsersPage /></ForAuth>} />
                         <Route path="users/:login" element={<ForAuth><AccountPage /></ForAuth>} />
+                        <Route path="sections" element={<ForAuth><SectionsPage /></ForAuth>} />
                         <Route path="register" element={<ForNonAuth><RegisterPage /></ForNonAuth>} />
                         <Route path="login" element={<ForNonAuth><LogInPage /></ForNonAuth>} />
                         <Route path="me" element={<ForAuth><MyAccountPage /></ForAuth>} />

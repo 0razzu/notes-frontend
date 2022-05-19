@@ -24,6 +24,7 @@ const Header = ({user}) => {
                 <div className={'navbar-start'}>
                     <div className={'navbar-tabs'}>
                         <Tab location={'/users'} pageName={'users'}><FormattedMessage id="users" /></Tab>
+                        <Tab location={'/sections'} pageName={'sections'}><FormattedMessage id="sections" /></Tab>
                     </div>
                 </div>
             }

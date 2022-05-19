@@ -34,6 +34,10 @@ const MESSAGES = {
         deleted_users: 'Deleted',
         superusers: 'Superusers',
 
+        sections: 'Sections',
+        create: 'Create',
+        name: 'Name',
+
         register: 'Register',
         log_in: `Log${nbsp}in`,
 
@@ -128,6 +132,10 @@ const MESSAGES = {
         ignored_by: 'Игнорирующие меня',
         deleted_users: 'Покинувшие сервер',
         superusers: 'Суперпользователи',
+
+        sections: 'Разделы',
+        create: 'Создать',
+        name: 'Название',
 
         register: 'Зарегистрироваться',
         log_in: 'Войти',
