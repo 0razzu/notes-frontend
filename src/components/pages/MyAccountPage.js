@@ -56,7 +56,7 @@ const MyAccountPage = ({setPageId, user, setUser}) => {
                     </p>
                     {user.super &&
                         <p>
-                            <FormattedMessage id="superuser" />
+                            <span className={'tag is-warning'}><FormattedMessage id="superuser" /></span>
                         </p>
                     }
                 </section>

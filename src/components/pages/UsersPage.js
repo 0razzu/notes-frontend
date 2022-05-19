@@ -31,6 +31,32 @@ const UsersPage = ({setPageId, user, setUser}) => {
     }, [setPageId])
 
 
+    useEffect(() => {
+        getUsers(0)
+
+        if (!user.super)
+            getFromAPI('/account')
+                .then(response => setUser(response))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user.super])
+
+
+    useEffect(() => {
+        if (users.length < count)
+            setHasNext(false)
+
+        else
+            getFromAPI('/accounts' + stringifyParams({
+                from: from + count,
+                count: 1,
+                sortByRating: sortingTypes[sortByRatingIndex],
+                type,
+            }))
+                .then(result => setHasNext(result.length === 1))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [from, users.length])
+
+
     const getUsers = from => {
         getFromAPI('/accounts' + stringifyParams({
             from,
@@ -69,33 +95,6 @@ const UsersPage = ({setPageId, user, setUser}) => {
 
 
     const showOnClick = () => getUsers(from)
-
-
-    useEffect(() => {
-        getUsers(0)
-
-        if (!user.super)
-            getFromAPI('/account')
-                .then(response => setUser(response))
-                .catch(e => distributeErrors(e))
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [user.super])
-
-
-    useEffect(() => {
-        if (users.length < count)
-            setHasNext(false)
-
-        else
-            getFromAPI('/accounts' + stringifyParams({
-                from: from + count,
-                count: 1,
-                sortByRating: sortingTypes[sortByRatingIndex],
-                type,
-            }))
-                .then(result => setHasNext(result.length === 1))
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [from, users.length])
 
 
     return (
@@ -171,7 +170,11 @@ const UsersPage = ({setPageId, user, setUser}) => {
                                     <FormattedMessage id="registered_on"
                                                       values={{date: intl.formatDate(user.timeRegistered)}} />
                                 </p>
-                                <p>{user.super && <FormattedMessage id="superuser" />}</p>
+                                {user.super &&
+                                    <p className={'mt-2'}>
+                                        <span className={'tag is-warning'}><FormattedMessage id="superuser" /></span>
+                                    </p>
+                                }
                             </div>
                         </div>
                     )}

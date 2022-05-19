@@ -1,7 +1,7 @@
 import {connect} from 'react-redux'
 import {FormattedMessage} from 'react-intl'
 import {useEffect, useState} from 'react'
-import {getFromAPI} from '../../utils/fetchFromAPI'
+import {getFromAPI, postToAPI} from '../../utils/fetchFromAPI'
 import {bindActionCreators} from '@reduxjs/toolkit'
 import distributeErrors from '../../utils/distributeErrors'
 import {useParams} from 'react-router-dom'
@@ -26,7 +26,6 @@ const AccountPage = ({setPageName, user, setUser}) => {
         if (!user.super)
             getFromAPI('/account')
                 .then(response => setUser(response))
-                .catch(e => distributeErrors(e))
     }, [user.super, setUser])
 
 
@@ -38,6 +37,20 @@ const AccountPage = ({setPageName, user, setUser}) => {
         else
             setRequestedUser(user)
     }, [user, login])
+
+
+    const subscribe = () => {
+        postToAPI('/followings', {login})
+            .then(() => setRequestedUser({...requestedUser, followed: true, ignored: false}))
+            .catch(e => distributeErrors(e))
+    }
+
+
+    const ignore = () => {
+        postToAPI('/ignore', {login})
+            .then(() => setRequestedUser({...requestedUser, ignored: true, followed: false}))
+            .catch(e => distributeErrors(e))
+    }
 
 
     return (
@@ -65,19 +78,46 @@ const AccountPage = ({setPageName, user, setUser}) => {
                                 <span className={'label is-inline'}><FormattedMessage id="last_name" />: </span>
                                 {requestedUser.lastName}
                             </p>
-                            {requestedUser.super &&
-                                <p><FormattedMessage id="superuser" /></p>
+
+                            {(requestedUser.followed || requestedUser.ignored || requestedUser.super) &&
+                                <p>
+                                    {requestedUser.super &&
+                                        <span className={'tag is-warning'}><FormattedMessage id="superuser" /></span>
+                                    }
+                                    {requestedUser.followed &&
+                                        <span className={'tag is-link'}><FormattedMessage id="followed_by_me" /></span>
+                                    }
+                                    {requestedUser.ignored &&
+                                        <span className={'tag is-danger'}><FormattedMessage id="ignored_by_me" /></span>
+                                    }
+                                </p>
                             }
                         </section>
 
-                        {!requestedUser.super && user.super &&
-                            <section className={'content'}>
-                                <button className={'button is-warning'}
-                                        onClick={() => setMakeSuperDialogIsActive(true)}>
-                                    <FormattedMessage id="make_super" />
-                                </button>
-                            </section>
-                        }
+                        <section className={'content'}>
+                            <div className={'buttons'}>
+                                {!requestedUser.super && user.super &&
+                                    <button className={'button is-warning'}
+                                            onClick={() => setMakeSuperDialogIsActive(true)}>
+                                        <FormattedMessage id="make_super" />
+                                    </button>
+                                }
+
+                                {!requestedUser.followed &&
+                                    <button className={'button is-link'}
+                                            onClick={subscribe}>
+                                        <FormattedMessage id="subscribe" />
+                                    </button>
+                                }
+
+                                {!requestedUser.ignored &&
+                                    <button className={'button is-danger'}
+                                            onClick={ignore}>
+                                        <FormattedMessage id="ignore" />
+                                    </button>
+                                }
+                            </div>
+                        </section>
                     </article>
 
                     {!requestedUser.super && user.super &&

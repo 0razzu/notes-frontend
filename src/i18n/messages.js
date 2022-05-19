@@ -43,7 +43,9 @@ const MESSAGES = {
 
         my_account: 'My account',
         id: 'Identifier',
-        superuser: '✨ Superuser ✨',
+        followed_by_me: `Followed by${nbsp}me`,
+        ignored_by_me: `Ignored by${nbsp}me`,
+        superuser: 'Superuser',
         edit: 'Edit',
         delete_account: 'Delete account',
 
@@ -53,6 +55,8 @@ const MESSAGES = {
         save: 'Save',
 
         make_super: 'Make superuser',
+        subscribe: 'Subscribe',
+        ignore: 'Ignore',
         make_them_super: `Make {login} a${nbsp}superuser?`,
         yes: 'Yes',
 
@@ -127,7 +131,9 @@ const MESSAGES = {
 
         my_account: 'Мой аккаунт',
         id: 'Идентификатор',
-        superuser: '✨ Суперпользователь ✨',
+        followed_by_me: `В${nbsp}подписках`,
+        ignored_by_me: `В${nbsp}игнор-листе`,
+        superuser: 'Суперпользователь',
         edit: 'Редактировать',
         delete_account: 'Удалить аккаунт',
 
@@ -137,6 +143,8 @@ const MESSAGES = {
         save: 'Сохранить',
 
         make_super: 'Сделать суперпользователем',
+        subscribe: 'Подписаться',
+        ignore: 'Игнорировать',
         make_them_super: 'Сделать {login} суперпользователем?',
         yes: 'Да',
 
