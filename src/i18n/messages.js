@@ -7,9 +7,14 @@ const nbsp = '\xa0'
 const MESSAGES = {
     [LOCALES.ENGLISH]: {
         app_name: 'Notes',
-        app_description: 'Publish your notes!',
+        app_description: `You can publish your${nbsp}notes here.`,
         no_such_page: 'No such page!',
         language: 'Language',
+
+        greeting: 'Hello!',
+        register_or_login: `But${nbsp}first, {register} or${nbsp}{login}.`,
+        register_or_login_register: 'register',
+        register_or_login_login: `log${nbsp}in`,
 
         users: 'Users',
         on_page: `Elements on${nbsp}the${nbsp}page`,
@@ -97,9 +102,14 @@ const MESSAGES = {
 
     [LOCALES.RUSSIAN]: {
         app_name: 'Заметки',
-        app_description: 'Публикуйте свои заметки!',
+        app_description: 'Тут можно публиковать заметки.',
         no_such_page: 'Нет такой страницы!',
         language: 'Язык',
+
+        greeting: 'Добрый день!',
+        register_or_login: `Но${nbsp}сначала {register} или${nbsp}{login}.`,
+        register_or_login_register: 'зарегистрируйтесь',
+        register_or_login_login: 'войдите',
 
         users: 'Пользователи',
         on_page: `Элементов на${nbsp}странице`,
