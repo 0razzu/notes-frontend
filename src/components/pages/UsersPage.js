@@ -5,14 +5,17 @@ import {useEffect, useState} from 'react'
 import {setPageId} from '../../store/slices/pageSlice'
 import '../../styles/UsersPage.sass'
 import HorizontalInputField from '../forms/atoms/HorizontalInputField'
-import {getFromAPI} from '../../utils/fetchFromAPI'
+import {getFromAPI, stringifyParams} from '../../utils/fetchFromAPI'
 import distributeErrors from '../../utils/distributeErrors'
+import ChangingFontAwesomeIcon from '../atoms/ChangingFontAwesomeIcon'
 
 
 const UsersPage = ({setPageId}) => {
     const intl = useIntl()
     const [from, setFrom] = useState(0)
     const [count, setCount] = useState(20)
+    const sortingTypes = [undefined, 'asc', 'desc']
+    const [sortByRatingIndex, setSortByRatingIndex] = useState(0)
     const [users, setUsers] = useState([])
     const [hasNext, setHasNext] = useState(false)
     const [errors, setErrors] = useState({})
@@ -24,18 +27,20 @@ const UsersPage = ({setPageId}) => {
 
 
     const getUsers = from => {
-        getFromAPI(`/accounts?from=${from}&count=${count}`)
+        getFromAPI('/accounts' + stringifyParams({
+            from,
+            count,
+            sortByRating: sortingTypes[sortByRatingIndex],
+        }))
             .then(result => {
                 setUsers(result)
                 setFrom(from)
             })
-            .catch(e => {
-                distributeErrors(e, setErrors)
-            })
+            .catch(e => distributeErrors(e, setErrors))
     }
 
 
-    const handlePreviousOnClick = () => {
+    const previousOnClick = () => {
         let newFrom = from - count
         if (newFrom <= 0)
             newFrom = 0
@@ -44,10 +49,13 @@ const UsersPage = ({setPageId}) => {
     }
 
 
-    const handleNextOnClick = () => getUsers(from + count)
+    const nextOnClick = () => getUsers(from + count)
 
 
-    const handleShowOnClick = () => getUsers(from)
+    const sortByRatingOnClick = () => setSortByRatingIndex((sortByRatingIndex + 1) % sortingTypes.length)
+
+
+    const showOnClick = () => getUsers(from)
 
 
     useEffect(() => {
@@ -61,7 +69,11 @@ const UsersPage = ({setPageId}) => {
             setHasNext(false)
 
         else
-            getFromAPI(`/accounts?from=${from + count}&count=1`)
+            getFromAPI('/accounts' + stringifyParams({
+                from: from + count,
+                count: 1,
+                sortByRating: sortingTypes[sortByRatingIndex],
+            }))
                 .then(result => setHasNext(result.length === 1))
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [from, users.length])
@@ -75,10 +87,10 @@ const UsersPage = ({setPageId}) => {
                      role={'navigation'}
                      aria-label={'pagination'}>
                     <div>
-                        <button className={'pagination-previous'} onClick={handlePreviousOnClick} disabled={from <= 0}>
+                        <button className={'pagination-previous'} onClick={previousOnClick} disabled={from <= 0}>
                             <i className={'fas fa-arrow-left'} />
                         </button>
-                        <button className={'pagination-next'} onClick={handleNextOnClick} disabled={!hasNext}>
+                        <button className={'pagination-next'} onClick={nextOnClick} disabled={!hasNext}>
                             <i className={'fas fa-arrow-right'} />
                         </button>
                     </div>
@@ -91,7 +103,15 @@ const UsersPage = ({setPageId}) => {
                                           onChange={event => setCount(Number(event.target.value))}
                                           errorIds={errors.count} />
 
-                    <button className={'button is-primary'} onClick={handleShowOnClick}>
+                    <button className={'button'}
+                            onClick={sortByRatingOnClick}>
+                        <ChangingFontAwesomeIcon id={'fa-sort'} show={sortByRatingIndex === 0} />
+                        <ChangingFontAwesomeIcon id={'fa-sort-up'} show={sortByRatingIndex === 1} />
+                        <ChangingFontAwesomeIcon id={'fa-sort-down'} show={sortByRatingIndex === 2} />
+                        <span><FormattedMessage id="rating" /></span>
+                    </button>
+
+                    <button className={'button is-primary'} onClick={showOnClick}>
                         <FormattedMessage id="show" />
                     </button>
                 </nav>

@@ -28,6 +28,20 @@ const throwIfErrors = response => {
 }
 
 
+const stringifyParams = params => {
+    let paramStr = '?'
+
+    for (const key in params) {
+        const value = params[key]
+
+        if (value !== undefined)
+            paramStr += `${key}=${value}&`
+    }
+
+    return paramStr.slice(0, -1)
+}
+
+
 const fetcherCreator = method => (path, body) => fetchFromAPI(method, path, body)
 
 
@@ -35,3 +49,4 @@ export const postToAPI = fetcherCreator('POST')
 export const putToAPI = fetcherCreator('PUT')
 export const getFromAPI = fetcherCreator('GET')
 export const deleteFromAPI = fetcherCreator('DELETE')
+export {stringifyParams}
