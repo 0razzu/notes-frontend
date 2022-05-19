@@ -11,6 +11,7 @@ import ChangingFontAwesomeIcon from '../atoms/ChangingFontAwesomeIcon'
 import {setUser} from '../../store/slices/userSlice'
 import FormFieldErrorCaption from '../forms/atoms/FormFieldErrorCaption'
 import classNames from 'classnames'
+import {Link} from 'react-router-dom'
 
 
 const UsersPage = ({setPageId, user, setUser}) => {
@@ -157,7 +158,7 @@ const UsersPage = ({setPageId, user, setUser}) => {
                     {users.map(user =>
                         <div className={'card'} key={user.id}>
                             <div className={'card-content'}>
-                                <h3 className={'title is-4'}>{user.login}</h3>
+                                <h3 className={'title is-4'}><Link to={`/users/${user.login}`}>{user.login}</Link></h3>
                                 <h4 className={'subtitle is-6 has-text-grey'}>
                                     {user.deleted?
                                         <FormattedMessage id="deleted" /> :
