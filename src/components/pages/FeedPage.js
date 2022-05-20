@@ -1,4 +1,4 @@
-import {FormattedMessage} from 'react-intl'
+import {FormattedMessage, useIntl} from 'react-intl'
 import {useEffect, useState} from 'react'
 import {bindActionCreators} from '@reduxjs/toolkit'
 import {setPageId} from '../../store/slices/pageSlice'
@@ -12,6 +12,7 @@ import {nanoid} from 'nanoid'
 
 
 const FeedPage = ({setPageId}) => {
+    const intl = useIntl()
     const [notes, setNotes] = useState([])
     const [from, setFrom] = useState(0)
     const [count, setCount] = useState(20)
@@ -119,9 +120,26 @@ const FeedPage = ({setPageId}) => {
                         <div className={'card'} key={note.id}>
                             <div className={'card-content'}>
                                 <h3 className={'title is-4'}><Link to={`/notes/${note.id}`}>{note.subject}</Link></h3>
-                                <article className={'content'}>
-                                    {note.body.split('\n').map(par => <p key={nanoid()}>{par}</p>)}
+                                <h4 className={'subtitle is-6 has-text-grey'}>
+                                    <FormattedMessage id="created_on_at" values={{
+                                        date: intl.formatDate(note.created),
+                                        time: intl.formatTime(note.created),
+                                    }} />
+                                </h4>
+                                <article>
+                                    <section className={'content'}>
+                                        {note.body.split('\n').map(par => <p key={nanoid()}>{par}</p>)}
+                                    </section>
                                 </article>
+                            </div>
+
+                            <div className={'card-footer'}>
+                                <Link to={`/users/byId/${note.authorId}`} className={'card-footer-item'}>
+                                    <FormattedMessage id="to_authors_page" />
+                                </Link>
+                                <Link to={`/sections/${note.sectionId}`} className={'card-footer-item'}>
+                                    <FormattedMessage id="to_section" />
+                                </Link>
                             </div>
                         </div>
                     )}

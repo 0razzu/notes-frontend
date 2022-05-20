@@ -17,6 +17,9 @@ const MESSAGES = {
         register_or_login_login: `log${nbsp}in`,
 
         feed: 'Last day notes',
+        created_on_at: `Created on${nbsp}{date} at${nbsp}{time}${nbsp}UTC`,
+        to_authors_page: `To${nbsp}author’s page`,
+        to_section: `To${nbsp}section`,
 
         users: 'Users',
         on_page: `Elements on${nbsp}the${nbsp}page`,
@@ -124,6 +127,9 @@ const MESSAGES = {
         register_or_login_login: 'войдите',
 
         feed: `Заметки за${nbsp}последние сутки`,
+        created_on_at: `Создана {date} в${nbsp}{time}${nbsp}UTC`,
+        to_authors_page: `К${nbsp}странице автора`,
+        to_section: `К${nbsp}разделу`,
 
         users: 'Пользователи',
         on_page: `Элементов на${nbsp}странице`,
