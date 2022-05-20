@@ -98,7 +98,7 @@ const UsersPage = ({setPageId, user, setUser}) => {
 
 
     return (
-        <div className={'UsersPage'}>
+        <>
             <h2><FormattedMessage id="users" /></h2>
             <article>
                 <nav className={'pagination'}
@@ -153,7 +153,7 @@ const UsersPage = ({setPageId, user, setUser}) => {
                     </button>
                 </nav>
 
-                <div className={'Users'}>
+                <div className={'users'}>
                     {users.map(user =>
                         <div className={'card'} key={user.id}>
                             <div className={'card-content'}>
@@ -180,7 +180,7 @@ const UsersPage = ({setPageId, user, setUser}) => {
                     )}
                 </div>
             </article>
-        </div>
+        </>
     )
 }
 

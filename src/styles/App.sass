@@ -22,22 +22,43 @@ main
     @extend .mr-2
 
 
-  .Errors
-    position: fixed
-    right: 1rem
-    z-index: 100
-    min-width: 20rem
-
-    @include screen-770-plus
-      top: 2rem
-
-    @include screen-769-minus
-      bottom: 2rem
-      width: calc(100% - 2rem)
+  .pagination
+    display: flex
+    flex-flow: wrap
+    justify-content: flex-start
+    gap: 1rem 2rem
+    margin-left: 0
+    margin-right: 0
 
 
-    .message
-      box-shadow: $panel-shadow
+    *
+      order: unset
+
+
+    .pagination-previous,
+    .pagination-next
+      background: unset
+
+
+      &:first-child
+        margin-left: 0
+
+
+      &:last-child
+        margin-right: 0
+
+
+    .HorizontalInputField
+      .field-label
+        flex-basis: unset
+
+
+      .input
+        max-width: 5rem
+
+
+    .field
+      margin-bottom: 0
 
 
   .field.is-grouped.is-grouped-multiline

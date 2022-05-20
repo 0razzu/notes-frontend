@@ -1,0 +1,20 @@
+@import "bulma"
+@import "screens"
+
+
+.Errors
+  position: fixed
+  right: 1rem
+  z-index: 100
+  min-width: 20rem
+
+  @include screen-770-plus
+    top: 2rem
+
+  @include screen-769-minus
+    bottom: 2rem
+    width: calc(100% - 2rem)
+
+
+  .message
+    box-shadow: $panel-shadow

@@ -3,6 +3,7 @@ import {clearErrors} from '../store/slices/errorsSlice'
 import {connect} from 'react-redux'
 import {FormattedMessage} from 'react-intl'
 import {nanoid} from 'nanoid'
+import "../styles/Errors.sass"
 
 
 const Errors = ({errors, clearErrors}) => {
