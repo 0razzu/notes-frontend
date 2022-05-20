@@ -38,6 +38,11 @@ const MESSAGES = {
         create: 'Create',
         name: 'Name',
 
+        creator: 'Creator',
+        delete: 'Delete',
+        delete_section_confirmation: `Delete this${nbsp}section?`,
+        delete_section_confirmation_descr: `Its${nbsp}notes will${nbsp}also be${nbsp}deleted.`,
+
         register: 'Register',
         log_in: `Log${nbsp}in`,
 
@@ -88,6 +93,7 @@ const MESSAGES = {
         USER_NOT_FOUND_BY_LOGIN: `Cannot find a${nbsp}user with${nbsp}this login`,
         SECTION_EXISTS: `A${nbsp}section with${nbsp}this name already exists`,
         SECTION_NOT_FOUND: `Cannot find a${nbsp}section with${nbsp}this id`,
+        SECTION_NOT_FOUND_SECTION_ID: `Cannot find a${nbsp}section with${nbsp}this id`,
         SESSION_NOT_FOUND: `Log${nbsp}in first`,
         WRONG_OLD_PASSWORD: 'Wrong password',
         WRONG_PASSWORD: 'Wrong password',
@@ -136,6 +142,11 @@ const MESSAGES = {
         sections: 'Разделы',
         create: 'Создать',
         name: 'Название',
+
+        creator: 'Создатель',
+        delete: 'Удалить',
+        delete_section_confirmation: `Удалить этот${nbsp}раздел?`,
+        delete_section_confirmation_descr: `Также будут${nbsp}удалены его${nbsp}заметки.`,
 
         register: 'Зарегистрироваться',
         log_in: 'Войти',
@@ -187,6 +198,7 @@ const MESSAGES = {
         USER_NOT_FOUND_BY_LOGIN: `Нет пользователя с${nbsp}таким логином`,
         SECTION_EXISTS: `Уже есть раздел с${nbsp}таким названием`,
         SECTION_NOT_FOUND: `Раздел не${nbsp}найден`,
+        SECTION_NOT_FOUND_SECTION_ID: `Раздел не${nbsp}найден`,
         SESSION_NOT_FOUND: `Сначала войдите в${nbsp}аккаунт`,
         WRONG_OLD_PASSWORD: 'Неверный пароль',
         WRONG_PASSWORD: 'Неверный пароль',

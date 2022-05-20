@@ -1,24 +1,23 @@
 import {useState} from 'react'
-import {postToAPI} from '../../utils/fetchFromAPI'
+import {putToAPI} from '../../utils/fetchFromAPI'
 import distributeErrors from '../../utils/distributeErrors'
 import {FormattedMessage} from 'react-intl'
 import LabelledInput from './atoms/LabelledInput'
 
 
-const CreateSection = ({sections, setSections, setVisible}) => {
-    const [name, setName] = useState('')
+const EditSection = ({section, setSection, setVisible}) => {
+    const [name, setName] = useState(section.name)
     const [errors, setErrors] = useState({})
 
 
     const handleSubmit = event => {
         event.preventDefault()
 
-        postToAPI('/sections', {name})
-            .then((response) => setSections([...sections, response]))
-            .then(() => {
+        putToAPI(`/sections/${section.id}`, {name})
+            .then(response => {
+                setSection({...section, name:  response.name})
                 setErrors({})
                 setVisible(false)
-                setName('')
             })
             .catch(e => distributeErrors(e, setErrors))
     }
@@ -38,7 +37,7 @@ const CreateSection = ({sections, setSections, setVisible}) => {
 
                 <div className={'field has-addons has-addons-centered'}>
                     <div className={'control'}>
-                        <button className={'button is-success'}><FormattedMessage id="create" /></button>
+                        <button className={'button is-success'}><FormattedMessage id="save" /></button>
                     </div>
                 </div>
             </div>
@@ -47,4 +46,4 @@ const CreateSection = ({sections, setSections, setVisible}) => {
 }
 
 
-export default CreateSection
+export default EditSection

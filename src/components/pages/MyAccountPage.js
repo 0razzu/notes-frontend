@@ -63,14 +63,14 @@ const MyAccountPage = ({setPageId, user, setUser}) => {
 
                 <section className={'content'}>
                     <div className={'buttons'}>
-                        <Link to={'/me/edit'} className={'button is-link is-outlined'}>
+                        <Link to={'/me/edit'} className={'button is-success'}>
                             <span className={'icon is-small'}>
                                 <i className={'fa fa-pen'} aria-hidden="true" />
                             </span>
                             <span><FormattedMessage id="edit" /></span>
                         </Link>
 
-                        <button className={'button is-danger is-outlined'}
+                        <button className={'button is-danger'}
                                 onClick={() => setDeleteDialogIsActive(true)}>
                             <span className={'icon is-small'}>
                                 <i className={'fa fa-trash'} aria-hidden="true" />

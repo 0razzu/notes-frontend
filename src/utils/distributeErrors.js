@@ -20,6 +20,7 @@ const distributeErrors = (e, setErrors) => {
                 case 'unknown':
                 case 'request':
                 case 'url':
+                case 'id':
                     dispatchAddError({code})
                     break
                 default:
