@@ -7,8 +7,8 @@ import distributeErrors from '../../utils/distributeErrors'
 import {useParams} from 'react-router-dom'
 import {setPageName} from '../../store/slices/pageSlice'
 import {setUser} from '../../store/slices/userSlice'
-import classNames from 'classnames'
 import MakeSuper from '../forms/MakeSuper'
+import Modal from '../atoms/Modal'
 
 
 const AccountPage = ({setPageName, user, setUser}) => {
@@ -143,17 +143,9 @@ const AccountPage = ({setPageName, user, setUser}) => {
                     </article>
 
                     {!requestedUser.super && user.super &&
-                        <div className={classNames('modal', {'is-active': makeSuperDialogIsActive})}>
-                            <div className={'modal-background'} />
-                            <div className={'modal-content'}>
-                                <MakeSuper requestedUser={requestedUser}
-                                           setRequestedUser={setRequestedUser}
-                                           onSuccess={() => setMakeSuperDialogIsActive(false)} />
-                            </div>
-                            <button className={'modal-close is-large'}
-                                    aria-label="close"
-                                    onClick={() => setMakeSuperDialogIsActive(false)} />
-                        </div>
+                        <Modal isVisible={makeSuperDialogIsActive} setIsVisible={setMakeSuperDialogIsActive}>
+                            <MakeSuper requestedUser={requestedUser} setRequestedUser={setRequestedUser} />
+                        </Modal>
                     }
                 </>
             }

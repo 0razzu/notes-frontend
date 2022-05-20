@@ -6,8 +6,8 @@ import {useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import {getFromAPI} from '../../utils/fetchFromAPI'
 import distributeErrors from '../../utils/distributeErrors'
-import classNames from 'classnames'
 import CreateSection from '../forms/CreateSection'
+import Modal from '../atoms/Modal'
 
 
 const SectionsPage = ({setPageId}) => {
@@ -52,17 +52,11 @@ const SectionsPage = ({setPageId}) => {
                 </section>
             </article>
 
-            <div className={classNames('modal', {'is-active': createSectionIsActive})}>
-                <div className={'modal-background'} />
-                <div className={'modal-content'}>
-                    <CreateSection sections={sections}
-                                   setSections={setSections}
-                                   setVisible={setCreateSectionIsActive} />
-                </div>
-                <button className={'modal-close is-large'}
-                        aria-label="close"
-                        onClick={() => setCreateSectionIsActive(false)} />
-            </div>
+            <Modal isVisible={createSectionIsActive} setIsVisible={setCreateSectionIsActive}>
+                <CreateSection sections={sections}
+                               setSections={setSections}
+                               setVisible={setCreateSectionIsActive} />
+            </Modal>
         </>
     )
 }

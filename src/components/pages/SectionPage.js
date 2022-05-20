@@ -7,9 +7,9 @@ import distributeErrors from '../../utils/distributeErrors'
 import {Link, useParams} from 'react-router-dom'
 import {setPageName} from '../../store/slices/pageSlice'
 import {setUser} from '../../store/slices/userSlice'
-import classNames from 'classnames'
 import EditSection from '../forms/EditSection'
 import DeleteSection from '../forms/DeleteSection'
+import Modal from '../atoms/Modal'
 
 
 const SectionPage = ({setPageName, user, setUser}) => {
@@ -77,29 +77,17 @@ const SectionPage = ({setPageName, user, setUser}) => {
                     </article>
 
                     {user.id === section.creator.id &&
-                        <div className={classNames('modal', {'is-active': editDialogIsActive})}>
-                            <div className={'modal-background'} />
-                            <div className={'modal-content'}>
-                                <EditSection section={section}
-                                             setSection={setSection}
-                                             setVisible={setEditDialogIsActive} />
-                            </div>
-                            <button className={'modal-close is-large'}
-                                    aria-label="close"
-                                    onClick={() => setEditDialogIsActive(false)} />
-                        </div>
+                        <Modal isVisible={editDialogIsActive} setIsVisible={setEditDialogIsActive}>
+                            <EditSection section={section}
+                                         setSection={setSection}
+                                         setVisible={setEditDialogIsActive} />
+                        </Modal>
                     }
 
                     {(user.id === section.creator.id || user.super) &&
-                        <div className={classNames('modal', {'is-active': deleteDialogIsActive})}>
-                            <div className={'modal-background'} />
-                            <div className={'modal-content'}>
-                                <DeleteSection id={section.id} />
-                            </div>
-                            <button className={'modal-close is-large'}
-                                    aria-label="close"
-                                    onClick={() => setDeleteDialogIsActive(false)} />
-                        </div>
+                        <Modal isVisible={deleteDialogIsActive} setIsVisible={setDeleteDialogIsActive}>
+                            <DeleteSection id={section.id} />
+                        </Modal>
                     }
                 </>
             }

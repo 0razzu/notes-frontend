@@ -7,8 +7,8 @@ import {setUser} from '../../store/slices/userSlice'
 import distributeErrors from '../../utils/distributeErrors'
 import {Link} from 'react-router-dom'
 import {setPageId} from '../../store/slices/pageSlice'
-import classNames from 'classnames'
 import DeleteAccount from '../forms/DeleteAccount'
+import Modal from '../atoms/Modal'
 
 
 const MyAccountPage = ({setPageId, user, setUser}) => {
@@ -81,15 +81,9 @@ const MyAccountPage = ({setPageId, user, setUser}) => {
                 </section>
             </article>
 
-            <div className={classNames('modal', {'is-active': deleteDialogIsActive})}>
-                <div className={'modal-background'} />
-                <div className={'modal-content'}>
-                    <DeleteAccount />
-                </div>
-                <button className={'modal-close is-large'}
-                        aria-label="close"
-                        onClick={() => setDeleteDialogIsActive(false)} />
-            </div>
+            <Modal isVisible={deleteDialogIsActive} setIsVisible={setDeleteDialogIsActive}>
+                <DeleteAccount />
+            </Modal>
         </>
     )
 }
