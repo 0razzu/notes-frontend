@@ -16,7 +16,7 @@ const MESSAGES = {
         register_or_login_register: 'register',
         register_or_login_login: `log${nbsp}in`,
 
-        feed: 'Feed',
+        feed: 'Last day notes',
 
         users: 'Users',
         on_page: `Elements on${nbsp}the${nbsp}page`,
@@ -123,7 +123,7 @@ const MESSAGES = {
         register_or_login_register: 'зарегистрируйтесь',
         register_or_login_login: 'войдите',
 
-        feed: 'Лента',
+        feed: `Заметки за${nbsp}последние сутки`,
 
         users: 'Пользователи',
         on_page: `Элементов на${nbsp}странице`,
