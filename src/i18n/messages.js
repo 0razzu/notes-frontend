@@ -48,6 +48,11 @@ const MESSAGES = {
         delete_section_confirmation: `Delete this${nbsp}section?`,
         delete_section_confirmation_descr: `Its${nbsp}notes will${nbsp}also be${nbsp}deleted.`,
 
+        create_note: `Create a${nbsp}note`,
+        subject: 'Subject',
+        section: 'Section',
+        body: 'Body',
+
         register: 'Register',
         log_in: `Log${nbsp}in`,
 
@@ -157,6 +162,11 @@ const MESSAGES = {
         delete: 'Удалить',
         delete_section_confirmation: `Удалить этот${nbsp}раздел?`,
         delete_section_confirmation_descr: `Также будут${nbsp}удалены его${nbsp}заметки.`,
+
+        create_note: 'Создать заметку',
+        subject: 'Тема',
+        section: 'Раздел',
+        body: 'Текст',
 
         register: 'Зарегистрироваться',
         log_in: 'Войти',

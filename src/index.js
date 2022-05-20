@@ -10,6 +10,7 @@ import UsersPage from './components/pages/UsersPage'
 import AccountPage from './components/pages/AccountPage'
 import SectionsPage from './components/pages/SectionsPage'
 import SectionPage from './components/pages/SectionPage'
+import CreateNotePage from './components/pages/CreateNotePage'
 import RegisterPage from './components/pages/RegisterPage'
 import LogInPage from './components/pages/LogInPage'
 import MyAccountPage from './components/pages/MyAccountPage'
@@ -31,6 +32,7 @@ createRoot(document.getElementById('root')).render(
                         <Route path="users/:login" element={<ForAuth><AccountPage /></ForAuth>} />
                         <Route path="sections" element={<ForAuth><SectionsPage /></ForAuth>} />
                         <Route path="sections/:id" element={<ForAuth><SectionPage /></ForAuth>} />
+                        <Route path="notes/create" element={<ForAuth><CreateNotePage /></ForAuth>} />
                         <Route path="register" element={<ForNonAuth><RegisterPage /></ForNonAuth>} />
                         <Route path="login" element={<ForNonAuth><LogInPage /></ForNonAuth>} />
                         <Route path="me" element={<ForAuth><MyAccountPage /></ForAuth>} />

@@ -1,6 +1,7 @@
 import {Link} from 'react-router-dom'
 import {FormattedMessage} from 'react-intl'
 import {connect} from 'react-redux'
+import CreateNoteButton from './buttons/CreateNoteButton'
 import Tab from './Tab'
 import LogoutButton from './buttons/LogoutButton'
 import RegisterButton from './buttons/RegisterButton'
@@ -33,6 +34,7 @@ const Header = ({user}) => {
                 <div className={'navbar-group'}>
                     {loggedIn?
                         <>
+                            <CreateNoteButton />
                             <Tab location={'/me'} pageName={'my_account'}>{user.login}</Tab>
                             <LogoutButton />
                         </> :
