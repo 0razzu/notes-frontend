@@ -27,6 +27,7 @@ createRoot(document.getElementById('root')).render(
                     <Route path="/" element={<App />}>
                         <Route index element={<AppIndex />} />
                         <Route path="users" element={<ForAuth><UsersPage /></ForAuth>} />
+                        <Route path="users/byId/:id" element={<ForAuth><AccountPage /></ForAuth>} />
                         <Route path="users/:login" element={<ForAuth><AccountPage /></ForAuth>} />
                         <Route path="sections" element={<ForAuth><SectionsPage /></ForAuth>} />
                         <Route path="sections/:id" element={<ForAuth><SectionPage /></ForAuth>} />

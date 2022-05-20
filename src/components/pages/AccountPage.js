@@ -12,14 +12,14 @@ import Modal from '../atoms/Modal'
 
 
 const AccountPage = ({setPageName, user, setUser}) => {
-    const {login} = useParams()
+    const {id, login} = useParams()
     const [requestedUser, setRequestedUser] = useState()
     const [makeSuperDialogIsActive, setMakeSuperDialogIsActive] = useState(false)
 
 
     useEffect(() => {
-        setPageName(login)
-    }, [setPageName, login])
+        setPageName(requestedUser?.login)
+    }, [setPageName, requestedUser])
 
 
     useEffect(() => {
@@ -30,38 +30,40 @@ const AccountPage = ({setPageName, user, setUser}) => {
 
 
     useEffect(() => {
-        if (user.login !== login)
-            getFromAPI('/accounts/' + login)
-                .then(response => setRequestedUser({...response, login}))
+        if (id)
+            getFromAPI(`/accounts/${id}`)
+                .then(response => setRequestedUser(response))
                 .catch(e => distributeErrors(e))
         else
-            setRequestedUser(user)
-    }, [user, login])
+            getFromAPI(`/accounts/?login=${login}`)
+                .then(response => setRequestedUser(response))
+                .catch(e => distributeErrors(e))
+    }, [id, login])
 
 
     const subscribe = () => {
-        postToAPI('/followings', {login})
+        postToAPI('/followings', {login: requestedUser.login})
             .then(() => setRequestedUser({...requestedUser, followed: true, ignored: false}))
             .catch(e => distributeErrors(e))
     }
 
 
     const unsubscribe = () => {
-        deleteFromAPI(`/followings/${login}`)
+        deleteFromAPI(`/followings/${requestedUser.login}`)
             .then(() => setRequestedUser({...requestedUser, followed: false}))
             .catch(e => distributeErrors(e))
     }
 
 
     const ignore = () => {
-        postToAPI('/ignore', {login})
+        postToAPI('/ignore', {login: requestedUser.login})
             .then(() => setRequestedUser({...requestedUser, ignored: true, followed: false}))
             .catch(e => distributeErrors(e))
     }
 
 
     const unignore = () => {
-        deleteFromAPI(`/ignore/${login}`)
+        deleteFromAPI(`/ignore/${requestedUser.login}`)
             .then(() => setRequestedUser({...requestedUser, ignored: false}))
             .catch(e => distributeErrors(e))
     }
@@ -69,7 +71,7 @@ const AccountPage = ({setPageName, user, setUser}) => {
 
     return (
         <>
-            <h2>{login}</h2>
+            <h2>{login?? requestedUser?.login?? id}</h2>
             {requestedUser &&
                 <>
                     <article>
