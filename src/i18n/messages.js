@@ -55,6 +55,9 @@ const MESSAGES = {
 
         revision_id: `Revision${nbsp}id`,
         author: 'Author',
+        view_revisions: 'View revisions',
+        revisions: 'Revisions',
+        revision: 'Revision',
         delete_note_confirmation: `Delete this${nbsp}note?`,
 
         note_editing: 'Note editing',
@@ -176,6 +179,9 @@ const MESSAGES = {
 
         revision_id: `Идентификатор${nbsp}версии`,
         author: 'Автор',
+        view_revisions: 'Посмотреть версии',
+        revisions: 'Версии',
+        revision: 'Версия',
         delete_note_confirmation: `Удалить эту${nbsp}заметку?`,
 
         note_editing: 'Редактирование заметки',

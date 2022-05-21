@@ -10,6 +10,7 @@ import {nanoid} from 'nanoid'
 import useUser from '../../hooks/useUser'
 import Modal from '../atoms/Modal'
 import DeleteNote from '../forms/DeleteNote'
+import '../../styles/NotePage.sass'
 
 
 const NotePage = ({setPageName}) => {
@@ -19,6 +20,8 @@ const NotePage = ({setPageName}) => {
     const [note, setNote] = useState()
     const [authorLogin, setAuthorLogin] = useState()
     const [sectionName, setSectionName] = useState()
+    const [revisions, setRevisions] = useState([])
+    const [revisionsModalIsActive, setRevisionsModalIsActive] = useState(false)
     const [deleteDialogIsActive, setDeleteDialogIsActive] = useState(false)
 
 
@@ -57,6 +60,16 @@ const NotePage = ({setPageName}) => {
     }, [note?.sectionId])
 
 
+    const viewRevisions = () => {
+        if (revisions.length === 0)
+            getFromAPI(`/notes/${id}/revisions`)
+                .then(response => setRevisions(response))
+                .catch(e => distributeErrors(e))
+
+        setRevisionsModalIsActive(true)
+    }
+
+
     return (
         <>
             <h2>{note?.subject ?? id}</h2>
@@ -92,29 +105,62 @@ const NotePage = ({setPageName}) => {
                             </p>
                         </section>
 
-                        {(user.id === note.authorId || user.super) &&
-                            <section className={'content'}>
-                                <div className={'buttons'}>
-                                    {user.id === note.authorId &&
-                                        <Link to={`/notes/${id}/edit`} className={'button is-success'}>
+                        <section className={'content'}>
+                            <div className={'buttons'}>
+                                <button className={'button is-link'} onClick={viewRevisions}>
+                                    <FormattedMessage id="view_revisions" />
+                                </button>
+
+                                {(user.id === note.authorId || user.super) &&
+                                    <>
+                                        {user.id === note.authorId &&
+                                            <Link to={`/notes/${id}/edit`} className={'button is-success'}>
                                             <span className={'icon is-small'}>
                                                 <i className={'fa fa-pen'} aria-hidden="true" />
                                             </span>
-                                            <span><FormattedMessage id="edit" /></span>
-                                        </Link>
-                                    }
+                                                <span><FormattedMessage id="edit" /></span>
+                                            </Link>
+                                        }
 
-                                    <button className={'button is-danger'}
-                                            onClick={() => setDeleteDialogIsActive(true)}>
+                                        <button className={'button is-danger'}
+                                                onClick={() => setDeleteDialogIsActive(true)}>
                                         <span className={'icon is-small'}>
                                             <i className={'fa fa-trash'} aria-hidden="true" />
                                         </span>
-                                        <span><FormattedMessage id="delete" /></span>
-                                    </button>
-                                </div>
-                            </section>
-                        }
+                                            <span><FormattedMessage id="delete" /></span>
+                                        </button>
+                                    </>
+                                }
+                            </div>
+                        </section>
                     </article>
+
+                    <Modal isVisible={revisionsModalIsActive} setIsVisible={setRevisionsModalIsActive}>
+                        <div className={'revisions'}>
+                            <h2 className={'title'}><FormattedMessage id="revisions" /></h2>
+
+                            {revisions.map(revision =>
+                                <div className={'card'} key={revision.id}>
+                                    <div className={'card-content'}>
+                                        <h3 className={'title is-4'}>
+                                            <FormattedMessage id="revision" /> {revision.id}
+                                        </h3>
+                                        <h4 className={'subtitle is-6 has-text-grey'}>
+                                            <FormattedMessage id="created_on_at" values={{
+                                                date: intl.formatDate(revision.created),
+                                                time: intl.formatTime(revision.created),
+                                            }} />
+                                        </h4>
+                                        <article>
+                                            <section className={'content'}>
+                                                {revision.body.split('\n').map(par => <p key={nanoid()}>{par}</p>)}
+                                            </section>
+                                        </article>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    </Modal>
 
                     {(user.id === note.authorId || user.super) &&
                         <Modal isVisible={deleteDialogIsActive} setIsVisible={setDeleteDialogIsActive}>
