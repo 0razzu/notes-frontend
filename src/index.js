@@ -12,10 +12,12 @@ import SectionsPage from './components/pages/SectionsPage'
 import SectionPage from './components/pages/SectionPage'
 import CreateNotePage from './components/pages/CreateNotePage'
 import NotePage from './components/pages/NotePage'
+import EditNotePage from './components/pages/EditNotePage'
 import RegisterPage from './components/pages/RegisterPage'
 import LogInPage from './components/pages/LogInPage'
 import MyAccountPage from './components/pages/MyAccountPage'
 import EditMyAccountPage from './components/pages/EditMyAccountPage'
+import DeniedPage from './components/pages/DeniedPage'
 import NoSuchPage from './components/pages/NoSuchPage'
 import store from './store/store'
 import {Provider} from 'react-redux'
@@ -35,10 +37,12 @@ createRoot(document.getElementById('root')).render(
                         <Route path="sections/:id" element={<ForAuth><SectionPage /></ForAuth>} />
                         <Route path="notes/create" element={<ForAuth><CreateNotePage /></ForAuth>} />
                         <Route path="notes/:id" element={<ForAuth><NotePage /></ForAuth>} />
+                        <Route path="notes/:id/edit" element={<ForAuth><EditNotePage /></ForAuth>} />
                         <Route path="register" element={<ForNonAuth><RegisterPage /></ForNonAuth>} />
                         <Route path="login" element={<ForNonAuth><LogInPage /></ForNonAuth>} />
                         <Route path="me" element={<ForAuth><MyAccountPage /></ForAuth>} />
                         <Route path="me/edit" element={<ForAuth><EditMyAccountPage /></ForAuth>} />
+                        <Route path="403" element={<DeniedPage />} />
                         <Route path="*" element={<NoSuchPage />} />
                     </Route>
                 </Routes>
