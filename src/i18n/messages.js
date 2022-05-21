@@ -53,6 +53,9 @@ const MESSAGES = {
         section: 'Section',
         body: 'Body',
 
+        revision_id: `Revision${nbsp}id`,
+        author: 'Author',
+
         register: 'Register',
         log_in: `Log${nbsp}in`,
 
@@ -167,6 +170,9 @@ const MESSAGES = {
         subject: 'Тема',
         section: 'Раздел',
         body: 'Текст',
+
+        revision_id: `Идентификатор${nbsp}версии`,
+        author: 'Автор',
 
         register: 'Зарегистрироваться',
         log_in: 'Войти',
