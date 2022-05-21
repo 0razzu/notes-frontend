@@ -2,19 +2,44 @@
 @import "screens"
 
 
-.navbar-group
-  display: flex
-  align-items: center
-  padding: 0 .75rem
+.Header
+  @extend .navbar
+  display: flex !important
+  flex-wrap: wrap !important
 
 
-  @include screen-1023-minus
-    padding: .5rem .75rem !important
+  @include screen-769-minus
+    border-bottom: 2px solid $grey-lightest
 
 
-  .navbar-item
-    height: 100%
+  .navbar-start,
+  .navbar-end
+    display: flex !important
+    align-items: stretch !important
 
 
-  *:not(:last-child)
-    @extend .mr-3
+  .navbar-start
+    margin-right: auto
+
+
+  .navbar-group
+    display: flex
+    align-items: center
+    padding: 0 .75rem
+
+
+    .navbar-item
+      height: 100%
+
+
+    *:not(:last-child)
+      @extend .mr-3
+
+
+  .navbar-item.is-tab
+    display: flex !important
+    align-items: center !important
+
+
+    span
+      vertical-align: sub

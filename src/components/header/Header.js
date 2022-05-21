@@ -14,9 +14,9 @@ const Header = ({user}) => {
 
 
     return (
-        <nav className={'navbar'}>
+        <nav className={'Header'}>
             <div className={'navbar-brand'}>
-                <Link to={'/'} className={'title navbar-item is-uppercase has-background-white-ter'}>
+                <Link to={'/'} className={'title navbar-item is-uppercase'}>
                     <FormattedMessage id="app_name" />
                 </Link>
             </div>

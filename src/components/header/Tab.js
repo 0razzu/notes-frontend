@@ -11,7 +11,9 @@ const Tab = ({currentPageName, location, pageName, children}) => {
                       'is-active': currentPageName === pageName,
                   })
               }>
-            {children}
+            <span>
+                {children}
+            </span>
         </Link>
     )
 }

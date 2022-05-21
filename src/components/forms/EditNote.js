@@ -29,7 +29,7 @@ const EditNote = ({note}) => {
             sectionId: sectionId === note.sectionId? undefined : sectionId,
             body: body === note.body? undefined : body,
         })
-            .then(response => {
+            .then(() => {
                 setErrors({})
                 setDone(true)
             })
