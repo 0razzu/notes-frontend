@@ -9,7 +9,10 @@ const errorsSlice = createSlice({
     initialState,
     reducers: {
         add: (state, action) => {
-            state.push(action.payload)
+            const error = action.payload
+
+            if (!state.map(e => e.code).includes(error.code))
+                state.push(error)
         },
 
         clear: state => initialState,
