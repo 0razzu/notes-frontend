@@ -8,14 +8,15 @@ import HorizontalInputField from '../forms/atoms/HorizontalInputField'
 import {getFromAPI, stringifyParams} from '../../utils/fetchFromAPI'
 import distributeErrors from '../../utils/distributeErrors'
 import ChangingFontAwesomeIcon from '../atoms/ChangingFontAwesomeIcon'
-import {setUser} from '../../store/slices/userSlice'
 import FormFieldErrorCaption from '../forms/atoms/FormFieldErrorCaption'
 import classNames from 'classnames'
 import {Link} from 'react-router-dom'
+import useUser from '../../hooks/useUser'
 
 
-const UsersPage = ({setPageId, user, setUser}) => {
+const UsersPage = ({setPageId}) => {
     const intl = useIntl()
+    const user = useUser()
     const [from, setFrom] = useState(0)
     const [count, setCount] = useState(20)
     const sortingTypes = [undefined, 'asc', 'desc']
@@ -33,12 +34,8 @@ const UsersPage = ({setPageId, user, setUser}) => {
 
     useEffect(() => {
         getUsers(0)
-
-        if (!user.super)
-            getFromAPI('/account')
-                .then(response => setUser(response))
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [user.super])
+    }, [])
 
 
     useEffect(() => {
@@ -185,15 +182,9 @@ const UsersPage = ({setPageId, user, setUser}) => {
 }
 
 
-const mapStateToProps = state => ({
-    user: state.user,
-})
-
-
 const mapDispatchToProps = dispatch => ({
     setPageId: bindActionCreators(setPageId, dispatch),
-    setUser: bindActionCreators(setUser, dispatch),
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersPage)
+export default connect(null, mapDispatchToProps)(UsersPage)

@@ -6,13 +6,14 @@ import {bindActionCreators} from '@reduxjs/toolkit'
 import distributeErrors from '../../utils/distributeErrors'
 import {useParams} from 'react-router-dom'
 import {setPageName} from '../../store/slices/pageSlice'
-import {setUser} from '../../store/slices/userSlice'
 import MakeSuper from '../forms/MakeSuper'
 import Modal from '../atoms/Modal'
+import useUser from '../../hooks/useUser'
 
 
-const AccountPage = ({setPageName, user, setUser}) => {
+const AccountPage = ({setPageName}) => {
     const {id, login} = useParams()
+    const user = useUser()
     const [requestedUser, setRequestedUser] = useState()
     const [makeSuperDialogIsActive, setMakeSuperDialogIsActive] = useState(false)
 
@@ -20,13 +21,6 @@ const AccountPage = ({setPageName, user, setUser}) => {
     useEffect(() => {
         setPageName(requestedUser?.login)
     }, [setPageName, requestedUser])
-
-
-    useEffect(() => {
-        if (!user.super)
-            getFromAPI('/account')
-                .then(response => setUser(response))
-    }, [user.super, setUser])
 
 
     useEffect(() => {
@@ -71,7 +65,7 @@ const AccountPage = ({setPageName, user, setUser}) => {
 
     return (
         <>
-            <h2>{login?? requestedUser?.login?? id}</h2>
+            <h2>{login ?? requestedUser?.login ?? id}</h2>
             {requestedUser &&
                 <>
                     <article>
@@ -156,15 +150,9 @@ const AccountPage = ({setPageName, user, setUser}) => {
 }
 
 
-const mapStateToProps = state => ({
-    user: state.user,
-})
-
-
 const mapDispatchToProps = dispatch => ({
     setPageName: bindActionCreators(setPageName, dispatch),
-    setUser: bindActionCreators(setUser, dispatch),
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(AccountPage)
+export default connect(null, mapDispatchToProps)(AccountPage)

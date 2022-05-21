@@ -1,30 +1,22 @@
 import {connect} from 'react-redux'
 import {FormattedMessage} from 'react-intl'
 import {useEffect, useState} from 'react'
-import {getFromAPI} from '../../utils/fetchFromAPI'
 import {bindActionCreators} from '@reduxjs/toolkit'
-import {setUser} from '../../store/slices/userSlice'
-import distributeErrors from '../../utils/distributeErrors'
 import {Link} from 'react-router-dom'
 import {setPageId} from '../../store/slices/pageSlice'
 import DeleteAccount from '../forms/DeleteAccount'
 import Modal from '../atoms/Modal'
+import useUser from '../../hooks/useUser'
 
 
-const MyAccountPage = ({setPageId, user, setUser}) => {
+const MyAccountPage = ({setPageId}) => {
+    const user = useUser()
     const [deleteDialogIsActive, setDeleteDialogIsActive] = useState(false)
 
 
     useEffect(() => {
         setPageId('my_account')
     }, [setPageId])
-
-
-    useEffect(() => {
-        getFromAPI('/account')
-            .then(response => setUser(response))
-            .catch(e => distributeErrors(e))
-    }, [setUser])
 
 
     return (
@@ -89,15 +81,9 @@ const MyAccountPage = ({setPageId, user, setUser}) => {
 }
 
 
-const mapStateToProps = state => ({
-    user: state.user,
-})
-
-
 const mapDispatchToProps = dispatch => ({
     setPageId: bindActionCreators(setPageId, dispatch),
-    setUser: bindActionCreators(setUser, dispatch),
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyAccountPage)
+export default connect(null, mapDispatchToProps)(MyAccountPage)

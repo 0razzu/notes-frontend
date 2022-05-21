@@ -4,15 +4,16 @@ import {getFromAPI} from '../../utils/fetchFromAPI'
 import distributeErrors from '../../utils/distributeErrors'
 import {bindActionCreators} from '@reduxjs/toolkit'
 import {setPageName} from '../../store/slices/pageSlice'
-import {setUser} from '../../store/slices/userSlice'
 import {connect} from 'react-redux'
 import {FormattedMessage, useIntl} from 'react-intl'
 import {nanoid} from 'nanoid'
+import useUser from '../../hooks/useUser'
 
 
-const NotePage = ({setPageName, user, setUser}) => {
+const NotePage = ({setPageName}) => {
     const {id} = useParams()
     const intl = useIntl()
+    const user = useUser()
     const [note, setNote] = useState()
     const [authorLogin, setAuthorLogin] = useState()
     const [sectionName, setSectionName] = useState()
@@ -21,13 +22,6 @@ const NotePage = ({setPageName, user, setUser}) => {
     useEffect(() => {
         setPageName(note?.subject)
     }, [note?.subject, setPageName])
-
-
-    useEffect(() => {
-        if (!user.super)
-            getFromAPI(`/account`)
-                .then(response => setUser(response))
-    }, [setUser, user.super])
 
 
     useEffect(() => {
@@ -104,15 +98,9 @@ const NotePage = ({setPageName, user, setUser}) => {
 }
 
 
-const mapStateToProps = state => ({
-    user: state.user,
-})
-
-
 const mapDispatchToProps = dispatch => ({
     setPageName: bindActionCreators(setPageName, dispatch),
-    setUser: bindActionCreators(setUser, dispatch),
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(NotePage)
+export default connect(null, mapDispatchToProps)(NotePage)

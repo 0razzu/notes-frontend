@@ -6,14 +6,15 @@ import {bindActionCreators} from '@reduxjs/toolkit'
 import distributeErrors from '../../utils/distributeErrors'
 import {Link, useParams} from 'react-router-dom'
 import {setPageName} from '../../store/slices/pageSlice'
-import {setUser} from '../../store/slices/userSlice'
 import EditSection from '../forms/EditSection'
 import DeleteSection from '../forms/DeleteSection'
 import Modal from '../atoms/Modal'
+import useUser from '../../hooks/useUser'
 
 
-const SectionPage = ({setPageName, user, setUser}) => {
+const SectionPage = ({setPageName}) => {
     const {id} = useParams()
+    const user = useUser()
     const [section, setSection] = useState({id})
     const [editDialogIsActive, setEditDialogIsActive] = useState(false)
     const [deleteDialogIsActive, setDeleteDialogIsActive] = useState(false)
@@ -22,13 +23,6 @@ const SectionPage = ({setPageName, user, setUser}) => {
     useEffect(() => {
         setPageName(section.name)
     }, [section.name, setPageName])
-
-
-    useEffect(() => {
-        if (!user.super)
-            getFromAPI('/account')
-                .then(response => setUser(response))
-    }, [user.super, setUser])
 
 
     useEffect(() => {
@@ -96,15 +90,9 @@ const SectionPage = ({setPageName, user, setUser}) => {
 }
 
 
-const mapStateToProps = state => ({
-    user: state.user,
-})
-
-
 const mapDispatchToProps = dispatch => ({
     setPageName: bindActionCreators(setPageName, dispatch),
-    setUser: bindActionCreators(setUser, dispatch),
 })
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(SectionPage)
+export default connect(null, mapDispatchToProps)(SectionPage)
