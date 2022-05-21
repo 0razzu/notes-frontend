@@ -8,6 +8,8 @@ import {connect} from 'react-redux'
 import {FormattedMessage, useIntl} from 'react-intl'
 import {nanoid} from 'nanoid'
 import useUser from '../../hooks/useUser'
+import Modal from '../atoms/Modal'
+import DeleteNote from '../forms/DeleteNote'
 
 
 const NotePage = ({setPageName}) => {
@@ -17,6 +19,7 @@ const NotePage = ({setPageName}) => {
     const [note, setNote] = useState()
     const [authorLogin, setAuthorLogin] = useState()
     const [sectionName, setSectionName] = useState()
+    const [deleteDialogIsActive, setDeleteDialogIsActive] = useState(false)
 
 
     useEffect(() => {
@@ -77,20 +80,47 @@ const NotePage = ({setPageName}) => {
                             {note.body.split('\n').map(par => <p key={nanoid()}>{par}</p>)}
                         </section>
 
-                        <section>
+                        <section className={'content'}>
                             <p>
                                 <strong><FormattedMessage id="author" />: </strong>
                                 {authorLogin?
                                     <Link to={`/users/${authorLogin}`}>{authorLogin}</Link> :
                                     <Link to={`/users/byId/${note.authorId}`}>{note.authorId}</Link>
-                                }
-                            </p>
-                            <p>
+                                } <br />
                                 <strong><FormattedMessage id="section" />: </strong>
                                 <Link to={`/sections/${note.sectionId}`}>{sectionName ?? note.sectionId}</Link>
                             </p>
                         </section>
+
+                        {(user.id === note.authorId || user.super) &&
+                            <section className={'content'}>
+                                <div className={'buttons'}>
+                                    {user.id === note.authorId &&
+                                        <Link to={`/notes/${id}/edit`} className={'button is-success'}>
+                                            <span className={'icon is-small'}>
+                                                <i className={'fa fa-pen'} aria-hidden="true" />
+                                            </span>
+                                            <span><FormattedMessage id="edit" /></span>
+                                        </Link>
+                                    }
+
+                                    <button className={'button is-danger'}
+                                            onClick={() => setDeleteDialogIsActive(true)}>
+                                        <span className={'icon is-small'}>
+                                            <i className={'fa fa-trash'} aria-hidden="true" />
+                                        </span>
+                                        <span><FormattedMessage id="delete" /></span>
+                                    </button>
+                                </div>
+                            </section>
+                        }
                     </article>
+
+                    {(user.id === note.authorId || user.super) &&
+                        <Modal isVisible={deleteDialogIsActive} setIsVisible={setDeleteDialogIsActive}>
+                            <DeleteNote id={note.id} />
+                        </Modal>
+                    }
                 </>
             }
         </>

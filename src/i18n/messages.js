@@ -55,6 +55,7 @@ const MESSAGES = {
 
         revision_id: `Revision${nbsp}id`,
         author: 'Author',
+        delete_note_confirmation: `Delete this${nbsp}note?`,
 
         register: 'Register',
         log_in: `Log${nbsp}in`,
@@ -173,6 +174,7 @@ const MESSAGES = {
 
         revision_id: `Идентификатор${nbsp}версии`,
         author: 'Автор',
+        delete_note_confirmation: `Удалить эту${nbsp}заметку?`,
 
         register: 'Зарегистрироваться',
         log_in: 'Войти',
