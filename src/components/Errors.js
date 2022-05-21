@@ -3,10 +3,20 @@ import {clearErrors} from '../store/slices/errorsSlice'
 import {connect} from 'react-redux'
 import {FormattedMessage} from 'react-intl'
 import {nanoid} from 'nanoid'
-import "../styles/Errors.sass"
+import '../styles/Errors.sass'
+import {useEffect} from 'react'
 
 
 const Errors = ({errors, clearErrors}) => {
+    useEffect(() => {
+        if (errors.length !== 0) {
+            const timerId = setTimeout(() => clearErrors(), 5000)
+
+            return () => clearTimeout(timerId)
+        }
+    }, [clearErrors, errors])
+
+
     return (errors.length > 0 &&
         <div className={'Errors'}>
             <article className={'message is-danger'}>
@@ -28,12 +38,12 @@ const Errors = ({errors, clearErrors}) => {
 
 
 const mapStateToProps = state => ({
-    errors: state.errors
+    errors: state.errors,
 })
 
 
 const mapDispatchToProps = dispatch => ({
-    clearErrors: bindActionCreators(clearErrors, dispatch)
+    clearErrors: bindActionCreators(clearErrors, dispatch),
 })
 
 
