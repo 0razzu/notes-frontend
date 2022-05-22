@@ -35,6 +35,9 @@ const Header = ({user}) => {
                     {loggedIn?
                         <>
                             <CreateNoteButton />
+                            <Tab location={`/users/${user.login}/notes`} pageName={'my_notes'}>
+                                <FormattedMessage id="my_notes" />
+                            </Tab>
                             <Tab location={'/me'} pageName={'my_account'}>{user.login}</Tab>
                             <LogoutButton />
                         </> :

@@ -4,7 +4,7 @@ import {useEffect, useState} from 'react'
 import {deleteFromAPI, getFromAPI, postToAPI} from '../../utils/fetchFromAPI'
 import {bindActionCreators} from '@reduxjs/toolkit'
 import distributeErrors from '../../utils/distributeErrors'
-import {useParams} from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 import {setPageName} from '../../store/slices/pageSlice'
 import MakeSuper from '../forms/MakeSuper'
 import Modal from '../atoms/Modal'
@@ -135,6 +135,14 @@ const AccountPage = ({setPageName}) => {
                                     </button>
                                 }
                             </div>
+                        </section>
+
+                        <section className={'content'}>
+                            <p>
+                                <Link to={`/users/${requestedUser.login}/notes`}>
+                                    <FormattedMessage id="users_notes" values={{user: requestedUser.login}} />
+                                </Link>
+                            </p>
                         </section>
                     </article>
 
