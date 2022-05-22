@@ -95,6 +95,9 @@ const MESSAGES = {
         make_them_super: `Make {login} a${nbsp}superuser?`,
         yes: 'Yes',
 
+        my_notes: `My${nbsp}notes`,
+        users_notes: '{user}’s notes',
+
         uh_oh: 'Uh-oh!',
         COMMENT_NOT_FOUND: `Cannot find a${nbsp}comment with${nbsp}this id`,
         DATABASE_ERROR: `An${nbsp}unknown database error has${nbsp}occurred`,
@@ -218,6 +221,9 @@ const MESSAGES = {
         unignore: `Убрать из${nbsp}игнор-листа`,
         make_them_super: 'Сделать {login} суперпользователем?',
         yes: 'Да',
+
+        my_notes: `Мои${nbsp}заметки`,
+        users_notes: 'Заметки автора {user}',
 
         uh_oh: 'Ой!',
         COMMENT_NOT_FOUND: 'Нет такого комментария',

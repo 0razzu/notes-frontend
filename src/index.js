@@ -8,6 +8,7 @@ import App from './components/App'
 import AppIndex from './components/pages/AppIndex'
 import UsersPage from './components/pages/UsersPage'
 import AccountPage from './components/pages/AccountPage'
+import UserNotesPage from './components/pages/UserNotesPage'
 import SectionsPage from './components/pages/SectionsPage'
 import SectionPage from './components/pages/SectionPage'
 import CreateNotePage from './components/pages/CreateNotePage'
@@ -33,6 +34,7 @@ createRoot(document.getElementById('root')).render(
                         <Route path="users" element={<ForAuth><UsersPage /></ForAuth>} />
                         <Route path="users/byId/:id" element={<ForAuth><AccountPage /></ForAuth>} />
                         <Route path="users/:login" element={<ForAuth><AccountPage /></ForAuth>} />
+                        <Route path="users/:login/notes" element={<ForAuth><UserNotesPage /></ForAuth>} />
                         <Route path="sections" element={<ForAuth><SectionsPage /></ForAuth>} />
                         <Route path="sections/:id" element={<ForAuth><SectionPage /></ForAuth>} />
                         <Route path="notes/create" element={<ForAuth><CreateNotePage /></ForAuth>} />

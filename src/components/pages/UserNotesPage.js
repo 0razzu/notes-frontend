@@ -1,17 +1,23 @@
-import {FormattedMessage} from 'react-intl'
+import {FormattedMessage, useIntl} from 'react-intl'
 import {useEffect, useState} from 'react'
-import {bindActionCreators} from '@reduxjs/toolkit'
-import {setPageId} from '../../store/slices/pageSlice'
-import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
 import {getFromAPI, stringifyParams} from '../../utils/fetchFromAPI'
 import distributeErrors from '../../utils/distributeErrors'
-import '../../styles/FeedPage.sass'
+import {Link} from 'react-router-dom'
+import {bindActionCreators} from '@reduxjs/toolkit'
+import {setPageName} from '../../store/slices/pageSlice'
+import {connect} from 'react-redux'
+import useUser from '../../hooks/useUser'
+import {useParams} from 'react-router'
 import Pagination from '../atoms/Pagination'
 import NoteBody from '../atoms/NoteBody'
 
 
-const FeedPage = ({setPageId}) => {
+const UserNotesPage = ({setPageName}) => {
+    const {login: authorLogin} = useParams()
+    const intl = useIntl()
+    const user = useUser()
+    const [title, setTitle] = useState()
+    const [author, setAuthor] = useState()
     const [notes, setNotes] = useState([])
     const [from, setFrom] = useState(0)
     const [count, setCount] = useState(20)
@@ -20,14 +26,36 @@ const FeedPage = ({setPageId}) => {
 
 
     useEffect(() => {
-        setPageId('feed')
-    }, [setPageId])
+        if (authorLogin === user.login)
+            setTitle(intl.formatMessage({id: 'my_notes'}))
+
+        else
+            setTitle(intl.formatMessage({id: 'users_notes'}, {user: authorLogin}))
+    }, [authorLogin, user.login, intl])
+
+
+    useEffect(() => {
+        setPageName(title)
+    }, [setPageName, title])
+
+
+    useEffect(() => {
+        if (!author) {
+            if (authorLogin === user.login)
+                setAuthor(user)
+            else
+                getFromAPI('/accounts/' + stringifyParams({login: authorLogin}))
+                    .then(response => setAuthor(response))
+                    .catch(e => distributeErrors(e))
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
 
     useEffect(() => {
         getNotes(0)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [author?.id])
 
 
     useEffect(() => {
@@ -38,35 +66,26 @@ const FeedPage = ({setPageId}) => {
             getFromAPI('/notes' + stringifyParams({
                 from: from + count,
                 count: 1,
-                include: 'onlyFollowings',
-                timeFrom: getDate(),
+                user: author.id,
             }))
                 .then(result => setHasNext(result.length === 1))
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [from, notes.length])
 
 
-    const getDate = () => {
-        const date = new Date()
-        date.setDate(date.getDate() - 7)
-
-        return date.toISOString()
-    }
-
-
     const getNotes = from => {
-        getFromAPI('/notes' + stringifyParams({
-            from,
-            count,
-            include: 'onlyFollowings',
-            timeFrom: getDate(),
-        }))
-            .then(result => {
-                setNotes(result)
-                setFrom(from)
-                setErrors({})
-            })
-            .catch(e => distributeErrors(e, setErrors))
+        if (author?.id)
+            getFromAPI('/notes' + stringifyParams({
+                from,
+                count,
+                user: author.id,
+            }))
+                .then(result => {
+                    setNotes(result)
+                    setFrom(from)
+                    setErrors({})
+                })
+                .catch(e => distributeErrors(e, setErrors))
     }
 
 
@@ -87,7 +106,7 @@ const FeedPage = ({setPageId}) => {
 
     return (
         <>
-            <h2><FormattedMessage id="feed" /></h2>
+            <h2>{title}</h2>
             <article>
                 <Pagination previousOnClick={previousOnClick}
                             previousDisabled={from <= 0}
@@ -104,9 +123,6 @@ const FeedPage = ({setPageId}) => {
                             <NoteBody note={note} />
 
                             <div className={'card-footer'}>
-                                <Link to={`/users/byId/${note.authorId}`} className={'card-footer-item'}>
-                                    <FormattedMessage id="to_authors_page" />
-                                </Link>
                                 <Link to={`/sections/${note.sectionId}`} className={'card-footer-item'}>
                                     <FormattedMessage id="to_section" />
                                 </Link>
@@ -121,8 +137,8 @@ const FeedPage = ({setPageId}) => {
 
 
 const mapDispatchToProps = dispatch => ({
-    setPageId: bindActionCreators(setPageId, dispatch),
+    setPageName: bindActionCreators(setPageName, dispatch),
 })
 
 
-export default connect(null, mapDispatchToProps)(FeedPage)
+export default connect(null, mapDispatchToProps)(UserNotesPage)
