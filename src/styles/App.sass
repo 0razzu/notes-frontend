@@ -18,6 +18,10 @@ main
     @extend .title
 
 
+  input[type="checkbox"]
+    margin-right: .325rem
+
+
   .tag:not(:last-child)
     @extend .mr-2
 
@@ -48,11 +52,21 @@ main
         margin-right: 0
 
 
+    .field .control
+      display: flex
+      align-items: center
+
+
+      .help
+        margin-left: 1rem
+        margin-top: 0
+
+
+    .field-label
+      flex-basis: unset
+
+
     .HorizontalInputField
-      .field-label
-        flex-basis: unset
-
-
       .input
         max-width: 5rem
 

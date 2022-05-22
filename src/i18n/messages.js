@@ -55,6 +55,8 @@ const MESSAGES = {
 
         search: 'Search',
         any_section: `Any${nbsp}section`,
+        tags: 'Keywords',
+        all_tags: 'All included',
 
         revision_id: `Revision${nbsp}id`,
         author: 'Author',
@@ -185,6 +187,8 @@ const MESSAGES = {
 
         search: 'Поиск',
         any_section: 'Любой раздел',
+        tags: 'Ключевые слова',
+        all_tags: 'Все входят',
 
         revision_id: `Идентификатор${nbsp}версии`,
         author: 'Автор',

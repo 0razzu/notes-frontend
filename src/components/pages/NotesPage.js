@@ -16,10 +16,12 @@ import FormFieldErrorCaption from '../forms/atoms/FormFieldErrorCaption'
 const NotesPage = ({setPageId}) => {
     const intl = useIntl()
     const user = useUser()
-    const sortingTypes = [undefined, 'asc', 'desc']
-    const [sortByRatingIndex, setSortByRatingIndex] = useState(0)
     const [sections, setSections] = useState()
     const [sectionId, setSectionId] = useState()
+    const sortingTypes = [undefined, 'asc', 'desc']
+    const [sortByRatingIndex, setSortByRatingIndex] = useState(0)
+    const [tags, setTags] = useState()
+    const [allTags, setAllTags] = useState(false)
     const [errors, setErrors] = useState({})
 
 
@@ -44,13 +46,33 @@ const NotesPage = ({setPageId}) => {
             {user.id && sections &&
                 <article>
                     <NoteListWithPagination getNotesParams={{
-                        sortByRating: sortingTypes[sortByRatingIndex],
                         sectionId: sectionId === ''? undefined : sectionId,
+                        sortByRating: sortingTypes[sortByRatingIndex],
+                        tags: tags?.length? tags.split(/\s+/).join(',') : undefined,
+                        allTags: tags?.length? allTags : undefined,
                     }}
                                             linksToAuthors
                                             linksToSections
                                             paginationChildren={
                                                 <>
+                                                    <div className={'field'}>
+                                                        <div className={classNames('control', {'is-danger': errors.sectionId})}>
+                                                            <div className={'select'}>
+                                                                <select onChange={event => handleInputChange(event, setSectionId)}>
+                                                                    <option value={''}>
+                                                                        {intl.formatMessage({id: 'any_section'})}
+                                                                    </option>
+                                                                    {sections.map(section =>
+                                                                        <option key={section.id}
+                                                                                value={section.id}>
+                                                                            {section.name}
+                                                                        </option>)}
+                                                                </select>
+                                                            </div>
+                                                            <FormFieldErrorCaption messageIds={errors.sectionId} />
+                                                        </div>
+                                                    </div>
+
                                                     <button className={'button'}
                                                             onClick={sortByRatingOnClick}>
                                                         <ChangingFontAwesomeIcon id={'fa-sort'}
@@ -63,17 +85,22 @@ const NotesPage = ({setPageId}) => {
                                                     </button>
 
                                                     <div className={'field'}>
-                                                        <div className={classNames('control', {'is-danger': errors.sectionId})}>
-                                                            <div className={'select'}>
-                                                                <select onChange={event => handleInputChange(event, setSectionId)}>
-                                                                    <option value={''}>
-                                                                        {intl.formatMessage({id: 'any_section'})}
-                                                                    </option>
-                                                                    {sections.map(section => <option key={section.id}
-                                                                                                     value={section.id}>{section.name}</option>)}
-                                                                </select>
-                                                            </div>
-                                                            <FormFieldErrorCaption messageIds={errors.sectionId} />
+                                                        <div className={classNames('control', {'is-danger': errors.tags})}>
+                                                            <input className={'input'}
+                                                                   type={'text'}
+                                                                   placeholder={intl.formatMessage({id: 'tags'})}
+                                                                   onChange={event => handleInputChange(event, setTags)} />
+                                                            <FormFieldErrorCaption messageIds={errors.tags} />
+                                                        </div>
+                                                    </div>
+
+                                                    <div className={'field'}>
+                                                        <div className={classNames('control', {'is-danger': errors.allTags})}>
+                                                            <label className={'checkbox'}>
+                                                                <input type={'checkbox'}
+                                                                       onChange={event => setAllTags(event.target.checked)} />
+                                                                <FormattedMessage id="all_tags" />
+                                                            </label>
                                                         </div>
                                                     </div>
                                                 </>
