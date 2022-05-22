@@ -54,6 +54,7 @@ const MESSAGES = {
         body: 'Body',
 
         search: 'Search',
+        any_section: `Any${nbsp}section`,
 
         revision_id: `Revision${nbsp}id`,
         author: 'Author',
@@ -183,6 +184,7 @@ const MESSAGES = {
         body: 'Текст',
 
         search: 'Поиск',
+        any_section: 'Любой раздел',
 
         revision_id: `Идентификатор${nbsp}версии`,
         author: 'Автор',

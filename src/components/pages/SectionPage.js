@@ -17,6 +17,7 @@ const SectionPage = ({setPageName}) => {
     const {id} = useParams()
     const user = useUser()
     const [section, setSection] = useState({id})
+    const [errors, setErrors] = useState({})
     const [editDialogIsActive, setEditDialogIsActive] = useState(false)
     const [deleteDialogIsActive, setDeleteDialogIsActive] = useState(false)
 
@@ -70,7 +71,7 @@ const SectionPage = ({setPageName}) => {
                             </section>
                         }
 
-                        <NoteListWithPagination getNotesParams={{sectionId: id}} linksToAuthors />
+                        <NoteListWithPagination getNotesParams={{sectionId: id}} linksToAuthors errors={errors} setErrors={setErrors} />
                     </article>
 
                     {user.id === section.creator.id &&

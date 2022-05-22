@@ -9,13 +9,20 @@ import '../../styles/NoteListWithPagination.sass'
 import {connect} from 'react-redux'
 
 
-const NoteListWithPagination = ({page, getNotesParams, linksToAuthors, linksToSections, paginationChildren}) => {
+const NoteListWithPagination = ({
+                                    page,
+                                    getNotesParams,
+                                    linksToAuthors,
+                                    linksToSections,
+                                    paginationChildren,
+                                    errors,
+                                    setErrors
+                                }) => {
     const intl = useIntl()
     const [notes, setNotes] = useState([])
     const [from, setFrom] = useState(0)
     const [count, setCount] = useState(20)
     const [hasNext, setHasNext] = useState(false)
-    const [errors, setErrors] = useState({})
 
 
     useEffect(() => {

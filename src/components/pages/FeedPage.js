@@ -1,5 +1,5 @@
 import {FormattedMessage} from 'react-intl'
-import {useEffect} from 'react'
+import {useEffect, useState} from 'react'
 import {bindActionCreators} from '@reduxjs/toolkit'
 import {setPageId} from '../../store/slices/pageSlice'
 import {connect} from 'react-redux'
@@ -7,6 +7,9 @@ import NoteListWithPagination from '../atoms/NoteListWithPagination'
 
 
 const FeedPage = ({setPageId}) => {
+    const [errors, setErrors] = useState({})
+
+
     useEffect(() => {
         setPageId('feed')
     }, [setPageId])
@@ -26,7 +29,9 @@ const FeedPage = ({setPageId}) => {
             <article>
                 <NoteListWithPagination getNotesParams={{include: 'onlyFollowings', timeFrom: getDate()}}
                                         linksToAuthors
-                                        linksToSections />
+                                        linksToSections
+                                        errors={errors}
+                                        setErrors={setErrors} />
             </article>
         </>
     )

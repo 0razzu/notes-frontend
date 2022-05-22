@@ -16,6 +16,7 @@ const UserNotesPage = ({setPageName}) => {
     const user = useUser()
     const [title, setTitle] = useState()
     const [author, setAuthor] = useState()
+    const [errors, setErrors] = useState({})
 
 
     useEffect(() => {
@@ -49,7 +50,10 @@ const UserNotesPage = ({setPageName}) => {
             <h2>{title}</h2>
             {author?.id &&
                 <article>
-                    <NoteListWithPagination getNotesParams={{user: author.id}} linksToSections />
+                    <NoteListWithPagination getNotesParams={{user: author.id}}
+                                            linksToSections
+                                            errors={errors}
+                                            setErrors={setErrors} />
                 </article>
             }
         </>
