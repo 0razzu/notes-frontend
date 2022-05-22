@@ -8,7 +8,7 @@ import distributeErrors from '../../utils/distributeErrors'
 import '../../styles/NoteListWithPagination.sass'
 
 
-const NoteListWithPagination = ({getNotesParams}) => {
+const NoteListWithPagination = ({getNotesParams, linksToAuthors, linksToSections, paginationChildren}) => {
     const intl = useIntl()
     const [notes, setNotes] = useState([])
     const [from, setFrom] = useState(0)
@@ -88,7 +88,9 @@ const NoteListWithPagination = ({getNotesParams}) => {
                         count={count}
                         setCount={setCount}
                         countErrors={errors.count}
-                        showOnClick={showOnClick} />
+                        showOnClick={showOnClick}>
+                {paginationChildren}
+            </Pagination>
 
             <div className={'notes'}>
                 {notes.map(note =>
@@ -109,14 +111,20 @@ const NoteListWithPagination = ({getNotesParams}) => {
                             </article>
                         </div>
 
-                        <div className={'card-footer'}>
-                            <Link to={`/users/byId/${note.authorId}`} className={'card-footer-item'}>
-                                <FormattedMessage id="to_authors_page" />
-                            </Link>
-                            <Link to={`/sections/${note.sectionId}`} className={'card-footer-item'}>
-                                <FormattedMessage id="to_section" />
-                            </Link>
-                        </div>
+                        {(linksToAuthors || linksToSections) &&
+                            <div className={'card-footer'}>
+                                {linksToAuthors &&
+                                    <Link to={`/users/byId/${note.authorId}`} className={'card-footer-item'}>
+                                        <FormattedMessage id="to_authors_page" />
+                                    </Link>
+                                }
+                                {linksToSections &&
+                                    <Link to={`/sections/${note.sectionId}`} className={'card-footer-item'}>
+                                        <FormattedMessage id="to_section" />
+                                    </Link>
+                                }
+                            </div>
+                        }
                     </div>
                 )}
             </div>

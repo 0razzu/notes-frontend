@@ -70,7 +70,7 @@ const SectionPage = ({setPageName}) => {
                             </section>
                         }
 
-                        <NoteListWithPagination getNotesParams={{sectionId: id}} />
+                        <NoteListWithPagination getNotesParams={{sectionId: id}} linksToAuthors />
                     </article>
 
                     {user.id === section.creator.id &&

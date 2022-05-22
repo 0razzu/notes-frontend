@@ -50,7 +50,7 @@ const UserNotesPage = ({setPageName}) => {
             <h2>{title}</h2>
             {author &&
                 <article>
-                    <NoteListWithPagination getNotesParams={{user: author.id}} />
+                    <NoteListWithPagination getNotesParams={{user: author.id}} linksToSections />
                 </article>
             }
         </>

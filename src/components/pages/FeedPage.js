@@ -24,7 +24,9 @@ const FeedPage = ({setPageId}) => {
         <>
             <h2><FormattedMessage id="feed" /></h2>
             <article>
-                <NoteListWithPagination getNotesParams={{include: 'onlyFollowings', timeFrom: getDate()}} />
+                <NoteListWithPagination getNotesParams={{include: 'onlyFollowings', timeFrom: getDate()}}
+                                        linksToAuthors
+                                        linksToSections />
             </article>
         </>
     )
