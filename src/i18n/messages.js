@@ -53,6 +53,8 @@ const MESSAGES = {
         section: 'Section',
         body: 'Body',
 
+        search: 'Search',
+
         revision_id: `Revision${nbsp}id`,
         author: 'Author',
         view_revisions: 'View revisions',
@@ -179,6 +181,8 @@ const MESSAGES = {
         subject: 'Тема',
         section: 'Раздел',
         body: 'Текст',
+
+        search: 'Поиск',
 
         revision_id: `Идентификатор${nbsp}версии`,
         author: 'Автор',

@@ -24,7 +24,8 @@ const UserNotesPage = ({setPageName}) => {
 
         else
             setTitle(intl.formatMessage({id: 'users_notes'}, {user: authorLogin}))
-    }, [authorLogin, user.login, intl])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [authorLogin, intl])
 
 
     useEffect(() => {
@@ -33,22 +34,20 @@ const UserNotesPage = ({setPageName}) => {
 
 
     useEffect(() => {
-        if (!author) {
-            if (authorLogin === user.login)
-                setAuthor(user)
-            else
-                getFromAPI('/accounts/' + stringifyParams({login: authorLogin}))
-                    .then(response => setAuthor(response))
-                    .catch(e => distributeErrors(e))
-        }
+        if (authorLogin === user.login)
+            setAuthor(user)
+        else
+            getFromAPI('/accounts/' + stringifyParams({login: authorLogin}))
+                .then(response => setAuthor(response))
+                .catch(e => distributeErrors(e))
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [authorLogin])
 
 
     return (
         <>
             <h2>{title}</h2>
-            {author &&
+            {author?.id &&
                 <article>
                     <NoteListWithPagination getNotesParams={{user: author.id}} linksToSections />
                 </article>

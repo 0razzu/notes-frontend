@@ -6,9 +6,10 @@ import {useEffect, useState} from 'react'
 import {getFromAPI, stringifyParams} from '../../utils/fetchFromAPI'
 import distributeErrors from '../../utils/distributeErrors'
 import '../../styles/NoteListWithPagination.sass'
+import {connect} from 'react-redux'
 
 
-const NoteListWithPagination = ({getNotesParams, linksToAuthors, linksToSections, paginationChildren}) => {
+const NoteListWithPagination = ({page, getNotesParams, linksToAuthors, linksToSections, paginationChildren}) => {
     const intl = useIntl()
     const [notes, setNotes] = useState([])
     const [from, setFrom] = useState(0)
@@ -20,7 +21,7 @@ const NoteListWithPagination = ({getNotesParams, linksToAuthors, linksToSections
     useEffect(() => {
         getNotes(0)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [page])
 
 
     useEffect(() => {
@@ -36,31 +37,21 @@ const NoteListWithPagination = ({getNotesParams, linksToAuthors, linksToSections
                 .then(result => setHasNext(result.length === 1))
                 .catch(e => distributeErrors(e))
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [from, notes.length])
+    }, [page, from, notes])
 
 
     const getNotes = from => {
-        if (paramsLoaded())
-            getFromAPI('/notes' + stringifyParams({
-                from,
-                count,
-                ...getNotesParams,
-            }))
-                .then(result => {
-                    setNotes(result)
-                    setFrom(from)
-                    setErrors({})
-                })
-                .catch(e => distributeErrors(e, setErrors))
-    }
-
-
-    const paramsLoaded = () => {
-        for (const param in getNotesParams)
-            if (getNotesParams[param] === undefined)
-                return false
-
-        return true
+        getFromAPI('/notes' + stringifyParams({
+            from,
+            count,
+            ...getNotesParams,
+        }))
+            .then(result => {
+                setNotes(result)
+                setFrom(from)
+                setErrors({})
+            })
+            .catch(e => distributeErrors(e, setErrors))
     }
 
 
@@ -133,4 +124,9 @@ const NoteListWithPagination = ({getNotesParams, linksToAuthors, linksToSections
 }
 
 
-export default NoteListWithPagination
+const mapStateToProps = state => ({
+    page: state.page,
+})
+
+
+export default connect(mapStateToProps)(NoteListWithPagination)
