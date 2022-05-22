@@ -22,6 +22,8 @@ const NotesPage = ({setPageId}) => {
     const [sortByRatingIndex, setSortByRatingIndex] = useState(0)
     const [tags, setTags] = useState()
     const [allTags, setAllTags] = useState(false)
+    const [timeFrom, setTimeFrom] = useState()
+    const [timeTo, setTimeTo] = useState()
     const [errors, setErrors] = useState({})
 
 
@@ -50,6 +52,8 @@ const NotesPage = ({setPageId}) => {
                         sortByRating: sortingTypes[sortByRatingIndex],
                         tags: tags?.length? tags.split(/\s+/).join(',') : undefined,
                         allTags: tags?.length? allTags : undefined,
+                        timeFrom: timeFrom === ''? undefined : timeFrom,
+                        timeTo: timeTo === ''? undefined : timeTo,
                     }}
                                             linksToAuthors
                                             linksToSections
@@ -101,6 +105,24 @@ const NotesPage = ({setPageId}) => {
                                                                        onChange={event => setAllTags(event.target.checked)} />
                                                                 <FormattedMessage id="all_tags" />
                                                             </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className={'field is-grouped'}>
+                                                        <div className={classNames('control', {'is-danger': errors.timeFrom})}>
+                                                            <input className={'input'}
+                                                                   type={'datetime-local'}
+                                                                   onChange={event => handleInputChange(event, setTimeFrom)} />
+                                                            <FormFieldErrorCaption messageIds={errors.timeFrom} />
+                                                        </div>
+
+                                                        <div className={'control'}>—</div>
+
+                                                        <div className={classNames('control', {'is-danger': errors.timeTo})}>
+                                                            <input className={'input'}
+                                                                   type={'datetime-local'}
+                                                                   onChange={event => handleInputChange(event, setTimeTo)} />
+                                                            <FormFieldErrorCaption messageIds={errors.timeTo} />
                                                         </div>
                                                     </div>
                                                 </>
