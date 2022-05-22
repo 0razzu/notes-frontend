@@ -58,6 +58,7 @@ const MESSAGES = {
         tags: 'Keywords',
         all_tags: 'All included',
         any_author: `Any${nbsp}author`,
+        not_ignored: 'Any, except ignored',
 
         revision_id: `Revision${nbsp}id`,
         author: 'Author',
@@ -191,6 +192,7 @@ const MESSAGES = {
         tags: 'Ключевые слова',
         all_tags: 'Все входят',
         any_author: 'Любой автор',
+        not_ignored: 'Любой неигнорируемый',
 
         revision_id: `Идентификатор${nbsp}версии`,
         author: 'Автор',

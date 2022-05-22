@@ -26,6 +26,7 @@ const NotesPage = ({setPageId}) => {
     const [timeFrom, setTimeFrom] = useState()
     const [timeTo, setTimeTo] = useState()
     const [userId, setUserId] = useState()
+    const [include, setInclude] = useState()
     const [errors, setErrors] = useState({})
 
 
@@ -64,6 +65,7 @@ const NotesPage = ({setPageId}) => {
                         timeFrom: timeFrom === ''? undefined : timeFrom,
                         timeTo: timeTo === ''? undefined : timeTo,
                         user: userId === ''? undefined : userId,
+                        include: include === ''? undefined : include,
                     }}
                                             linksToAuthors
                                             linksToSections
@@ -151,6 +153,41 @@ const NotesPage = ({setPageId}) => {
                                                                 </select>
                                                             </div>
                                                             <FormFieldErrorCaption messageIds={errors.user} />
+                                                        </div>
+                                                    </div>
+
+                                                    <div className={'field'}>
+                                                        <div className={classNames('control', {'is-danger': errors.include})}>
+                                                            <label className={'radio'}>
+                                                                <input type={'radio'}
+                                                                       name={'include'}
+                                                                       value={''}
+                                                                       defaultChecked
+                                                                       onChange={event => setInclude(event.target.value)} />
+                                                                <FormattedMessage id="any_author" />
+                                                            </label>
+                                                            <label className={'radio'}>
+                                                                <input type={'radio'}
+                                                                       name={'include'}
+                                                                       value={'onlyFollowings'}
+                                                                       onChange={event => setInclude(event.target.value)} />
+                                                                <FormattedMessage id="following" />
+                                                            </label>
+                                                            <label className={'radio'}>
+                                                                <input type={'radio'}
+                                                                       name={'include'}
+                                                                       value={'onlyIgnore'}
+                                                                       onChange={event => setInclude(event.target.value)} />
+                                                                <FormattedMessage id="ignored" />
+                                                            </label>
+                                                            <label className={'radio'}>
+                                                                <input type={'radio'}
+                                                                       name={'include'}
+                                                                       value={'notIgnore'}
+                                                                       onChange={event => setInclude(event.target.value)} />
+                                                                <FormattedMessage id="not_ignored" />
+                                                            </label>
+                                                            <FormFieldErrorCaption messageIds={errors.include} />
                                                         </div>
                                                     </div>
                                                 </>
