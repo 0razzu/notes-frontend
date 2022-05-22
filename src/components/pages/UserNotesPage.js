@@ -7,7 +7,7 @@ import {setPageName} from '../../store/slices/pageSlice'
 import {connect} from 'react-redux'
 import useUser from '../../hooks/useUser'
 import {useParams} from 'react-router'
-import Notes from '../atoms/Notes'
+import NoteListWithPagination from '../atoms/NoteListWithPagination'
 
 
 const UserNotesPage = ({setPageName}) => {
@@ -50,7 +50,7 @@ const UserNotesPage = ({setPageName}) => {
             <h2>{title}</h2>
             {author &&
                 <article>
-                    <Notes getNotesParams={{user: author.id}} />
+                    <NoteListWithPagination getNotesParams={{user: author.id}} />
                 </article>
             }
         </>

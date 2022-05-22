@@ -10,7 +10,7 @@ import EditSection from '../forms/EditSection'
 import DeleteSection from '../forms/DeleteSection'
 import Modal from '../atoms/Modal'
 import useUser from '../../hooks/useUser'
-import Notes from '../atoms/Notes'
+import NoteListWithPagination from '../atoms/NoteListWithPagination'
 
 
 const SectionPage = ({setPageName}) => {
@@ -70,7 +70,7 @@ const SectionPage = ({setPageName}) => {
                             </section>
                         }
 
-                        <Notes getNotesParams={{sectionId: id}} />
+                        <NoteListWithPagination getNotesParams={{sectionId: id}} />
                     </article>
 
                     {user.id === section.creator.id &&

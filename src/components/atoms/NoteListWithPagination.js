@@ -5,9 +5,10 @@ import {nanoid} from 'nanoid'
 import {useEffect, useState} from 'react'
 import {getFromAPI, stringifyParams} from '../../utils/fetchFromAPI'
 import distributeErrors from '../../utils/distributeErrors'
+import '../../styles/NoteListWithPagination.sass'
 
 
-const Notes = ({getNotesParams}) => {
+const NoteListWithPagination = ({getNotesParams}) => {
     const intl = useIntl()
     const [notes, setNotes] = useState([])
     const [from, setFrom] = useState(0)
@@ -124,4 +125,4 @@ const Notes = ({getNotesParams}) => {
 }
 
 
-export default Notes
+export default NoteListWithPagination

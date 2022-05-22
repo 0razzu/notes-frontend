@@ -3,8 +3,7 @@ import {useEffect} from 'react'
 import {bindActionCreators} from '@reduxjs/toolkit'
 import {setPageId} from '../../store/slices/pageSlice'
 import {connect} from 'react-redux'
-import '../../styles/FeedPage.sass'
-import Notes from '../atoms/Notes'
+import NoteListWithPagination from '../atoms/NoteListWithPagination'
 
 
 const FeedPage = ({setPageId}) => {
@@ -25,7 +24,7 @@ const FeedPage = ({setPageId}) => {
         <>
             <h2><FormattedMessage id="feed" /></h2>
             <article>
-                <Notes getNotesParams={{include: 'onlyFollowings', timeFrom: getDate()}} />
+                <NoteListWithPagination getNotesParams={{include: 'onlyFollowings', timeFrom: getDate()}} />
             </article>
         </>
     )
