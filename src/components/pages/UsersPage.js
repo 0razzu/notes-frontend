@@ -4,7 +4,6 @@ import {connect} from 'react-redux'
 import {useEffect, useState} from 'react'
 import {setPageId} from '../../store/slices/pageSlice'
 import '../../styles/UsersPage.sass'
-import HorizontalInputField from '../forms/atoms/HorizontalInputField'
 import {getFromAPI, stringifyParams} from '../../utils/fetchFromAPI'
 import distributeErrors from '../../utils/distributeErrors'
 import ChangingFontAwesomeIcon from '../atoms/ChangingFontAwesomeIcon'
@@ -12,6 +11,7 @@ import FormFieldErrorCaption from '../forms/atoms/FormFieldErrorCaption'
 import classNames from 'classnames'
 import {Link} from 'react-router-dom'
 import useUser from '../../hooks/useUser'
+import Pagination from '../atoms/Pagination'
 
 
 const UsersPage = ({setPageId}) => {
@@ -98,26 +98,14 @@ const UsersPage = ({setPageId}) => {
         <>
             <h2><FormattedMessage id="users" /></h2>
             <article>
-                <nav className={'pagination'}
-                     role={'navigation'}
-                     aria-label={'pagination'}>
-                    <div>
-                        <button className={'pagination-previous'} onClick={previousOnClick} disabled={from <= 0}>
-                            <i className={'fas fa-arrow-left'} />
-                        </button>
-                        <button className={'pagination-next'} onClick={nextOnClick} disabled={!hasNext}>
-                            <i className={'fas fa-arrow-right'} />
-                        </button>
-                    </div>
-
-                    <HorizontalInputField id={'on_page'}
-                                          type={'number'}
-                                          inputMode={'numeric'}
-                                          min={1}
-                                          value={count}
-                                          onChange={event => setCount(Number(event.target.value))}
-                                          errorIds={errors.count} />
-
+                <Pagination previousOnClick={previousOnClick}
+                            previousDisabled={from <= 0}
+                            nextOnClick={nextOnClick}
+                            nextDisabled={!hasNext}
+                            count={count}
+                            setCount={setCount}
+                            countErrors={errors.count}
+                            showOnClick={showOnClick}>
                     <button className={'button'}
                             onClick={sortByRatingOnClick}>
                         <ChangingFontAwesomeIcon id={'fa-sort'} show={sortByRatingIndex === 0} />
@@ -144,11 +132,7 @@ const UsersPage = ({setPageId}) => {
                         </div>
                         <FormFieldErrorCaption messageIds={errors.type} />
                     </div>
-
-                    <button className={'button is-primary'} onClick={showOnClick}>
-                        <FormattedMessage id="show" />
-                    </button>
-                </nav>
+                </Pagination>
 
                 <div className={'users'}>
                     {users.map(user =>
