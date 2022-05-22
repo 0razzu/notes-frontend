@@ -57,6 +57,7 @@ const MESSAGES = {
         any_section: `Any${nbsp}section`,
         tags: 'Keywords',
         all_tags: 'All included',
+        any_author: `Any${nbsp}author`,
 
         revision_id: `Revision${nbsp}id`,
         author: 'Author',
@@ -189,6 +190,7 @@ const MESSAGES = {
         any_section: 'Любой раздел',
         tags: 'Ключевые слова',
         all_tags: 'Все входят',
+        any_author: 'Любой автор',
 
         revision_id: `Идентификатор${nbsp}версии`,
         author: 'Автор',

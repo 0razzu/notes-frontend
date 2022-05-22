@@ -17,6 +17,7 @@ const NotesPage = ({setPageId}) => {
     const intl = useIntl()
     const user = useUser()
     const [sections, setSections] = useState()
+    const [users, setUsers] = useState()
     const [sectionId, setSectionId] = useState()
     const sortingTypes = [undefined, 'asc', 'desc']
     const [sortByRatingIndex, setSortByRatingIndex] = useState(0)
@@ -24,6 +25,7 @@ const NotesPage = ({setPageId}) => {
     const [allTags, setAllTags] = useState(false)
     const [timeFrom, setTimeFrom] = useState()
     const [timeTo, setTimeTo] = useState()
+    const [userId, setUserId] = useState()
     const [errors, setErrors] = useState({})
 
 
@@ -39,13 +41,20 @@ const NotesPage = ({setPageId}) => {
     }, [])
 
 
+    useEffect(() => {
+        getFromAPI('/accounts')
+            .then(result => setUsers(result))
+            .catch(e => distributeErrors(e))
+    }, [])
+
+
     const sortByRatingOnClick = () => setSortByRatingIndex((sortByRatingIndex + 1) % sortingTypes.length)
 
 
     return (
         <>
             <h2><FormattedMessage id="search" /></h2>
-            {user.id && sections &&
+            {user.id && sections && users &&
                 <article>
                     <NoteListWithPagination getNotesParams={{
                         sectionId: sectionId === ''? undefined : sectionId,
@@ -54,6 +63,7 @@ const NotesPage = ({setPageId}) => {
                         allTags: tags?.length? allTags : undefined,
                         timeFrom: timeFrom === ''? undefined : timeFrom,
                         timeTo: timeTo === ''? undefined : timeTo,
+                        user: userId === ''? undefined : userId,
                     }}
                                             linksToAuthors
                                             linksToSections
@@ -123,6 +133,24 @@ const NotesPage = ({setPageId}) => {
                                                                    type={'datetime-local'}
                                                                    onChange={event => handleInputChange(event, setTimeTo)} />
                                                             <FormFieldErrorCaption messageIds={errors.timeTo} />
+                                                        </div>
+                                                    </div>
+
+                                                    <div className={'field'}>
+                                                        <div className={classNames('control', {'is-danger': errors.user})}>
+                                                            <div className={'select'}>
+                                                                <select onChange={event => handleInputChange(event, setUserId)}>
+                                                                    <option value={''}>
+                                                                        {intl.formatMessage({id: 'any_author'})}
+                                                                    </option>
+                                                                    {users.map(user =>
+                                                                        <option key={user.id}
+                                                                                value={user.id}>
+                                                                            {user.login}
+                                                                        </option>)}
+                                                                </select>
+                                                            </div>
+                                                            <FormFieldErrorCaption messageIds={errors.user} />
                                                         </div>
                                                     </div>
                                                 </>
