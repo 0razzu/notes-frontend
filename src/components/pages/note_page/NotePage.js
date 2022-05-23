@@ -1,16 +1,17 @@
 import {Link, useParams} from 'react-router-dom'
 import {useEffect, useState} from 'react'
-import {getFromAPI} from '../../utils/fetchFromAPI'
-import distributeErrors from '../../utils/distributeErrors'
+import {getFromAPI} from '../../../utils/fetchFromAPI'
+import distributeErrors from '../../../utils/distributeErrors'
 import {bindActionCreators} from '@reduxjs/toolkit'
-import {setPageName} from '../../store/slices/pageSlice'
+import {setPageName} from '../../../store/slices/pageSlice'
 import {connect} from 'react-redux'
 import {FormattedMessage, useIntl} from 'react-intl'
 import {nanoid} from 'nanoid'
-import useUser from '../../hooks/useUser'
-import Modal from '../atoms/Modal'
-import DeleteNote from '../forms/DeleteNote'
-import '../../styles/NotePage.sass'
+import useUser from '../../../hooks/useUser'
+import Modal from '../../atoms/Modal'
+import DeleteNote from '../../forms/DeleteNote'
+import '../../../styles/NotePage.sass'
+import NoteComments from './NoteComments'
 
 
 const NotePage = ({setPageName}) => {
@@ -78,7 +79,7 @@ const NotePage = ({setPageName}) => {
                 <>
                     <h3 className={'subtitle is-6 has-text-grey'}>
                         <p>
-                            <FormattedMessage id="created_on_at" values={{
+                            <FormattedMessage id="note_created_on_at" values={{
                                 date: intl.formatDate(note.created),
                                 time: intl.formatTime(note.created),
                             }} />
@@ -135,6 +136,8 @@ const NotePage = ({setPageName}) => {
                         </section>
                     </article>
 
+                    <NoteComments note={note} />
+
                     <Modal isVisible={revisionsModalIsActive} setIsVisible={setRevisionsModalIsActive}>
                         <div className={'revisions'}>
                             <h2 className={'title'}><FormattedMessage id="revisions" /></h2>
@@ -146,7 +149,7 @@ const NotePage = ({setPageName}) => {
                                             <FormattedMessage id="revision" /> {revision.id}
                                         </h3>
                                         <h4 className={'subtitle is-6 has-text-grey'}>
-                                            <FormattedMessage id="created_on_at" values={{
+                                            <FormattedMessage id="note_created_on_at" values={{
                                                 date: intl.formatDate(revision.created),
                                                 time: intl.formatTime(revision.created),
                                             }} />

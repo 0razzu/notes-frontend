@@ -17,7 +17,7 @@ const MESSAGES = {
         register_or_login_login: `log${nbsp}in`,
 
         feed: 'Last week notes',
-        created_on_at: `Created on${nbsp}{date} at${nbsp}{time}${nbsp}UTC`,
+        note_created_on_at: `Created on${nbsp}{date} at${nbsp}{time}${nbsp}UTC`,
         to_authors_page: `To${nbsp}author’s page`,
         to_section: `To${nbsp}section`,
 
@@ -64,9 +64,17 @@ const MESSAGES = {
         revision_id: `Revision${nbsp}id`,
         author: 'Author',
         view_revisions: 'View revisions',
+        comments: 'Comments',
+        current_rev_comments: `To${nbsp}the${nbsp}current revision`,
+        add: 'Add',
+        comment_created_on_at: `Created on${nbsp}{date} at${nbsp}{time}${nbsp}UTC`,
+        old_comments: `To${nbsp}previous revisions`,
+        to_revision_id: `To${nbsp}revision${nbsp}{id}`,
+        delete_comment_confirmation: `Delete this${nbsp}comment?`,
         revisions: 'Revisions',
         revision: 'Revision',
         delete_note_confirmation: `Delete this${nbsp}note?`,
+        delete_current_rev_comments_confirmation: `Delete comments to${nbsp}the${nbsp}current revision of${nbsp}this${nbsp}note?`,
 
         note_editing: 'Note editing',
 
@@ -152,7 +160,7 @@ const MESSAGES = {
         register_or_login_login: 'войдите',
 
         feed: `Заметки за${nbsp}последнюю неделю`,
-        created_on_at: `Создана {date} в${nbsp}{time}${nbsp}UTC`,
+        note_created_on_at: `Создана {date} в${nbsp}{time}${nbsp}UTC`,
         to_authors_page: `К${nbsp}странице автора`,
         to_section: `К${nbsp}разделу`,
 
@@ -199,9 +207,17 @@ const MESSAGES = {
         revision_id: `Идентификатор${nbsp}версии`,
         author: 'Автор',
         view_revisions: 'Посмотреть версии',
+        comments: 'Комментарии',
+        current_rev_comments: `К${nbsp}текущей версии`,
+        add: 'Добавить',
+        comment_created_on_at: `Создан {date} в${nbsp}{time}${nbsp}UTC`,
+        old_comments: `К${nbsp}предыдущим версиям`,
+        to_revision_id: `К${nbsp}версии${nbsp}{id}`,
+        delete_comment_confirmation: `Удалить этот${nbsp}комментарий?`,
         revisions: 'Версии',
         revision: 'Версия',
         delete_note_confirmation: `Удалить эту${nbsp}заметку?`,
+        delete_current_rev_comments_confirmation: `Удалить комментарии к${nbsp}текущей версии этой${nbsp}заметки?`,
 
         note_editing: 'Редактирование заметки',
 

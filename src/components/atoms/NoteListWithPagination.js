@@ -96,7 +96,7 @@ const NoteListWithPagination = ({
                         <div className={'card-content'}>
                             <h3 className={'title is-4'}><Link to={`/notes/${note.id}`}>{note.subject}</Link></h3>
                             <h4 className={'subtitle is-6 has-text-grey'}>
-                                <FormattedMessage id="created_on_at" values={{
+                                <FormattedMessage id="note_created_on_at" values={{
                                     date: intl.formatDate(note.created),
                                     time: intl.formatTime(note.created),
                                 }} />
