@@ -101,7 +101,7 @@ const NotesPage = ({setPageId}) => {
                                     <span><FormattedMessage id="rating" /></span>
                                 </button>
 
-                                <div className={'field'}>
+                                <div className={'field is-grouped'}>
                                     <div className={classNames('control', {'is-danger': errors.tags})}>
                                         <input className={'input'}
                                                type={'text'}
@@ -109,9 +109,7 @@ const NotesPage = ({setPageId}) => {
                                                onChange={event => handleInputChange(event, setTags)} />
                                         <FormFieldErrorCaption messageIds={errors.tags} />
                                     </div>
-                                </div>
 
-                                <div className={'field'}>
                                     <div className={classNames('control', {'is-danger': errors.allTags})}>
                                         <label className={'checkbox'}>
                                             <input type={'checkbox'}
@@ -159,35 +157,22 @@ const NotesPage = ({setPageId}) => {
 
                                 <div className={'field'}>
                                     <div className={classNames('control', {'is-danger': errors.include})}>
-                                        <label className={'radio'}>
-                                            <input type={'radio'}
-                                                   name={'include'}
-                                                   value={''}
-                                                   defaultChecked
-                                                   onChange={event => setInclude(event.target.value)} />
-                                            <FormattedMessage id="any_author" />
-                                        </label>
-                                        <label className={'radio'}>
-                                            <input type={'radio'}
-                                                   name={'include'}
-                                                   value={'onlyFollowings'}
-                                                   onChange={event => setInclude(event.target.value)} />
-                                            <FormattedMessage id="following" />
-                                        </label>
-                                        <label className={'radio'}>
-                                            <input type={'radio'}
-                                                   name={'include'}
-                                                   value={'onlyIgnore'}
-                                                   onChange={event => setInclude(event.target.value)} />
-                                            <FormattedMessage id="ignored" />
-                                        </label>
-                                        <label className={'radio'}>
-                                            <input type={'radio'}
-                                                   name={'include'}
-                                                   value={'notIgnore'}
-                                                   onChange={event => setInclude(event.target.value)} />
-                                            <FormattedMessage id="not_ignored" />
-                                        </label>
+                                        <div className={'select'}>
+                                            <select onChange={event => handleInputChange(event, setInclude)}>
+                                                <option value={''}>
+                                                    {intl.formatMessage({id: 'any_author_group'})}
+                                                </option>
+                                                <option value={'onlyFollowings'}>
+                                                    {intl.formatMessage({id: 'following'})}
+                                                </option>
+                                                <option value={'onlyIgnore'}>
+                                                    {intl.formatMessage({id: 'ignored'})}
+                                                </option>
+                                                <option value={'notIgnore'}>
+                                                    {intl.formatMessage({id: 'not_ignored'})}
+                                                </option>
+                                            </select>
+                                        </div>
                                         <FormFieldErrorCaption messageIds={errors.include} />
                                     </div>
                                 </div>
