@@ -1,12 +1,12 @@
 import {FormattedMessage, useIntl} from 'react-intl'
 import {nanoid} from 'nanoid'
 import {useEffect, useState} from 'react'
-import {getFromAPI} from '../../utils/fetchFromAPI'
-import distributeErrors from '../../utils/distributeErrors'
+import {getFromAPI} from '../../../utils/fetchFromAPI'
+import distributeErrors from '../../../utils/distributeErrors'
 import classNames from 'classnames'
-import Modal from './Modal'
-import EditComment from '../forms/EditComment'
-import DeleteComment from '../forms/DeleteComment'
+import Modal from '../../atoms/Modal'
+import EditComment from '../../forms/EditComment'
+import DeleteComment from '../../forms/DeleteComment'
 
 
 const Comment = ({comment, showRevId, onEdit, onDelete}) => {

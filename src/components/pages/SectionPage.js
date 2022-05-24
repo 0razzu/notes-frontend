@@ -78,7 +78,7 @@ const SectionPage = ({setPageName}) => {
                         <Modal isVisible={editDialogIsActive} setIsVisible={setEditDialogIsActive}>
                             <EditSection section={section}
                                          setSection={setSection}
-                                         setVisible={setEditDialogIsActive} />
+                                         setIsVisible={setEditDialogIsActive} />
                         </Modal>
                     }
 

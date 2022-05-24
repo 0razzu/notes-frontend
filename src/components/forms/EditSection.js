@@ -5,7 +5,7 @@ import {FormattedMessage} from 'react-intl'
 import LabelledInput from './atoms/LabelledInput'
 
 
-const EditSection = ({section, setSection, setVisible}) => {
+const EditSection = ({section, setSection, setIsVisible}) => {
     const [name, setName] = useState(section.name)
     const [errors, setErrors] = useState({})
 
@@ -17,7 +17,7 @@ const EditSection = ({section, setSection, setVisible}) => {
             .then(response => {
                 setSection({...section, name:  response.name})
                 setErrors({})
-                setVisible(false)
+                setIsVisible(false)
             })
             .catch(e => distributeErrors(e, setErrors))
     }

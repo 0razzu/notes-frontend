@@ -63,7 +63,10 @@ const MESSAGES = {
 
         revision_id: `Revision${nbsp}id`,
         author: 'Author',
+        your_mark_for_note: `Your${nbsp}mark for${nbsp}this note`,
         view_revisions: 'View revisions',
+        change_mark: 'Change mark',
+        rate: 'Rate',
         comments: 'Comments',
         current_rev_comments: `To${nbsp}the${nbsp}current revision`,
         add: 'Add',
@@ -73,6 +76,7 @@ const MESSAGES = {
         delete_comment_confirmation: `Delete this${nbsp}comment?`,
         revisions: 'Revisions',
         revision: 'Revision',
+        mark: 'Mark',
         delete_note_confirmation: `Delete this${nbsp}note?`,
         delete_current_rev_comments_confirmation: `Delete comments to${nbsp}the${nbsp}current revision of${nbsp}this${nbsp}note?`,
 
@@ -206,7 +210,10 @@ const MESSAGES = {
 
         revision_id: `Идентификатор${nbsp}версии`,
         author: 'Автор',
+        your_mark_for_note: `Ваша${nbsp}оценка этой заметки`,
         view_revisions: 'Посмотреть версии',
+        change_mark: 'Изменить оценку',
+        rate: 'Оценить',
         comments: 'Комментарии',
         current_rev_comments: `К${nbsp}текущей версии`,
         add: 'Добавить',
@@ -216,6 +223,7 @@ const MESSAGES = {
         delete_comment_confirmation: `Удалить этот${nbsp}комментарий?`,
         revisions: 'Версии',
         revision: 'Версия',
+        mark: 'Оценка',
         delete_note_confirmation: `Удалить эту${nbsp}заметку?`,
         delete_current_rev_comments_confirmation: `Удалить комментарии к${nbsp}текущей версии этой${nbsp}заметки?`,
 

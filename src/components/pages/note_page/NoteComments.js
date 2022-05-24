@@ -1,5 +1,5 @@
 import {FormattedMessage} from 'react-intl'
-import Comment from '../../atoms/Comment'
+import Comment from './Comment'
 import {useEffect, useState} from 'react'
 import {getFromAPI} from '../../../utils/fetchFromAPI'
 import distributeErrors from '../../../utils/distributeErrors'

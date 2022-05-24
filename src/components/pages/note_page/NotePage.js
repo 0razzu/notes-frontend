@@ -12,6 +12,7 @@ import Modal from '../../atoms/Modal'
 import DeleteNote from '../../forms/DeleteNote'
 import '../../../styles/NotePage.sass'
 import NoteComments from './NoteComments'
+import RateNote from '../../forms/RateNote'
 
 
 const NotePage = ({setPageName}) => {
@@ -21,7 +22,9 @@ const NotePage = ({setPageName}) => {
     const [note, setNote] = useState()
     const [authorLogin, setAuthorLogin] = useState()
     const [sectionName, setSectionName] = useState()
+    const [mark, setMark] = useState()
     const [revisions, setRevisions] = useState([])
+    const [rateNoteDialogIsActive, setRateNoteDialogIsActive] = useState(false)
     const [revisionsModalIsActive, setRevisionsModalIsActive] = useState(false)
     const [deleteDialogIsActive, setDeleteDialogIsActive] = useState(false)
 
@@ -59,6 +62,13 @@ const NotePage = ({setPageName}) => {
                 .then(response => setSectionName(response.name))
                 .catch(e => distributeErrors(e))
     }, [note?.sectionId])
+
+
+    useEffect(() => {
+        getFromAPI(`/notes/${id}/rating`)
+            .then(response => setMark(response.rating))
+            .catch(e => distributeErrors(e))
+    }, [id])
 
 
     const viewRevisions = () => {
@@ -100,9 +110,18 @@ const NotePage = ({setPageName}) => {
                                 {authorLogin?
                                     <Link to={`/users/${authorLogin}`}>{authorLogin}</Link> :
                                     <Link to={`/users/byId/${note.authorId}`}>{note.authorId}</Link>
-                                } <br />
+                                }
+                                <br />
                                 <strong><FormattedMessage id="section" />: </strong>
                                 <Link to={`/sections/${note.sectionId}`}>{sectionName ?? note.sectionId}</Link>
+
+                                {user.id !== note.authorId && mark &&
+                                    <>
+                                        <br />
+                                        <strong><FormattedMessage id="your_mark_for_note" />: </strong>
+                                        {mark}
+                                    </>
+                                }
                             </p>
                         </section>
 
@@ -112,22 +131,32 @@ const NotePage = ({setPageName}) => {
                                     <FormattedMessage id="view_revisions" />
                                 </button>
 
+                                {user.id !== note.authorId &&
+                                    <button className={'button is-warning'}
+                                            onClick={() => setRateNoteDialogIsActive(true)}>
+                                        {mark?
+                                            <FormattedMessage id="change_mark" /> :
+                                            <FormattedMessage id="rate" />
+                                        }
+                                    </button>
+                                }
+
                                 {(user.id === note.authorId || user.super) &&
                                     <>
                                         {user.id === note.authorId &&
                                             <Link to={`/notes/${id}/edit`} className={'button is-success'}>
-                                            <span className={'icon is-small'}>
-                                                <i className={'fa fa-pen'} aria-hidden="true" />
-                                            </span>
+                                                <span className={'icon is-small'}>
+                                                    <i className={'fa fa-pen'} aria-hidden="true" />
+                                                </span>
                                                 <span><FormattedMessage id="edit" /></span>
                                             </Link>
                                         }
 
                                         <button className={'button is-danger'}
                                                 onClick={() => setDeleteDialogIsActive(true)}>
-                                        <span className={'icon is-small'}>
-                                            <i className={'fa fa-trash'} aria-hidden="true" />
-                                        </span>
+                                            <span className={'icon is-small'}>
+                                                <i className={'fa fa-trash'} aria-hidden="true" />
+                                            </span>
                                             <span><FormattedMessage id="delete" /></span>
                                         </button>
                                     </>
@@ -164,6 +193,15 @@ const NotePage = ({setPageName}) => {
                             )}
                         </div>
                     </Modal>
+
+                    {user.id !== note.authorId &&
+                        <Modal isVisible={rateNoteDialogIsActive} setIsVisible={setRateNoteDialogIsActive}>
+                            <RateNote noteId={note.id}
+                                      mark={mark}
+                                      setMark={setMark}
+                                      setIsVisible={setRateNoteDialogIsActive} />
+                        </Modal>
+                    }
 
                     {(user.id === note.authorId || user.super) &&
                         <Modal isVisible={deleteDialogIsActive} setIsVisible={setDeleteDialogIsActive}>
