@@ -139,10 +139,12 @@ const UsersPage = ({setPageId}) => {
                         <div className={'card'} key={user.id}>
                             <div className={'card-content'}>
                                 <h3 className={'title is-4'}><Link to={`/users/${user.login}`}>{user.login}</Link></h3>
-                                <h4 className={'subtitle is-6 has-text-grey'}>
+                                <h4 className={'subtitle is-6'}>
                                     {user.deleted?
-                                        <FormattedMessage id="deleted" /> :
-                                        <FormattedMessage id={user.online? 'online' : 'offline'} />
+                                        <span className={'tag is-danger is-light'}><FormattedMessage id="deleted" /></span> :
+                                        user.online?
+                                            <span className={'tag is-success is-light'}><FormattedMessage id="online" /></span> :
+                                            <span className={'tag'}><FormattedMessage id="offline" /></span>
                                     }
                                 </h4>
                                 <p>{user.firstName} {user.patronymic && user.patronymic + ' '}{user.lastName}</p>
