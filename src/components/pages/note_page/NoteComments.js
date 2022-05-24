@@ -11,7 +11,7 @@ import {connect} from 'react-redux'
 
 const NoteComments = ({user, note}) => {
     const isSuper = user.super
-    const isAuthor = user.id === note.authorId
+    const isNoteAuthor = user.id === note.authorId
     const [comments, setComments] = useState([])
     const [currentRevComments, setCurrentRevComments] = useState([])
     const [oldComments, setOldComments] = useState([])
@@ -33,18 +33,17 @@ const NoteComments = ({user, note}) => {
     }, [comments, note.revisionId])
 
 
-    const onEdit = id => newBody => {
+    const onEditComment = id => newBody => {
         setComments(comments.map(comment => {
-            if (comment.id === id) {
+            if (comment.id === id)
                 return {...comment, body: newBody}
-            }
 
             return comment
         }))
     }
 
 
-    const onDelete = id => () => setComments(comments.filter(comment => comment.id !== id))
+    const onDeleteComment = id => () => setComments(comments.filter(comment => comment.id !== id))
 
 
     return (
@@ -59,9 +58,9 @@ const NoteComments = ({user, note}) => {
                         {currentRevComments.map(comment =>
                             <Comment key={comment.id}
                                      comment={comment}
-                                     onEdit={user.id === comment.authorId && onEdit(comment.id)}
-                                     onDelete={(isAuthor || isSuper || user.id === comment.authorId)
-                                         && onDelete(comment.id)} />
+                                     onEdit={user.id === comment.authorId && onEditComment(comment.id)}
+                                     onDelete={(isNoteAuthor || isSuper || user.id === comment.authorId)
+                                         && onDeleteComment(comment.id)} />
                         )}
                     </section>
                 }
@@ -75,7 +74,7 @@ const NoteComments = ({user, note}) => {
                         <span><FormattedMessage id="add" /></span>
                     </button>
 
-                    {(isAuthor || isSuper) &&
+                    {(isNoteAuthor || isSuper) &&
                         <button className={'button is-danger is-outlined'}
                                 onClick={() => setDeleteCommentsDialogIsActive(true)}>
                                         <span className={'icon is-small'}>
@@ -93,9 +92,9 @@ const NoteComments = ({user, note}) => {
                         {oldComments.map(comment =>
                             <Comment key={comment.id}
                                      comment={comment}
-                                     onEdit={user.id === comment.authorId && onEdit(comment.id)}
-                                     onDelete={(isAuthor || isSuper || user.id === comment.authorId)
-                                         && onDelete(comment.id)}
+                                     onEdit={user.id === comment.authorId && onEditComment(comment.id)}
+                                     onDelete={(isNoteAuthor || isSuper || user.id === comment.authorId)
+                                         && onDeleteComment(comment.id)}
                                      showRevId />
                         )}
                     </section>
@@ -109,7 +108,7 @@ const NoteComments = ({user, note}) => {
                             setIsVisible={setAddCommentDialogIsActive} />
             </Modal>
 
-            {(isAuthor || isSuper) &&
+            {(isNoteAuthor || isSuper) &&
                 <Modal isVisible={deleteCommentsDialogIsActive}
                        setIsVisible={setDeleteCommentsDialogIsActive}>
                     <DeleteCurrentRevisionComments id={note.id}

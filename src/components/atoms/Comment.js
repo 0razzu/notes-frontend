@@ -53,18 +53,18 @@ const Comment = ({comment, showRevId, onEdit, onDelete}) => {
                         {onEdit &&
                             <button className={'button is-link is-outlined is-small'}
                                     onClick={() => setEditDialogIsActive(true)}>
-                        <span className={'icon is-small'}>
-                            <i className={'fa fa-pen'} aria-hidden="true" />
-                        </span>
+                                <span className={'icon is-small'}>
+                                    <i className={'fa fa-pen'} aria-hidden="true" />
+                                </span>
                             </button>
                         }
 
                         {onDelete &&
                             <button className={'button is-danger is-outlined is-small'}
                                     onClick={() => setDeleteDialogIsActive(true)}>
-                        <span className={'icon is-small'}>
-                            <i className={'fa fa-trash'} aria-hidden="true" />
-                        </span>
+                                <span className={'icon is-small'}>
+                                    <i className={'fa fa-trash'} aria-hidden="true" />
+                                </span>
                             </button>
                         }
                     </div>
