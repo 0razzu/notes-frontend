@@ -3,6 +3,7 @@ import {bindActionCreators} from '@reduxjs/toolkit'
 import {connect} from 'react-redux'
 import {useEffect, useState} from 'react'
 import {setPageId} from '../../store/slices/pageSlice'
+import {addAllUserIdToLogin} from '../../store/slices/userIdToLoginSlice'
 import '../../styles/UsersPage.sass'
 import {getFromAPI, stringifyParams} from '../../utils/fetchFromAPI'
 import distributeErrors from '../../utils/distributeErrors'
@@ -14,7 +15,7 @@ import useUser from '../../hooks/useUser'
 import Pagination from '../atoms/Pagination'
 
 
-const UsersPage = ({setPageId}) => {
+const UsersPage = ({setPageId, addAllUserIdToLogin}) => {
     const intl = useIntl()
     const user = useUser()
     const [from, setFrom] = useState(0)
@@ -64,7 +65,10 @@ const UsersPage = ({setPageId}) => {
             .then(result => {
                 setUsers(result)
                 setFrom(from)
+
+                return result
             })
+            .then(result => addAllUserIdToLogin(result.map(user => ({[user.id]: user.login}))))
             .then(() => setErrors({}))
             .catch(e => distributeErrors(e, setErrors))
     }
@@ -170,6 +174,7 @@ const UsersPage = ({setPageId}) => {
 
 const mapDispatchToProps = dispatch => ({
     setPageId: bindActionCreators(setPageId, dispatch),
+    addAllUserIdToLogin: bindActionCreators(addAllUserIdToLogin, dispatch),
 })
 
 

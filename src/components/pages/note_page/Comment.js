@@ -1,27 +1,18 @@
 import {FormattedMessage, useIntl} from 'react-intl'
 import {nanoid} from 'nanoid'
-import {useEffect, useState} from 'react'
-import {getFromAPI} from '../../../utils/fetchFromAPI'
-import distributeErrors from '../../../utils/distributeErrors'
+import {useState} from 'react'
 import classNames from 'classnames'
 import Modal from '../../atoms/Modal'
 import EditComment from '../../forms/EditComment'
 import DeleteComment from '../../forms/DeleteComment'
+import useUserIdToLogin from '../../../hooks/useUserIdToLogin'
 
 
 const Comment = ({comment, showRevId, onEdit, onDelete}) => {
     const intl = useIntl()
-    const [authorLogin, setAuthorLogin] = useState()
+    const authorLogin = useUserIdToLogin(comment.authorId)
     const [editDialogIsActive, setEditDialogIsActive] = useState(false)
     const [deleteDialogIsActive, setDeleteDialogIsActive] = useState(false)
-
-
-    useEffect(() => {
-        if (!authorLogin)
-            getFromAPI(`/accounts/${comment.authorId}`)
-                .then(response => setAuthorLogin(response.login))
-                .catch(e => distributeErrors(e))
-    }, [authorLogin, comment.authorId])
 
 
     return (
