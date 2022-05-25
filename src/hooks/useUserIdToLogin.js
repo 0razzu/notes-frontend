@@ -11,7 +11,7 @@ const useUserIdToLogin = id => {
 
 
     useEffect(() => {
-        if (!userIdToLogin[id])
+        if (id && !userIdToLogin[id])
             getFromAPI(`/accounts/${id}`)
                 .then(response => dispatch(addUserIdToLogin({[id]: response.login})))
                 .catch(e => distributeErrors(e))

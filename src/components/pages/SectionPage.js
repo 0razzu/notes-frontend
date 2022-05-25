@@ -11,12 +11,14 @@ import DeleteSection from '../forms/DeleteSection'
 import Modal from '../atoms/Modal'
 import useUser from '../../hooks/useUser'
 import NoteListWithPagination from '../atoms/NoteListWithPagination'
+import useUserIdToLogin from '../../hooks/useUserIdToLogin'
 
 
 const SectionPage = ({setPageName}) => {
     const {id} = useParams()
     const user = useUser()
     const [section, setSection] = useState({id})
+    const creatorLogin = useUserIdToLogin(section?.creatorId)
     const [errors, setErrors] = useState({})
     const [editDialogIsActive, setEditDialogIsActive] = useState(false)
     const [deleteDialogIsActive, setDeleteDialogIsActive] = useState(false)
@@ -40,17 +42,19 @@ const SectionPage = ({setPageName}) => {
             {section.name &&
                 <>
                     <article>
-                        <section className={'content'}>
-                            <p>
-                                <span className={'label is-inline'}><FormattedMessage id="creator" />: </span>
-                                <Link to={`/users/${section.creator.login}`}>{section.creator.login}</Link>
-                            </p>
-                        </section>
+                        {creatorLogin &&
+                            <section className={'content'}>
+                                <p>
+                                    <span className={'label is-inline'}><FormattedMessage id="creator" />: </span>
+                                    <Link to={`/users/${creatorLogin}`}>{creatorLogin}</Link>
+                                </p>
+                            </section>
+                        }
 
-                        {(user.id === section.creator.id || user.super) &&
+                        {(user.id === section.creatorId || user.super) &&
                             <section className={'content'}>
                                 <div className={'buttons'}>
-                                    {user.id === section.creator.id &&
+                                    {user.id === section.creatorId &&
                                         <button className={'button is-success'}
                                                 onClick={() => setEditDialogIsActive(true)}>
                                             <span className={'icon is-small'}>
@@ -74,7 +78,7 @@ const SectionPage = ({setPageName}) => {
                         <NoteListWithPagination getNotesParams={{sectionId: id}} linksToAuthors errors={errors} setErrors={setErrors} />
                     </article>
 
-                    {user.id === section.creator.id &&
+                    {user.id === section.creatorId &&
                         <Modal isVisible={editDialogIsActive} setIsVisible={setEditDialogIsActive}>
                             <EditSection section={section}
                                          setSection={setSection}
@@ -82,7 +86,7 @@ const SectionPage = ({setPageName}) => {
                         </Modal>
                     }
 
-                    {(user.id === section.creator.id || user.super) &&
+                    {(user.id === section.creatorId || user.super) &&
                         <Modal isVisible={deleteDialogIsActive} setIsVisible={setDeleteDialogIsActive}>
                             <DeleteSection id={section.id} />
                         </Modal>
