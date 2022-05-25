@@ -13,6 +13,7 @@ import DeleteNote from '../../forms/DeleteNote'
 import '../../../styles/NotePage.sass'
 import NoteComments from './NoteComments'
 import RateNote from '../../forms/RateNote'
+import useUserIdToLogin from '../../../hooks/useUserIdToLogin'
 
 
 const NotePage = ({setPageName}) => {
@@ -20,7 +21,7 @@ const NotePage = ({setPageName}) => {
     const intl = useIntl()
     const user = useUser()
     const [note, setNote] = useState()
-    const [authorLogin, setAuthorLogin] = useState()
+    const authorLogin = useUserIdToLogin(note?.authorId)
     const [sectionName, setSectionName] = useState()
     const [mark, setMark] = useState()
     const [revisions, setRevisions] = useState([])
@@ -39,21 +40,6 @@ const NotePage = ({setPageName}) => {
             .then(response => setNote(response))
             .catch(e => distributeErrors(e))
     }, [id])
-
-
-    useEffect(() => {
-        const authorId = note?.authorId
-
-        if (authorId) {
-            if (user.id === authorId)
-                setAuthorLogin(user.login)
-
-            else
-                getFromAPI(`/accounts/${authorId}`)
-                    .then(response => setAuthorLogin(response.login))
-                    .catch(e => distributeErrors(e))
-        }
-    }, [note?.authorId, user.id, user.login])
 
 
     useEffect(() => {
