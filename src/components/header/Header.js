@@ -21,15 +21,16 @@ const Header = ({user}) => {
                 </Link>
             </div>
 
-            {loggedIn &&
-                <div className={'navbar-start'}>
+
+            <div className={'navbar-start'}>
+                {loggedIn &&
                     <div className={'navbar-tabs'}>
                         <Tab location={'/users'} pageName={'users'}><FormattedMessage id="users" /></Tab>
                         <Tab location={'/sections'} pageName={'sections'}><FormattedMessage id="sections" /></Tab>
                         <Tab location={'/notes'} pageName={'search'}><FormattedMessage id="search" /></Tab>
                     </div>
-                </div>
-            }
+                }
+            </div>
 
             <div className={'navbar-end'}>
                 <div className={'navbar-group'}>
