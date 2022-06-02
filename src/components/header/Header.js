@@ -21,7 +21,6 @@ const Header = ({user}) => {
                 </Link>
             </div>
 
-
             <div className={'navbar-start'}>
                 {loggedIn &&
                     <div className={'navbar-tabs'}>
