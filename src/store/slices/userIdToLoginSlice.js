@@ -14,7 +14,7 @@ const userIdToLoginSlice = createSlice({
         }),
         addAll: (state, action) => ({
             ...state,
-            ...action.payload.reduce((result, user) => ({...result, ...user}))
+            ...action.payload.reduce((result, user) => ({...result, ...user}), [])
         }),
         clear: state => initialState,
     }
